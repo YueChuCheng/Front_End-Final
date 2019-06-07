@@ -13,9 +13,20 @@
             <div></div>
             <div class="name">{{ child.name }}</div>
             <div class="price">NT${{ child.price }}</div>
+            <div class="btn">
+              <button v-on:click="Increase(index,cindex)">increase</button>
+              <p>{{child.count}}</p>
+              <button v-on:click="Decrease(index,cindex)">decrease</button>
+            </div>
           </li>
         </ul>
       </div>
+    </div>
+    <p>共計：NT$ {{ totalPrice }}</p>
+    <div class="btn">
+      <router-link to="/Order" tage="button" >
+        確認訂單
+      </router-link>
     </div>
   </div>
 </template>
@@ -36,9 +47,10 @@ export default {
       type: [
         {
           name: "test",
-          food: [{ name: "testfood", price: 0 }]
+          food: [{ name: "testfood", price: 0,count:0}]
         }
-      ]
+      ],
+      totalPrice:0
     };
   },
   firestore() {
@@ -47,12 +59,17 @@ export default {
       docRestaurantRef: firebase
         .firestore()
         .collection("Restaurant")
-        .doc("Restaurant1"),
+        .doc("Info"),
       colTypeRef: firebase
         .firestore()
         .collection("Restaurant")
-        .doc("Restaurant1")
-        .collection("Menu")
+        .doc("Info")
+        .collection("Menu"),
+      colOrderRef: firebase
+        .firestore()
+        .collection("Restaurant")
+        .doc("Info")
+        .collection("Order")
     };
   },
   mounted: async function() {
@@ -70,25 +87,72 @@ export default {
     let i = 0;
     querySnapshot.forEach(docSnapshot => {
       typearray.push({
-        name: docSnapshot.id,
-        food:[]
+        name: docSnapshot.data().Name,
+        food:[],
       });
     });
     this.type = typearray;
     //餐點細項資料
     const colTypeRef=this.$firestore.colTypeRef
     this.type.forEach(async function(item, index, array){
-      querySnapshot = await colTypeRef.doc(item.name).collection('Food').get();
+      querySnapshot = await colTypeRef.doc('Type'+(index+1)).collection('Food').get();
         let foodarray = [];
         querySnapshot.forEach(docSnapshot => {
         foodarray.push({
-          name: docSnapshot.id,
-          price: docSnapshot.data().Price
+          name: docSnapshot.data().Name,
+          price: docSnapshot.data().Price,
+          count:0
         });
         item.food=foodarray
-        console.log(item.food)
       });
     })
+  },
+  methods: {
+    Increase: function (index,cindex) {
+      this.type[index].food[cindex].count++
+      this.totalPrice+=this.type[index].food[cindex].price
+    },
+    Decrease: function (index,cindex) {
+      let count=this.type[index].food[cindex].count
+      if(count>0){
+        count--
+        this.type[index].food[cindex].count=count
+        this.totalPrice-=this.type[index].food[cindex].price
+      }
+    },
+    // Order: async function () {
+    //   let doc = await this.$firestore.docRestaurantRef.get();
+    //   let i=0;
+    //   if (doc.exists) {
+    //     i=doc.data().OrderCount
+    //     i++
+    //   }
+    //   let setOrderCount = await this.$firestore.docRestaurantRef.set({
+    //     OrderCount: i
+    //   }, { merge: true })
+
+    //   let orderArray=[]
+    //   this.type.forEach(item=>{
+    //     item.food.forEach(item=>{
+    //       if(item.count>0){
+    //         orderArray.push({
+    //           name:item.name,
+    //           count:item.count 
+    //         })
+    //       }
+    //     });
+    //   })
+    //   orderArray.forEach(async (item,index) =>{
+    //     console.log(index)
+    //     let setOrder=await this.$firestore.colOrderRef.doc('Order'+i).collection('Food').doc('Food'+(index+1)).set({
+    //       Name:item.name,
+    //       Count:item.count
+    //     })
+    //     let setTotalPrice=await this.$firestore.colOrderRef.doc('Order'+i).collection('Info').doc('Info').set({
+    //       TotalPrice:this.totalPrice
+    //     })
+    //   })
+    // }
   }
 };
 </script>
