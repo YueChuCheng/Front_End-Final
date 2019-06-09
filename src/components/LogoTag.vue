@@ -18,6 +18,7 @@ export default {
 @import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../css/base.css";
 * {
+  text-align: center;
   font-family: "Noto Sans TC", sans-serif;
 }
 .logo_style {

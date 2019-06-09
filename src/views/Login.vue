@@ -35,30 +35,17 @@
     </div>
     <div class="row">
       <div class="col">
-          <img src="../assets/picture (2).png" alt="" class="deco_img">
+        <img src="../assets/picture (2).png" alt class="deco_img">
       </div>
     </div>
   </div>
 </template>
-<script>
-import "bootstrap";
-import LogoTag from "@/components/LogoTag.vue";
-import logintitle from "@/components/LoginTitle.vue";
-export default {
-  name: "login",
-  components: {
-    LogoTag,
-    logintitle
-  }
-};
-</script>
+
 
 <style scoped>
-@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../css/base.css";
 * {
-    
-    text-align: center;
+  text-align: center;
   font-family: "Noto Sans TC", sans-serif;
 }
 
@@ -119,6 +106,24 @@ a {
   color: #ff794a !important;
 }
 </style>
+
+
+
+
+
+<script>
+import LogoTag from "@/components/LogoTag.vue";
+import logintitle from "@/components/LoginTitle.vue";
+export default {
+  name: "login",
+  components: {
+    LogoTag,
+    logintitle
+  }
+};
+</script>
+
+
 
 
 
