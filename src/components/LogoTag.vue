@@ -31,8 +31,8 @@ export default {
 }
 img {
   position: absolute;
-  top: 18%;
-  left: 40%;
-  height: 90%;
+  top: 24%;
+  left: 43%;
+  height: 80%;
 }
 </style>

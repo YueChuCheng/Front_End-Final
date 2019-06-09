@@ -1,13 +1,8 @@
 <template>
   <div class="main">
-      
     <LogoTag/>
-    <div class="row">
-      <div class="col title">
-        登入
-        <div class="title_style"></div>
-      </div>
-    </div>
+    <logintitle :titleName="'登入'"/>
+
     <div class="row">
       <div class="col subtitle mt-4">以社群媒體登入</div>
     </div>
@@ -38,53 +33,43 @@
         <a href class="forget_style">忘記密碼?</a>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+          <img src="../assets/picture (2).png" alt="" class="deco_img">
+      </div>
+    </div>
   </div>
 </template>
-
+<script>
+import "bootstrap";
+import LogoTag from "@/components/LogoTag.vue";
+import logintitle from "@/components/LoginTitle.vue";
+export default {
+  name: "login",
+  components: {
+    LogoTag,
+    logintitle
+  }
+};
+</script>
 
 <style scoped>
 @import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../css/base.css";
 * {
+    
+    text-align: center;
   font-family: "Noto Sans TC", sans-serif;
 }
-.logo_style {
-  position: absolute;
-  background-color: #232323;
-  height: 5vw;
-  width: 17vw;
-  margin-left: -6%;
-  margin-top: -4%;
-  border-radius: 10vw;
-}
-img {
-  position: absolute;
-  top: 18%;
-  left: 40%;
-  height: 90%;
-}
+
 .outline {
   outline: solid 2px red;
 }
 .main {
-  padding-top: 5%;
+  padding-top: 6%;
   min-height: 80vh;
 }
-.title {
-  color: #262626;
-  font-weight: 300;
-  font-size: 250%;
-}
-.title_style {
-  z-index: -1;
-  position: absolute;
-  background: #219e91;
-  margin-left: 47.5%;
-  margin-top: -1.5%;
-  height: 2vw;
-  width: 6vw;
-  border-radius: 50px;
-}
+
 .subtitle {
   font-size: 100%;
 }
@@ -135,16 +120,6 @@ a {
 }
 </style>
 
-<script>
 
-import "bootstrap";
-import LogoTag from "@/components/LogoTag.vue";
-export default {
-  name: 'login',
-  components: {
-    LogoTag
-  }
-};
-</script>
 
 
