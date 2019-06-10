@@ -7,11 +7,12 @@
         <span class="subtitle">找到家鄉的滋味</span>
       </div>
     </div>
-    <div class="row   subtitle2">
+    <div class="row subtitle2">
       <div class="col">
         <span class>找吃的</span>
       </div>
     </div>
+    <!-- 圖片輪播 -->
     <div
       id="carouselExampleIndicators"
       class="carousel slide"
@@ -35,6 +36,22 @@
         </div>
       </div>
     </div>
+    <!-- 圖片輪播結束 -->
+    <div class="container outline main_section">
+      <div class="row">
+        <div class="col title_section">選擇店家</div>
+      </div>
+      <div class="row">
+        <div class="col subtitle_section d-flex flex-column align-items-center">
+          <div>CHOOSE RESTAURANT</div> 
+          <div class="line"></div>
+        </div>
+        
+      </div>
+      <LoginTitle :titleName="'早午餐'" class="logintitle"/>
+    </div>
+
+
   </div>
 </template>
 
@@ -56,11 +73,11 @@
 }
 
 .mainImg_title {
-  z-index: 100;
+ 
   color: #fff;
   font-size: 9vw;
   height: 80vh;
-  width: 100vw;
+  left:30vw;
 }
 .carousel-item img {
   width: 100vw;
@@ -81,24 +98,47 @@ span {
 .subtitle2 {
   position: absolute;
   font-size: 2.2vw;
-  top:70vh;
-  left:45vw;
+  top: 70vh;
+  left: 45vw;
   color: #fff;
- 
- 
 }
+.main_section{
+  text-align: center;
+  min-height: 80vh;
+  margin-top: 50px;
+}
+.title_section{
+  font-size: 300%;
+   
+}
+.subtitle_section{
+font-size: 200%;
+}
+.line{
+  margin-top:15px;
+  border: solid #000 1.5px;
+  height: 0px;
+  width: 20vw;
+}
+.logintitle{
+  margin-top:40px; 
+}
+
+
 </style>
 <script>
 // @ is an alias to /src
 
 import "../../node_modules/bootstrap";
 import Nav from "@/components/Nav.vue";
+import LoginTitle from "@/components/LoginTitle.vue";
 import $ from "jquery";
 
 export default {
   name: "home",
   components: {
-    Nav
+    Nav,
+    LoginTitle
   }
 };
 </script>
