@@ -39,10 +39,5 @@ export default {
   border-radius: 50px;
 }
 
-.deco_img {
-  text-align: center;
-  width: 15vw;
-  margin-left: 65%;
-  margin-top: 2%;
-}
+
 </style>

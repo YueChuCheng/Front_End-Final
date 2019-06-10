@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main_section">
     <LogoTag/>
     <logintitle :titleName="'登入'"/>
 
@@ -52,7 +52,7 @@
 .outline {
   outline: solid 2px red;
 }
-.main {
+.main_section {
   padding-top: 6%;
   min-height: 80vh;
 }
@@ -66,7 +66,7 @@
   background: #fff;
   height: 4vw;
   border-radius: 0.8vw;
-  border: #7c7c7c solid 0.5px;
+  border: #7c7c7c solid 1px;
   margin-right: 20px;
 }
 .fbLogin {
@@ -104,6 +104,12 @@
 }
 a {
   color: #ff794a !important;
+}
+.deco_img {
+  text-align: center;
+  width: 15vw;
+  margin-left: 65%;
+  margin-top: 2%;
 }
 </style>
 

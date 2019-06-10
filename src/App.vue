@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+
 import "bootstrap";
 export default {
   
