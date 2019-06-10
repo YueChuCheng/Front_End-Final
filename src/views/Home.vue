@@ -37,26 +37,36 @@
       </div>
     </div>
     <!-- 圖片輪播結束 -->
-    <div class="container outline main_section">
+    <div class="container main_section">
       <div class="row">
         <div class="col title_section">選擇店家</div>
       </div>
       <div class="row">
         <div class="col subtitle_section d-flex flex-column align-items-center">
-          <div>CHOOSE RESTAURANT</div> 
+          <div>CHOOSE RESTAURANT</div>
           <div class="line"></div>
         </div>
-        
       </div>
       <LoginTitle :titleName="'早午餐'" class="logintitle"/>
     </div>
-
-
+    <div class="container  card_section">
+      <div class="row d-flex justify-content-around">
+        <StoreCard/>
+        
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.home{
+  z-index: -1000;
+  background-color: #f8f8f8;
+}
 /* 更改輪播形狀 */
+.carousel{
+  
+}
 .carousel-indicators {
   position: absolute;
   top: -10%;
@@ -73,58 +83,63 @@
 }
 
 .mainImg_title {
- 
+  z-index: 1000;
   color: #fff;
   font-size: 9vw;
   height: 80vh;
-  left:30vw;
+  left: 30vw;
 }
 .carousel-item img {
+  z-index: 1000;
   width: 100vw;
   height: 90vh;
   object-fit: cover;
 }
 span {
+  
   font-family: "Noto Serif TC", serif;
   letter-spacing: 0.8vw;
 }
 .subtitle {
+  
   font-size: 2.2vw;
   font-weight: 100;
 }
 .carousel {
-  z-index: -1;
+  z-index: 1;
 }
 .subtitle2 {
+  z-index: 1000;
   position: absolute;
   font-size: 2.2vw;
   top: 70vh;
   left: 45vw;
   color: #fff;
 }
-.main_section{
+.main_section {
+  z-index: 1000;
   text-align: center;
-  min-height: 80vh;
+  min-height: 25vh;
   margin-top: 50px;
 }
-.title_section{
+.title_section {
   font-size: 300%;
-   
 }
-.subtitle_section{
-font-size: 200%;
+.subtitle_section {
+  font-size: 200%;
 }
-.line{
-  margin-top:15px;
+.line {
+  margin-top: 15px;
   border: solid #000 1.5px;
   height: 0px;
-  width: 20vw;
+  width: 400px;
 }
-.logintitle{
-  margin-top:40px; 
+.logintitle {
+  margin-top: 40px;
 }
-
-
+.card_section{
+  margin-top:60px;
+}
 </style>
 <script>
 // @ is an alias to /src
@@ -132,13 +147,15 @@ font-size: 200%;
 import "../../node_modules/bootstrap";
 import Nav from "@/components/Nav.vue";
 import LoginTitle from "@/components/LoginTitle.vue";
+import StoreCard from "@/components/StoreCard.vue";
 import $ from "jquery";
 
 export default {
   name: "home",
   components: {
     Nav,
-    LoginTitle
+    LoginTitle,
+    StoreCard
   }
 };
 </script>

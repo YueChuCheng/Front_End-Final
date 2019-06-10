@@ -23,6 +23,7 @@ position: fixed;
   background-color: #232323;
   height: 120px;
   width: 100vw;
+  z-index: 1000;
 }
 .logo img{
     height:100px;
