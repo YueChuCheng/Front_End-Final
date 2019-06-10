@@ -55,6 +55,8 @@
         
       </div>
     </div>
+
+    <Footer/>
   </div>
 </template>
 
@@ -148,6 +150,7 @@ import "../../node_modules/bootstrap";
 import Nav from "@/components/Nav.vue";
 import LoginTitle from "@/components/LoginTitle.vue";
 import StoreCard from "@/components/StoreCard.vue";
+import Footer from "@/components/Footer.vue";
 import $ from "jquery";
 
 export default {
@@ -155,7 +158,8 @@ export default {
   components: {
     Nav,
     LoginTitle,
-    StoreCard
+    StoreCard,
+    Footer
   }
 };
 </script>
