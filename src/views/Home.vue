@@ -72,16 +72,16 @@
 .carousel-indicators {
   position: absolute;
   top: -10%;
-  left: 80%;
+  left: 83%;
 }
 .carousel-indicators li {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
 
 .main {
-  background-color: unset;
+  /* background-color: unset; */
 }
 
 .mainImg_title {
