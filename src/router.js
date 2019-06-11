@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
-import Menu from '@/components/Menu'
-import OrderManager from '@/components/OrderManager'
-import Order from '@/components/Order'
+import Menu from '@/views/Menu'
+import OrderManager from '@/views/OrderManager'
+import Order from '@/views/Order'
 Vue.use(Router)
 
 export default new Router({
