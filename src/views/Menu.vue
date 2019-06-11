@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Nav/>
     <header>
       <div>
         <div class="restaurant_info">
@@ -41,6 +42,7 @@
         <button v-on:click="Order">確認訂單</button>
       </div>
     </article>
+    <Footer/>
   </div>
 </template>
 
@@ -48,9 +50,15 @@
 <script>
 import db from "../firebase/index";
 import { mapState } from "vuex";
+import Nav from "../components/Nav"
+import Footer from "../components/Footer"
 
 export default {
   name: "#app",
+  components:{
+    Nav,
+    Footer,
+  },
   data() {
     return {
       restaurantName: "",

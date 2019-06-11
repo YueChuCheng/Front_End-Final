@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    aa
+    <Nav/>
     <div class="food" v-for="parent,index in order" :key="index">
       <div>{{ index+1 }}</div>
       <ul>
@@ -19,14 +19,21 @@
         </li>
       </ul>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import db from "../firebase/index";
+import Nav from "../components/Nav"
+import Footer from "../components/Footer"
 
 export default {
   name: "OrderManager",
+  components:{
+    Nav,
+    Footer,
+  },
   data() {
     return {
       order: [

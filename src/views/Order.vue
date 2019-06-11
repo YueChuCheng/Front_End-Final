@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <Nav/>
     <div class="food" v-for="item,index in order">
       <ul>
         <li>
@@ -196,6 +197,7 @@
       </form>
     </div>
     <button v-on:click="SendOrder" type="submit">送出訂單</button>
+    <Footer/>
   </div>
 </template>
 
@@ -203,8 +205,15 @@
 <script>
 import db from "../firebase/index";
 import {mapState} from "vuex";
+import Nav from "../components/Nav"
+import Footer from "../components/Footer"
+
 export default {
   name: 'Order',
+  components:{
+    Nav,
+    Footer,
+  },
   data () {
     return {
       nameText:'',
