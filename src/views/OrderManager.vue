@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import db from "../db";
+import db from "../firebase/index";
 
 export default {
   name: "OrderManager",

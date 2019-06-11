@@ -201,7 +201,7 @@
 
 <!-- <button type="submit">送出訂單</button>   -->
 <script>
-import db from "../db";
+import db from "../firebase/index";
 import {mapState} from "vuex";
 export default {
   name: 'Order',

@@ -46,7 +46,7 @@
 
       
 <script>
-import db from "../db";
+import db from "../firebase/index";
 import { mapState } from "vuex";
 
 export default {
