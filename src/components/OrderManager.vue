@@ -45,6 +45,7 @@ export default {
       orderNumber: []
     };
   },
+
   firestore() {
     return {
       docInfoRef: firebase
@@ -56,102 +57,84 @@ export default {
         .collection("Restaurant")
         .doc("Info")
         .collection("Order")
+      // docInfoRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc(this.$store.state.useruid),
+      // colOrderRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc(this.$store.state.useruid)
+      //   .collection("Order")
     };
   },
-  created: async function() {
-    let doc = await this.$firestore.docInfoRef.get();
-    this.orderNumber = doc.data().OrderNumber;
-    console.log(this.orderNumber);
-    for (var i = 0; i < this.orderNumber.length; i++) {
-      let doc = await this.$firestore.colOrderRef
-        .doc("Order" + this.orderNumber[i])
-        .collection("Info")
-        .doc("Info")
-        .get();
-      if (doc.exists) {
-        this.order.push({
-          info: {
-            name: doc.data().Name,
-            address: doc.data().Adress,
-            TEL: doc.data().TEL,
-            time: doc.data().Time,
-            totalPrice: doc.data().TotalPrice,
-            message: doc.data().Message
-          },
-          food: []
-        });
-      }
-      doc = await this.$firestore.colOrderRef
-        .doc("Order" + this.orderNumber[i])
-        .get();
-      let foodCount = 0;
-      if (doc.exists) {
-        foodCount = doc.data().FoodCount;
-      }
-      for (var j = 1; j <= foodCount; j++) {
-        let doc = await this.$firestore.colOrderRef
-          .doc("Order" + this.orderNumber[i])
-          .collection("Food")
-          .doc("Food" + j)
-          .get();
-        if (doc.exists) {
-          this.order[i].food.push({
-            name: doc.data().Name,
-            count: doc.data().Count
-          });
-        }
-      }
-    }
-    this.$firestore.colOrderRef.onSnapshot(async (res) => {
-      const changes = res.docChanges();
-      let changeId='empty'
-      changes.forEach(async change => {
-        if(change.type==='added')
-          changeId=change.doc.id
-        if(change.type==='removed')
-          console.log(change.doc.id)
-      })
-      let doc = await this.$firestore.colOrderRef
-        .doc(changeId)
-        .collection("Info")
-        .doc("Info")
-        .get();
-      if (doc.exists) {
-        this.order.push({
-          info: {
-            name: doc.data().Name,
-            address: doc.data().Adress,
-            TEL: doc.data().TEL,
-            time: doc.data().Time,
-            totalPrice: doc.data().TotalPrice,
-            message: doc.data().Message
-          },
-          food: []
-        });
-      }
-      doc = await this.$firestore.colOrderRef
-        .doc(changeId)
-        .get();
-      let foodCount = 0;
-      if (doc.exists) {
-        foodCount = doc.data().FoodCount;
-          }
-          for (var j = 1; j <= foodCount; j++) {
-            let doc = await this.$firestore.colOrderRef
-              .doc(changeId)
-              .collection("Food")
-              .doc("Food" + j)
-              .get();
-            if (doc.exists) {
-              this.order[i].food.push({
-                name: doc.data().Name,
-                count: doc.data().Count
-              });
-            }
-          }
-    })
-  },
+
+
   methods: {
+    async getOrderInfo(id){
+      // get order info with orderNumber
+      let self = this;
+
+      //AJAX
+      let doc = await this.$firestore.colOrderRef
+        .doc("Order" + id)
+        .collection("Info")
+        .doc("Info")
+        .get();
+
+      let food = await this.$firestore.colOrderRef
+        .doc("Order" + id)
+        .get();
+
+
+      //Format
+      if (doc.exists) {
+        let data = {
+          info: {
+            name: doc.data().Name,
+            address: doc.data().Address,
+            TEL: doc.data().TEL,
+            time: doc.data().Time,
+            totalPrice: doc.data().TotalPrice,
+            message: doc.data().Message
+          },
+          food: []
+        }
+    
+        let foodCount = food.data().FoodCount;
+        for (var foodId = 1; foodId <= foodCount; foodId++) {
+          data.food.push(await self.getFoodInfo(id, foodId))
+        }
+
+        return data;
+      }
+      else {
+        return "error";
+      }
+
+    },
+
+    async getFoodInfo(orderNumber, id) {
+      // get food inf with foodId in orderNumber
+      let doc = await this.$firestore.colOrderRef
+        .doc("Order" + orderNumber)
+        .collection("Food")
+        .doc("Food" + id)
+        .get();
+
+
+      if (doc.exists) {
+        let data = {
+          name: doc.data().Name,
+          count: doc.data().Count
+        }
+        return data;
+      }
+      else {
+        return "food error"
+      }
+    },
+
     Finish: async function(orderindex) {
       //刪除修改firebase資料
       this.$firestore.colOrderRef
@@ -169,7 +152,71 @@ export default {
         { merge: true }
       );
     }
-  }
+  },
+
+  created: async function() {
+    let self = this;
+    let doc = await this.$firestore.docInfoRef.get();
+    this.orderNumber = doc.data().OrderNumber;
+    console.log(this.orderNumber);
+
+    this.orderNumber.forEach(async ele => {
+      this.order.push(await self.getOrderInfo(ele))
+    })
+    console.log(this.order);
+
+
+    this.$firestore.colOrderRef.onSnapshot(async res => {
+      const changes = res.docChanges();
+      let changeId = "empty";
+      
+      changes.forEach(async change => {
+        if (change.type === "added") changeId = change.doc.id;
+        if (change.type === "removed") console.log(change.doc.id);
+      });
+      if (changeId !== "empty") {
+        let doc = await this.$firestore.colOrderRef
+          .doc(changeId)
+          .collection("Info")
+          .doc("Info")
+          .get();
+        if (doc.exists) {
+          this.order.push({
+            info: {
+              name: doc.data().Name,
+              address: doc.data().Address,
+              TEL: doc.data().TEL,
+              time: doc.data().Time,
+              totalPrice: doc.data().TotalPrice,
+              message: doc.data().Message
+            },
+            food: []
+          });
+        }
+        doc = await this.$firestore.colOrderRef.doc(changeId).get();
+        let foodCount = 0;
+        if (doc.exists) {
+          foodCount = doc.data().FoodCount;
+        }
+        for (var j = 1; j <= foodCount; j++) {
+          let doc = await this.$firestore.colOrderRef
+            .doc(changeId)
+            .collection("Food")
+            .doc("Food" + j)
+            .get();
+          if (doc.exists) {
+            this.order[i].food.push({
+              name: doc.data().Name,
+              count: doc.data().Count
+            });
+          }
+        }
+      }
+    });
+  },
+
+
+
 };
 </script>
 

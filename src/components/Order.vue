@@ -230,6 +230,12 @@ export default {
         .collection("Restaurant")
         .doc("Info")
         .collection("Order")
+      // docInfoRef: firebase.firestore().collection("Restaurant").doc(this.$store.state.uid),
+      // colOrderRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc(this.$store.state.uid)
+      //   .collection("Order")
     };
   },
   methods: {
