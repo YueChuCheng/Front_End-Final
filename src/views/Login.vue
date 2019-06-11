@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main_section">
     <LogoTag/>
     <logintitle :titleName="'登入'"/>
 
@@ -35,37 +35,24 @@
     </div>
     <div class="row">
       <div class="col">
-          <img src="../assets/picture (2).png" alt="" class="deco_img">
+        <img src="../assets/picture (2).png" alt class="deco_img">
       </div>
     </div>
   </div>
 </template>
-<script>
-import "bootstrap";
-import LogoTag from "@/components/LogoTag.vue";
-import logintitle from "@/components/LoginTitle.vue";
-export default {
-  name: "login",
-  components: {
-    LogoTag,
-    logintitle
-  }
-};
-</script>
+
 
 <style scoped>
-@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../css/base.css";
 * {
-    
-    text-align: center;
+  text-align: center;
   font-family: "Noto Sans TC", sans-serif;
 }
 
 .outline {
   outline: solid 2px red;
 }
-.main {
+.main_section {
   padding-top: 6%;
   min-height: 80vh;
 }
@@ -79,7 +66,7 @@ export default {
   background: #fff;
   height: 4vw;
   border-radius: 0.8vw;
-  border: #7c7c7c solid 0.5px;
+  border: #7c7c7c solid 1px;
   margin-right: 20px;
 }
 .fbLogin {
@@ -118,7 +105,31 @@ export default {
 a {
   color: #ff794a !important;
 }
+.deco_img {
+  text-align: center;
+  width: 15vw;
+  margin-left: 65%;
+  margin-top: 2%;
+}
 </style>
+
+
+
+
+
+<script>
+import LogoTag from "@/components/LogoTag.vue";
+import logintitle from "@/components/LoginTitle.vue";
+export default {
+  name: "login",
+  components: {
+    LogoTag,
+    logintitle
+  }
+};
+</script>
+
+
 
 
 
