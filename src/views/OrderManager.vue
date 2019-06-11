@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <Nav/>
+    <article>
     <div class="food" v-for="parent,index in order" :key="index">
       <div>{{ index+1 }}</div>
       <ul>
@@ -20,6 +21,7 @@
       </ul>
     </div>
     <Footer/>
+    </article>
   </div>
 </template>
 
@@ -229,6 +231,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+article{
+  border:1px solid #000000;
+  padding-top:130px
+}
 h1,
 h2 {
   font-weight: normal;

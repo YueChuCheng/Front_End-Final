@@ -187,6 +187,9 @@ export default {
   box-sizing: border-box; 
   font-family: "Noto Sans TC", sans-serif;
 }
+header{
+  padding-top:120px
+}
 h1,
 h2,
 h3 {
