@@ -7704,6 +7704,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-firestore@^0.3.21:
+  version "0.3.21"
+  resolved "https://registry.yarnpkg.com/vue-firestore/-/vue-firestore-0.3.21.tgz#153d40c9d560d824b474ea2b9d3ee6d036af448e"
+  integrity sha512-INC4zV2IC0nxPw86uSUqUxO+WXlRlTCcuROJlhhnmKDtCWprmQa8H75VPUD9Z07fJUNIanmwAIQ0YTrDKlLwug==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
