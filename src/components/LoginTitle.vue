@@ -22,11 +22,13 @@ export default {
 }
 
 .title {
+  text-align: center;
   color: #262626;
   font-weight: 300;
   font-size: 250%;
 }
 .title_style {
+  text-align: center;
   z-index: -1;
   position: absolute;
   background: #219e91;
@@ -37,9 +39,5 @@ export default {
   border-radius: 50px;
 }
 
-.deco_img {
-  width: 15vw;
-  margin-left: 65%;
-  margin-top: 2%;
-}
+
 </style>
