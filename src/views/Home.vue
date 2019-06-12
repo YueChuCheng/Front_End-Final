@@ -49,7 +49,7 @@
       </div>
       <LoginTitle :titleName="'早午餐'" class="logintitle"/>
     </div>
-    <div class="container  card_section outline">
+    <div class="container  card_section ">
       <div class="row d-flex justify-content-around">
         <StoreCard/>
         

@@ -18,7 +18,7 @@ export default new Vuex.Store({
     registerBool: false//是否在登入狀態
     ,user: {//儲存註冊資訊
       username: '',//儲存登入後用戶名稱
-      userid: ''
+      userid: '' //儲存登入後的用戶ID
 
     }
   },
@@ -79,6 +79,19 @@ export default new Vuex.Store({
       catch (error) {
         console.log("提取文件時出錯:", error);
       }
+    },
+    async doStoreDataRead() {//讀取
+      let docRef = await firebase.firestore().collection("Restaurant1").doc("Info")
+      try {
+        let doc = await docRef.get();
+        return doc.data();
+
+      }
+      catch (error) {
+        console.log("提取文件時出錯:", error);
+        return false;
+      }
     }
+
   }
 })
