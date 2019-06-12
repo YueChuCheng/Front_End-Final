@@ -15,7 +15,17 @@ export default new Vuex.Store({
       loading: false,
       user: ""
     },
+    registerBool: false//是否在登入狀態
+    ,user: {//儲存註冊資訊
+      username: '',//儲存登入後用戶名稱
+      userid: ''
+
+    }
   },
+  getters:{
+    registerBool:state=>state.registerBool
+  },
+
   mutations: {
 
   },
