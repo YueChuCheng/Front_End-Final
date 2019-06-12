@@ -5,8 +5,8 @@
     </div>
 
     <div class="col d-flex nav_btn justify-content-end align-items-center">
-      <div class="nav_btn_style">賣家登入</div>
-      <div class="nav_btn_style">賣家註冊</div>
+      <router-link to="/login" class="nav_btn_style">賣家登入</router-link>
+      <router-link to="/register" class="nav_btn_style">賣家註冊</router-link>
     </div>
     <div class="humberger d-flex flex-column justify-content-around">
       <div class="line line1"></div>

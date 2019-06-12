@@ -20,9 +20,7 @@ export default new Vuex.Store({
 
   },
   actions: {
-    async loginWithGoogle() {
-      //self=this 可用此方法於firebase函式中取得state變數
-      
+    async loginWithGoogle() { //google登入函式
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
       
@@ -57,6 +55,20 @@ export default new Vuex.Store({
       });
 
       return res//回傳跳哪一頁的值
+    },
+    async readUser() { //登入時讀取User資料
+      var user = firebase.auth().currentUser.uid;
+      let docRef = await firebase.firestore().collection("user").doc(user)
+      try {
+        let doc = await docRef.get();
+        this.state.user.userid = user; //填入User uid
+        this.state.user.username = doc.data().storename;//填入User Name
+        this.state.registerBool = true;//若登入則設為true        
+        
+      }
+      catch (error) {
+        console.log("提取文件時出錯:", error);
+      }
     }
   }
 })
