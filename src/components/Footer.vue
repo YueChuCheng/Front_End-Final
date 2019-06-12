@@ -20,7 +20,7 @@ export default {
 
         background-color: #232323;
         height:70px;
-        width: 100vw;
+        width: 100%;
         color:#fff;
         font-weight:200; 
     }

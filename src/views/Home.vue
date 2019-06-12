@@ -49,7 +49,7 @@
       </div>
       <LoginTitle :titleName="'早午餐'" class="logintitle"/>
     </div>
-    <div class="container  card_section">
+    <div class="container  card_section outline">
       <div class="row d-flex justify-content-around">
         <StoreCard/>
         
@@ -141,6 +141,7 @@ span {
 }
 .card_section{
   margin-top:60px;
+  width: 80vw;
 }
 </style>
 <script>
