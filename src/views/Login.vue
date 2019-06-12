@@ -7,7 +7,7 @@
       <div class="col subtitle mt-4">以社群媒體登入</div>
     </div>
     <div class="row d-flex justify-content-center login mt-4">
-      <div class="col-2 googleLogin"></div>
+      <div @click="loginWithGoogle" class="col-2 googleLogin"></div>
       <div class="col-2 fbLogin"></div>
     </div>
     <div class="row or_style d-flex justify-content-center login align-items-center mt-4">
@@ -118,6 +118,9 @@ a {
 
 
 <script>
+import {mapState}from 'vuex';
+import {mapActions}from 'vuex';
+import "../firebase";
 import LogoTag from "@/components/LogoTag.vue";
 import logintitle from "@/components/LoginTitle.vue";
 export default {
@@ -125,7 +128,19 @@ export default {
   components: {
     LogoTag,
     logintitle
+  },
+   computed:{
+    ...mapState(['login']),
+   
+    },
+  methods: {
+ 
+  ...mapActions(['loginWithGoogle']),
+
+
+   
   }
+  
 };
 </script>
 
