@@ -49,13 +49,18 @@
       </div>
       <LoginTitle :titleName="'早午餐'" class="logintitle"/>
     </div>
-    <div class="container  card_section ">
+    <div class="container card_section">
       <div class="row d-flex justify-content-around">
         <!-- 印出所有店家的資訊 -->
-        <StoreCard v-for="(ele, id) in store" 
-          :storename="ele.Name"  :storeAddress="ele.Adress" :storeTime="ele.OpenTime" :key="id"
+        <StoreCard
+         
+          v-for="(ele, id) in store"
+          :storename="ele.Name"
+          :storeAddress="ele.Adress"
+          :storeTime="ele.OpenTime"
+          :key="id"
+          :id="id"
         />
-        
       </div>
     </div>
 
@@ -64,13 +69,12 @@
 </template>
 
 <style scoped>
-.home{
+.home {
   z-index: -1000;
   background-color: #f8f8f8;
 }
 /* 更改輪播形狀 */
-.carousel{
-  
+.carousel {
 }
 .carousel-indicators {
   position: absolute;
@@ -101,12 +105,10 @@
   object-fit: cover;
 }
 span {
-  
   font-family: "Noto Serif TC", serif;
   letter-spacing: 0.8vw;
 }
 .subtitle {
-  
   font-size: 2.2vw;
   font-weight: 100;
 }
@@ -142,8 +144,8 @@ span {
 .logintitle {
   margin-top: 40px;
 }
-.card_section{
-  margin-top:60px;
+.card_section {
+  margin-top: 60px;
   width: 80vw;
 }
 </style>
@@ -156,18 +158,13 @@ import LoginTitle from "@/components/LoginTitle.vue";
 import StoreCard from "@/components/StoreCard.vue";
 import Footer from "@/components/Footer.vue";
 import $ from "jquery";
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 import { mapActions } from "vuex";
 export default {
   name: "home",
   data() {
     return {
-      store: [
-        {Name: "",
-        Adress: "",
-        OpenTime: "",
-        TEL: ""},
-      ],
+      store: [{ Name: "", Adress: "", OpenTime: "", TEL: "" }]
     };
   },
   components: {
@@ -176,14 +173,16 @@ export default {
     StoreCard,
     Footer
   },
-  methods:{
-    ...mapState(['storeData']),
-     ...mapActions(["doStoreDataRead"]),
+  methods: {
+    ...mapState(["storeData"]),
+    ...mapActions(["doStoreDataRead"]),
+  
   },
   async created() {
- 
     this.store = await this.doStoreDataRead();
-    
+    this.store.forEach((ele, id) => {
+      console.log(id);
+    });
   }
 };
 </script>

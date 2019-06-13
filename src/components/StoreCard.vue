@@ -10,7 +10,7 @@
         <p class="info_span">{{storeTime}}</p>
       </div>
       <div class="submit">
-        <div class="submit_btn">吃這間吧</div>
+        <div @click="readClickID(id)" class="submit_btn">吃這間吧</div>
       </div>
     </div>
   </div>
@@ -19,10 +19,10 @@
 <script>
 import { mapActions } from "vuex";
 import { mapState } from "vuex";
-
+import "../firebase/index.js";
 export default {
   name: "StoreCard",
-  props: ["storename","storeAddress","storeTime"],
+  props: ["storename", "storeAddress", "storeTime", "id"],
   data() {
     return {
       store: {
@@ -43,19 +43,22 @@ export default {
     ...mapActions(["doStoreDataRead"]),
     ...mapActions(["read"]),
     ...mapState(["storeData"]),
+    ...mapState(["clickID"]),
 
     save(storeString) {
       //按下查看店家資訊案件 儲存店家ID
       this.$store.state.store.storClick = storeString;
       console.log(this.$store.state.store.storClick);
-    }
-  },
-  //async created() {
-  //  //this.store = await this.doStoreDataRead();
-  //  this.store = await this.doStoreDataRead();
-  //  this.hello = await this.read();
-  //  console.log(this.store);
-  //}
+    },
+
+    async readClickID(i) {//點擊店家後儲存ID
+      let docRefStoreID = await firebase.firestore().collection("Restaurant1");
+      let docStoreID = await docRefStoreID.get();
+      this.storeData.storeID = docStoreID.docs; //取所有店家ID
+      this.clickID=this.storeData.storeID[i].id;
+      console.log(this.clickID);//點擊到的店家ID
+      
+  }}
 };
 </script>
 

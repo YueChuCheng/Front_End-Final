@@ -21,8 +21,10 @@ export default new Vuex.Store({
       userid: '' //儲存登入後的用戶ID
 
     },
+    clickID:''//點擊的店家id
+    ,
     storeData: {
-      storeID: [], //儲存點擊的店家ID
+      storeID: [], //儲存店家ID
       storeInfo:[]//儲存店家資訊
     }
   },
@@ -85,7 +87,7 @@ export default new Vuex.Store({
       }
     },
 
-    async doStoreDataRead() {//讀取
+    async doStoreDataRead() {//讀取首頁資訊
       let docRefStoreID = await firebase.firestore().collection("Restaurant1")
       try {
         let docStoreID = await docRefStoreID.get();
@@ -93,7 +95,7 @@ export default new Vuex.Store({
 
         this.state.storeData.storeID=docStoreID.docs;//取所有店家ID
         
-    
+        this.state.storeData.storeInfo=[]; //先清空儲存空間
        // console.log("第一間店家ID= "+this.state.storeData.storeID[1].id)//取某間店家ID
 
         //this.state.storeData.storeInfo=docStoreID.docs
@@ -112,22 +114,17 @@ export default new Vuex.Store({
         console.log("提取文件時出錯:", error);
         return false;
       }
+    },
+
+    async readClick(i){
+      console.log("i");    
+      let docRefStoreID = await firebase.firestore().collection("Restaurant1")        
+      let docStoreID = await docRefStoreID.get();
+      this.state.storeData.storeID=docStoreID.docs;//取所有店家ID
+      console.log(this.state.storeData.storeID[1].id);
     }
 
-
-    ,
-    async read() {
-      let docRef = await firebase.firestore().collection("Restaurant1").doc("Info")
-      try {
-        let doc = await docRef.get();
-        return doc.data();
-
-      }
-      catch (error) {
-        console.log("提取文件時出錯:", error);
-        return false;
-      }
-    }
+   
 
   }
 })

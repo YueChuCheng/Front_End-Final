@@ -103,6 +103,7 @@
 }
 </style>
 <script>
+
 import $ from "jquery";
 import {mapGetters} from 'vuex'
 import {mapState} from 'vuex'
@@ -117,6 +118,12 @@ export default {
      
     }
   },
+  mounted(){
+   $(".humberger").click(function (e) { 
+    $(".humberger").css("opacity", "0");
+     
+   });
+  }
 };
 
 //$(".humberger").click(function(e) {
