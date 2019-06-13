@@ -29,6 +29,7 @@
 import db from "../firebase/index";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { mapState } from "vuex";
 
 export default {
   name: "OrderManager",
@@ -54,27 +55,30 @@ export default {
       orderNumber: []
     };
   },
+  computed: mapState({
+    userid: state => state.user.userid
+  }),
 
   firestore() {
     return {
-      docInfoRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
       // docInfoRef: firebase
       //   .firestore()
       //   .collection("Restaurant")
-      //   .doc(this.$store.state.useruid),
+      //   .doc("Info"),
       // colOrderRef: firebase
       //   .firestore()
       //   .collection("Restaurant")
-      //   .doc(this.$store.state.useruid)
+      //   .doc("Info")
       //   .collection("Order")
+      docInfoRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.userid),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.userid)
+        .collection("Order")
     };
   },
 

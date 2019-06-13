@@ -27,13 +27,13 @@ export default {
     return {
       store: {
         Name: "",
-        Adress: "",
+        Address: "",
         OpenTime: "",
         TEL: ""
       },
       hello: {
         Name: "",
-        Adress: "",
+        Address: "",
         OpenTime: "",
         TEL: ""
       }
@@ -52,7 +52,7 @@ export default {
     },
 
     async readClickID(i) {//點擊店家後儲存ID
-      let docRefStoreID = await firebase.firestore().collection("Restaurant1");
+      let docRefStoreID = await firebase.firestore().collection("test");
       let docStoreID = await docRefStoreID.get();
       this.storeData.storeID = docStoreID.docs; //取所有店家ID
       this.clickID=this.storeData.storeID[i].id;
