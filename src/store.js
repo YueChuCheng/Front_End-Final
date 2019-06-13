@@ -91,13 +91,13 @@ export default new Vuex.Store({
         let docStoreID = await docRefStoreID.get();
         
 
-        this.state.storeData.storeID.push(docStoreID.docs);//取所有店家ID
+        this.state.storeData.storeID=docStoreID.docs;//取所有店家ID
         
-     
+    
        // console.log("第一間店家ID= "+this.state.storeData.storeID[1].id)//取某間店家ID
 
         //this.state.storeData.storeInfo=docStoreID.docs
-
+      
         for (let index = 0; index <docStoreID.docs.length; index++) {
           
           this.state.storeData.storeInfo.push(docStoreID.docs[index].data());//取店家資訊陣列

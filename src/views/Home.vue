@@ -51,7 +51,10 @@
     </div>
     <div class="container  card_section ">
       <div class="row d-flex justify-content-around">
-        <StoreCard />
+        <!-- 印出所有店家的資訊 -->
+        <StoreCard v-for="(ele, id) in store" 
+          :storename="ele.Name"  :storeAddress="ele.Adress" :storeTime="ele.OpenTime" :key="id"
+        />
         
       </div>
     </div>
@@ -154,8 +157,19 @@ import StoreCard from "@/components/StoreCard.vue";
 import Footer from "@/components/Footer.vue";
 import $ from "jquery";
 import {mapState} from 'vuex'
+import { mapActions } from "vuex";
 export default {
   name: "home",
+  data() {
+    return {
+      store: [
+        {Name: "",
+        Adress: "",
+        OpenTime: "",
+        TEL: ""},
+      ],
+    };
+  },
   components: {
     Nav,
     LoginTitle,
@@ -164,6 +178,12 @@ export default {
   },
   methods:{
     ...mapState(['storeData']),
+     ...mapActions(["doStoreDataRead"]),
+  },
+  async created() {
+ 
+    this.store = await this.doStoreDataRead();
+    
   }
 };
 </script>

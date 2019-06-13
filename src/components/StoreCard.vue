@@ -1,15 +1,17 @@
 <template>
   <div class="card_style">
-    <img src="../assets/restaurant/restaurant (1).png" alt>
-    <h5 class="storeName">{{store[0].Name}}</h5>
-    <div class="info">
-      <p class="info_time_p">地址:</p>
-      <p class="info_span"></p>
-      <p class="info_time_p">營業時間:</p>
-      <p class="info_span"></p>
-    </div>
-    <div class="submit">
-      <div class="submit_btn">吃這間吧</div>
+    <div>
+      <img src="../assets/restaurant/restaurant (1).png" alt>
+      <h5 class="storeName">{{storename}}</h5>
+      <div class="info">
+        <p class="info_time_p">地址:</p>
+        <p class="info_span">{{storeAddress}}</p>
+        <p class="info_time_p">營業時間:</p>
+        <p class="info_span">{{storeTime}}</p>
+      </div>
+      <div class="submit">
+        <div class="submit_btn">吃這間吧</div>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +22,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "StoreCard",
+  props: ["storename","storeAddress","storeTime"],
   data() {
     return {
       store: {
@@ -28,7 +31,7 @@ export default {
         OpenTime: "",
         TEL: ""
       },
-       hello: {
+      hello: {
         Name: "",
         Adress: "",
         OpenTime: "",
@@ -47,12 +50,12 @@ export default {
       console.log(this.$store.state.store.storClick);
     }
   },
-  async created() {
-    //this.store = await this.doStoreDataRead();
-    this.store = await this.doStoreDataRead();
-    this.hello = await this.read();
-    console.log(this.store);
-  }
+  //async created() {
+  //  //this.store = await this.doStoreDataRead();
+  //  this.store = await this.doStoreDataRead();
+  //  this.hello = await this.read();
+  //  console.log(this.store);
+  //}
 };
 </script>
 
