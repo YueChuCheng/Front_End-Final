@@ -10,7 +10,7 @@
         <p class="info_span">{{storeTime}}</p>
       </div>
       <div class="submit">
-        <div @click="readClickID(id)" class="submit_btn">吃這間吧</div>
+        <router-link to="/menu" @click="readClickID(id)" class="submit_btn">吃這間吧</router-link>
       </div>
     </div>
   </div>
@@ -55,8 +55,8 @@ export default {
       let docRefStoreID = await firebase.firestore().collection("test");
       let docStoreID = await docRefStoreID.get();
       this.storeData.storeID = docStoreID.docs; //取所有店家ID
-      this.clickID=this.storeData.storeID[i].id;
-      console.log(this.clickID);//點擊到的店家ID
+      this.$store.state.clickID=this.storeData.storeID[i].id;
+      console.log(this.$store.state.clickID);//點擊到的店家ID
       
   }}
 };
