@@ -24,8 +24,9 @@
             <h5 class="font_bg">{{parent.name}}</h5>
             <h5>{{parent.name}}</h5>
           </div>
-          <div class="food_container">
-            <div class="food" v-for="child,cindex in parent.food" :key="child.index" v-if="child.count > 0" v-bind:style="{ outline:'0.4vw solid #ff794a'}">
+          <div class="showtypebtn_container" v-on:click="parent.isShow=!parent.isShow"></div>
+          <div class="food_container" v-show="parent.isShow">
+            <div class="food" v-for="child,cindex in parent.food" :key="child.index" v-if="child.count > 0" v-bind:style="{ outline:'3px solid #ff794a'}">
               <ul>
                 <li>
                   <img src="../assets/food.png" class="img_food">
@@ -45,7 +46,7 @@
                 </li>
               </ul>
             </div>
-            <div class="food" v-for="child,cindex in parent.food" :key="child.index" v-if="child.count === 0">
+            <div class="food" v-else-if="child.count === 0">
               <ul>
                 <li>
                   <img src="../assets/food.png" class="img_food">
@@ -89,6 +90,7 @@ export default {
   },
   data() {
     return {
+      isShow:[],
       restaurantName: "",
       restaurantAddress: "",
       restaurantTEL: "",
@@ -152,7 +154,8 @@ export default {
     querySnapshot.forEach(docSnapshot => {
       typearray.push({
         name: docSnapshot.data().Name,
-        food: []
+        food: [],
+        isShow:false,
       });
     });
     this.type = typearray;
@@ -226,7 +229,7 @@ h3 {
 }
 h3,
 h4 {
-  font-size: 2.75vw;
+  font-size: 3vw;
   font-weight: 300;
 }
 h4 {
@@ -245,19 +248,18 @@ h5 {
   /* border:1px solid #000000; */
   font-size: 4vw;
   font-weight: 300;
-  line-height: 3.5vw;
+  line-height: 4.25vw;
   position: absolute;
   width: 3vw;
 }
 hr {
   border: none;
-  border-top: 0.1vw solid #262626;
+  border-top: 0.2vw solid #262626;
   width: 18vw;
-  margin-top: 5px;
+  margin-top: 1vw;
 }
 p {
   font-size: 1.75vw;
-  font-family: "Noto Sans TC", sans-serif;
   font-weight: 100;
   margin-bottom: 0.1vw;
 }
@@ -284,6 +286,8 @@ li {
   display: grid;
   grid-row-gap: 0.01vw;
 }
+
+
 /* article */
 article {
   width: 100%;
@@ -319,10 +323,11 @@ article {
   color: rgba(0, 0, 0, 0);
 }
 .food_container {
+  /* border:1px solid #000000; */
   grid-row-gap: 2vw;
   grid-column-gap: 1.5vw;
   display: grid;
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: repeat(3, 24vw);
 }
 .food ul li {
   background-color: #ffffff;
@@ -388,7 +393,6 @@ article {
 }
 .foodbtn:active {
   background-color: #c95932;
-  border: #c95932;
 }
 .img_foodbtn {
   height: 50%;
@@ -412,5 +416,123 @@ article {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+.showtypebtn_container{
+  position: absolute;
+  display:none;
+}
+
+@media screen and (max-width: 480px){
+  h3,h4 {
+    font-size: 1.4em;
+  }
+  h4:nth-child(2) {
+    display:none;
+  }
+  hr {
+    border-top: 1px solid #262626;
+    width: 18vw;
+    margin-top: 3vw;
+  }
+  h5 {
+    /* border:1px solid #000000;  */
+    font-size: 1.5em;
+    line-height: 1em;
+    width: auto;
+    text-align: center;
+    position: relative;
+  }
+  p {
+    font-size: 0.8em;
+  }
+  .restaurant_info {
+    width: 60vw;
+    padding: 15px 25px;
+    top: 40vw;
+    margin-top:0px;
+  }
+  /* article */
+  .menuheader_container {
+    margin-bottom: 4.5vw;
+  }
+  .type_container {
+    margin-top: 0px;
+  }
+  .type {
+    /* border:1px solid #000000;  */
+    width: 75vw;
+    grid-template-columns: 100%;
+    justify-content: center;
+    justify-items: center;
+    grid-template-rows: 10vw auto;
+    grid-row-gap: 15px;
+    padding-bottom: 100px;
+  }
+  .font_bg {
+    width: auto;
+    height: 5vw;
+    margin-top: 15px;
+    margin-left: 10px;
+    color: rgba(0, 0, 0, 0);
+    position: absolute;
+  }
+  .showtypebtn_container{
+    display:block;
+    border:1px solid #000000; 
+    width:29px;
+    height:16px;
+    margin-left:55vw;
+    margin-top: 2.5vw;
+    position: absolute;
+  }
+  .food_container {
+    grid-row-gap: 2.5%;
+    grid-template-columns: auto;
+  }
+  .food ul li {
+    padding:1.5% 0px;
+    /* border:1px solid #000000;  */
+    width: 73vw;
+    /* grid-template-columns: 9vw auto; */
+  }
+  .img_food {
+    /* border:1px solid #000000;  */
+    height: 90px;
+    margin-left: 10%;
+  }
+  .foodinfo_container {
+    padding: 0px 8px;
+    margin-top:-13%;
+  }
+  .foodinfo_container p {
+    font-size: 1.2em;
+  }
+  .foodinfo_container p:nth-child(2) {
+    font-size: 1em;
+    margin-top: 8%
+  }
+  .foodbtn_container .count {
+    font-size: 1em;
+    height: 27.5px;
+  }
+  .foodbtn {
+    height: 27.5px;
+  }
+  .foodbtn_container {
+    grid-template-columns: repeat(3, 27.5px);
+  }
+  .totalprice {
+    font-size: 1.1em;
+  }
+  .mainbtn {
+    margin-top: 40px;
+    font-size: 1em;
+    width: 100px;
+    height: 35px;
+    border-radius: 60px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>
