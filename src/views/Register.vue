@@ -135,14 +135,14 @@ export default {
       var user = firebase.auth().currentUser.uid;
       firebase
         .firestore()
-        .collection("user")
+        .collection("test")
         .doc(user)
         .set({
-          storename: $("input[name='name']").val(),
-          address: $("input[name='address']").val(),
-          tel: $("input[name='tel']").val(),
-          time: $("input[name='time']").val(),
-          registerBool: "true"
+          Name: $("input[name='name']").val(),
+          Address: $("input[name='address']").val(),
+          TEL: $("input[name='tel']").val(),
+          OpenTime: $("input[name='time']").val(),
+          RegisterBool: "true"
         });
     }
   }
