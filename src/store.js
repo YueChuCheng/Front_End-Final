@@ -51,7 +51,6 @@ export default new Vuex.Store({
   
         console.log(doc.data());
         if (doc.data()) { //若曾經註冊//改了
-         
           return 'login';
         }
         else {//若未註冊

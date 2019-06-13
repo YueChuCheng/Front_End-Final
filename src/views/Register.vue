@@ -143,6 +143,8 @@ export default {
           TEL: $("input[name='tel']").val(),
           OpenTime: $("input[name='time']").val(),
           TotalOrderCount: 0,
+          OrderCount: 0,
+          OrderNumber: [],
           RegisterBool: "true"
         });
     }
