@@ -56,7 +56,7 @@
          
           v-for="(ele, id) in store"
           :storename="ele.Name"
-          :storeAddress="ele.Adress"
+          :storeAddress="ele.Address"
           :storeTime="ele.OpenTime"
           :key="id"
           :id="id"
@@ -164,7 +164,7 @@ export default {
   name: "home",
   data() {
     return {
-      store: [{ Name: "", Adress: "", OpenTime: "", TEL: "" }]
+      store: [{ Name: "", Address: "", OpenTime: "", TEL: "" }]
     };
   },
   components: {

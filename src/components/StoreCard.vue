@@ -27,13 +27,13 @@ export default {
     return {
       store: {
         Name: "",
-        Adress: "",
+        Address: "",
         OpenTime: "",
         TEL: ""
       },
       hello: {
         Name: "",
-        Adress: "",
+        Address: "",
         OpenTime: "",
         TEL: ""
       }
