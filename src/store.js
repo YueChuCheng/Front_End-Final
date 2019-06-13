@@ -16,14 +16,18 @@ export default new Vuex.Store({
       user: ""
     },
     registerBool: false//是否在登入狀態
-    ,user: {//儲存註冊資訊
+    , user: {//儲存註冊資訊
       username: '',//儲存登入後用戶名稱
       userid: '' //儲存登入後的用戶ID
 
+    },
+    storeData: {
+      storeID: [], //儲存點擊的店家ID
+      storeInfo:[]//儲存店家資訊
     }
   },
-  getters:{
-    registerBool:state=>state.registerBool
+  getters: {
+    registerBool: state => state.registerBool
   },
 
   mutations: {
@@ -33,7 +37,7 @@ export default new Vuex.Store({
     async loginWithGoogle() { //google登入函式
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      
+
       var res = await firebase.auth().signInWithPopup(provider).then(async function (result) { //以非同步函示才能取得接收值
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
@@ -45,7 +49,7 @@ export default new Vuex.Store({
 
 
         if (doc.data().registerBool == "true") { //若曾經註冊
-         
+
           return 'login';
         }
         else {//若未註冊
@@ -74,13 +78,45 @@ export default new Vuex.Store({
         this.state.user.userid = user; //填入User uid
         this.state.user.username = doc.data().storename;//填入User Name
         this.state.registerBool = true;//若登入則設為true        
-        
+
       }
       catch (error) {
         console.log("提取文件時出錯:", error);
       }
     },
+
     async doStoreDataRead() {//讀取
+      let docRefStoreID = await firebase.firestore().collection("Restaurant1")
+      try {
+        let docStoreID = await docRefStoreID.get();
+        
+
+        this.state.storeData.storeID.push(docStoreID.docs);//取所有店家ID
+        
+     
+       // console.log("第一間店家ID= "+this.state.storeData.storeID[1].id)//取某間店家ID
+
+        //this.state.storeData.storeInfo=docStoreID.docs
+
+        for (let index = 0; index <docStoreID.docs.length; index++) {
+          
+          this.state.storeData.storeInfo.push(docStoreID.docs[index].data());//取店家資訊陣列
+        }
+        //console.log( this.state.storeData.storeInfo);//顯示店家資訊陣列
+
+        //return docStoreID.data();
+        console.log(this.state.storeData.storeInfo);
+        return this.state.storeData.storeInfo;//retrun storeInfo
+      }
+      catch (error) {
+        console.log("提取文件時出錯:", error);
+        return false;
+      }
+    }
+
+
+    ,
+    async read() {
       let docRef = await firebase.firestore().collection("Restaurant1").doc("Info")
       try {
         let doc = await docRef.get();

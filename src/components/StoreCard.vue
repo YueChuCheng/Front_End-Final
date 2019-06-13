@@ -1,12 +1,12 @@
 <template>
   <div class="card_style">
     <img src="../assets/restaurant/restaurant (1).png" alt>
-    <h5 class="storeName">{{hello.Name}}</h5>
+    <h5 class="storeName">{{store[0].Name}}</h5>
     <div class="info">
       <p class="info_time_p">地址:</p>
-      <p class="info_span">{{hello.Adress}}</p>
-      <p class="info_time_p ">營業時間: </p>
-      <p class="info_span">{{hello.OpenTime}}</p>
+      <p class="info_span"></p>
+      <p class="info_time_p">營業時間:</p>
+      <p class="info_span"></p>
     </div>
     <div class="submit">
       <div class="submit_btn">吃這間吧</div>
@@ -16,11 +16,19 @@
 
 <script>
 import { mapActions } from "vuex";
+import { mapState } from "vuex";
+
 export default {
   name: "StoreCard",
   data() {
     return {
-      hello: {
+      store: {
+        Name: "",
+        Adress: "",
+        OpenTime: "",
+        TEL: ""
+      },
+       hello: {
         Name: "",
         Adress: "",
         OpenTime: "",
@@ -30,6 +38,9 @@ export default {
   },
   methods: {
     ...mapActions(["doStoreDataRead"]),
+    ...mapActions(["read"]),
+    ...mapState(["storeData"]),
+
     save(storeString) {
       //按下查看店家資訊案件 儲存店家ID
       this.$store.state.store.storClick = storeString;
@@ -37,7 +48,10 @@ export default {
     }
   },
   async created() {
-    this.hello = await this.doStoreDataRead();
+    //this.store = await this.doStoreDataRead();
+    this.store = await this.doStoreDataRead();
+    this.hello = await this.read();
+    console.log(this.store);
   }
 };
 </script>
@@ -70,8 +84,8 @@ img {
   padding-left: 20px;
   font-size: 18px;
 }
-.info_span{
-  margin-left:30px;
+.info_span {
+  margin-left: 30px;
 }
 .submit {
   display: flex;

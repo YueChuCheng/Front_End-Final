@@ -51,7 +51,7 @@
     </div>
     <div class="container  card_section ">
       <div class="row d-flex justify-content-around">
-        <StoreCard/>
+        <StoreCard />
         
       </div>
     </div>
@@ -153,7 +153,7 @@ import LoginTitle from "@/components/LoginTitle.vue";
 import StoreCard from "@/components/StoreCard.vue";
 import Footer from "@/components/Footer.vue";
 import $ from "jquery";
-
+import {mapState} from 'vuex'
 export default {
   name: "home",
   components: {
@@ -161,6 +161,9 @@ export default {
     LoginTitle,
     StoreCard,
     Footer
+  },
+  methods:{
+    ...mapState(['storeData']),
   }
 };
 </script>
