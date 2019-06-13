@@ -104,36 +104,37 @@ export default {
     };
   },
   computed: mapState({
-    totalPrice: state => state.totalPrice
+    totalPrice: state => state.totalPrice,
+    clickID: state => state.clickID
   }),
   firestore() {
     return {
       // Collection
-      docRestaurantRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colTypeRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Menu"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docRestaurantRef: firebase.firestore().collection("Restaurant").doc(this.$store.state.uid),
+      // docRestaurantRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colTypeRef: firebase
       //   .firestore()
       //   .collection("Restaurant")
-      //   .doc(this.$store.state.uid)
+      //   .doc("Info")
       //   .collection("Menu"),
       // colOrderRef: firebase
       //   .firestore()
       //   .collection("Restaurant")
-      //   .doc(this.$store.state.uid)
+      //   .doc("Info")
       //   .collection("Order")
+      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colTypeRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Menu"),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
   },
   mounted: async function() {

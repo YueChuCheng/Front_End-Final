@@ -231,22 +231,23 @@ export default {
   computed: mapState({
     totalPrice: state => state.totalPrice,
     order: state => state.order,
+    clickID: state => state.clickID
   }),
   firestore() {
     return {
       // Collection
-      docInfoRef: firebase.firestore().collection("Restaurant").doc("Info"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docInfoRef: firebase.firestore().collection("Restaurant").doc(this.$store.state.uid),
+      // docInfoRef: firebase.firestore().collection("Restaurant").doc("Info"),
       // colOrderRef: firebase
       //   .firestore()
       //   .collection("Restaurant")
-      //   .doc(this.$store.state.uid)
+      //   .doc("Info")
       //   .collection("Order")
+      docInfoRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
   },
   methods: {
