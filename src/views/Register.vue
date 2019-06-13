@@ -11,19 +11,19 @@
       <div class="input_style">
         <div class="mt-3 input_w">
           店名
-          <input type="text " class="input" placeholder="填寫餐廳名稱">
+          <input name="name" type="text " class="input" placeholder="填寫餐廳名稱">
         </div>
         <div class="mt-3 input_w">
           地址
-          <input type="text " class="input" placeholder="填寫餐廳地址">
+          <input name="address" type="text " class="input" placeholder="填寫餐廳地址">
         </div>
         <div class="mt-3 input_w">
           TEL
-          <input type="text " class="input" placeholder="填寫餐廳電話">
+          <input name="tel" type="text " class="input" placeholder="填寫餐廳電話">
         </div>
         <div class="mt-3 input_w">
           外送時間
-          <input type="text " class="input " placeholder="填寫外送時間">
+          <input name="time" type="text " class="input" placeholder="填寫外送時間">
         </div>
         <div class="mt-3 input_w pic">
           選擇照片
@@ -33,7 +33,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="submit">成為賣家吧!</div>
+        <div @click="set" class="submit">成為賣家吧!</div>
       </div>
     </div>
     <div class="row">
@@ -122,11 +122,29 @@
 <script>
 import LogoTag from "@/components/LogoTag.vue";
 import logintitle from "@/components/LoginTitle.vue";
+import "../firebase"
+import $ from "jquery"
 export default {
   name: "register",
   components: {
     LogoTag,
     logintitle
+  },
+  methods: {
+    set() {
+      var user = firebase.auth().currentUser.uid;
+      firebase
+        .firestore()
+        .collection("user")
+        .doc(user)
+        .set({
+          storename: $("input[name='name']").val(),
+          address: $("input[name='address']").val(),
+          tel: $("input[name='tel']").val(),
+          time: $("input[name='time']").val(),
+          registerBool: "true"
+        });
+    }
   }
 };
 </script>

@@ -2,39 +2,39 @@
   <div class="hello">
     <Nav/>
     <article>
-    <div class="food" v-for="parent,index in order" :key="index">
-      <div>{{ index+1 }}</div>
-      <ul>
-        <li v-for="child,cindex in parent.food" :key="child.index">
-          <div>{{ child.name }}</div>
-          <div>數量：{{ child.count }}</div>
-        </li>
-        <li>
-          <div>共計：{{ parent.info.totalPrice }}</div>
-          <div>訂購人：{{ parent.info.name }}</div>
-          <div>送達時間：{{ parent.info.time }}</div>
-          <div>手機：{{ parent.info.TEL }}</div>
-          <div>外送地址：{{ parent.info.address }}</div>
-          <div>備註：{{ parent.info.message }}</div>
-          <button v-on:click="Finish(index)">完成</button>
-        </li>
-      </ul>
-    </div>
-    <Footer/>
+      <div class="food" v-for="parent,index in order" :key="index">
+        <div>{{ index+1 }}</div>
+        <ul>
+          <li v-for="child,cindex in parent.food" :key="child.index">
+            <div>{{ child.name }}</div>
+            <div>數量：{{ child.count }}</div>
+          </li>
+          <li>
+            <div>共計：{{ parent.info.totalPrice}}</div>
+            <div>訂購人：{{ parent.info.name }}</div>
+            <div>送達時間：{{ parent.info.time }}</div>
+            <div>手機：{{ parent.info.TEL }}</div>
+            <div>外送地址：{{ parent.info.address }}</div>
+            <div>備註：{{ parent.info.message }}</div>
+            <button v-on:click="Finish(index)">完成</button>
+          </li>
+        </ul>
+      </div>
+      <Footer/>
     </article>
   </div>
 </template>
 
 <script>
 import db from "../firebase/index";
-import Nav from "../components/Nav"
-import Footer from "../components/Footer"
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default {
   name: "OrderManager",
-  components:{
+  components: {
     Nav,
-    Footer,
+    Footer
   },
   data() {
     return {
@@ -78,9 +78,8 @@ export default {
     };
   },
 
-
   methods: {
-    async getOrderInfo(id){
+    async getOrderInfo(id) {
       // get order info with orderNumber
       let self = this;
 
@@ -91,10 +90,7 @@ export default {
         .doc("Info")
         .get();
 
-      let food = await this.$firestore.colOrderRef
-        .doc("Order" + id)
-        .get();
-
+      let food = await this.$firestore.colOrderRef.doc("Order" + id).get();
 
       //Format
       if (doc.exists) {
@@ -108,19 +104,17 @@ export default {
             message: doc.data().Message
           },
           food: []
-        }
-    
+        };
+
         let foodCount = food.data().FoodCount;
         for (var foodId = 1; foodId <= foodCount; foodId++) {
-          data.food.push(await self.getFoodInfo(id, foodId))
+          data.food.push(await self.getFoodInfo(id, foodId));
         }
 
         return data;
-      }
-      else {
+      } else {
         return "error";
       }
-
     },
 
     async getFoodInfo(orderNumber, id) {
@@ -131,16 +125,14 @@ export default {
         .doc("Food" + id)
         .get();
 
-
       if (doc.exists) {
         let data = {
           name: doc.data().Name,
           count: doc.data().Count
-        }
+        };
         return data;
-      }
-      else {
-        return "food error"
+      } else {
+        return "food error";
       }
     },
 
@@ -167,73 +159,42 @@ export default {
     let self = this;
     let doc = await this.$firestore.docInfoRef.get();
     this.orderNumber = doc.data().OrderNumber;
-    console.log(this.orderNumber);
+    // console.log(this.orderNumber);
 
     this.orderNumber.forEach(async ele => {
-      this.order.push(await self.getOrderInfo(ele))
-    })
-    console.log(this.order);
-
-
-    this.$firestore.colOrderRef.onSnapshot(async res => {
-      const changes = res.docChanges();
-      let changeId = "empty";
-      
-      changes.forEach(async change => {
-        if (change.type === "added") changeId = change.doc.id;
-        if (change.type === "removed") console.log(change.doc.id);
-      });
-      if (changeId !== "empty") {
-        let doc = await this.$firestore.colOrderRef
-          .doc(changeId)
-          .collection("Info")
-          .doc("Info")
-          .get();
-        if (doc.exists) {
-          this.order.push({
-            info: {
-              name: doc.data().Name,
-              address: doc.data().Address,
-              TEL: doc.data().TEL,
-              time: doc.data().Time,
-              totalPrice: doc.data().TotalPrice,
-              message: doc.data().Message
-            },
-            food: []
-          });
-        }
-        doc = await this.$firestore.colOrderRef.doc(changeId).get();
-        let foodCount = 0;
-        if (doc.exists) {
-          foodCount = doc.data().FoodCount;
-        }
-        for (var j = 1; j <= foodCount; j++) {
-          let doc = await this.$firestore.colOrderRef
-            .doc(changeId)
-            .collection("Food")
-            .doc("Food" + j)
-            .get();
-          if (doc.exists) {
-            this.order[i].food.push({
-              name: doc.data().Name,
-              count: doc.data().Count
-            });
-          }
-        }
-      }
+      this.order.push(await self.getOrderInfo(ele));
     });
-  },
 
+    let changeId = "empty";
 
+    //監聽資料
+    this.$firestore.colOrderRef.onSnapshot({
+        // Listen for document metadata changes
+        includeMetadataChanges: false
+    },
+      async res => {
+        const changes = res.docChanges();
+        changes.forEach(async change => {
+          changeId = change.doc.id;
+          changeId=changeId.substring(changeId.length,5);
+          if (change.type === "modified") {
+            console.log(await self.getOrderInfo(changeId))
+          }
+          // if (change.type === "removed") console.log(changeId);
+        });
+        
+      }
+    );
 
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-article{
-  border:1px solid #000000;
-  padding-top:130px
+article {
+  border: 1px solid #000000;
+  padding-top: 130px;
 }
 h1,
 h2 {

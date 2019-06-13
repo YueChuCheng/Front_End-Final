@@ -3,10 +3,16 @@
     <div class="col logo">
       <img src="../assets/logo.png" alt>
     </div>
-
-    <div class="col d-flex nav_btn justify-content-end align-items-center">
-      <div class="nav_btn_style">賣家登入</div>
-      <div class="nav_btn_style">賣家註冊</div>
+  <!-- 未登入前的nav -->
+    <div  v-if="!registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
+      <router-link to="/login" class="nav_btn_style">賣家登入</router-link>
+      <router-link to="/register" class="nav_btn_style">賣家註冊</router-link>
+    </div>
+    <!-- 登入後的nav -->
+    <div  v-if="registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
+      <p class="nav_name">您好，{{this.user.username}}!</p>
+      <router-link to="/*" class="nav_btn_style">菜單編輯</router-link>
+      <router-link to="/*" class="nav_btn_style">訂單編輯</router-link>
     </div>
     <div class="humberger d-flex flex-column justify-content-around">
       <div class="line line1"></div>
@@ -36,6 +42,7 @@
 }
 .nav_btn {
   height: 50px;
+  color:#fff;
 }
 .nav_btn_style {
   color: #fff;
@@ -65,6 +72,11 @@
   border-top: 1.5px solid #fff;
   border-radius: 2px;
 }
+.nav_name{
+  margin-top:15px;
+  margin-right:3%;
+  font-size: 20px;
+}
 @media screen and (max-width: 480px) {
   .nav_btn_style {
     display: none;
@@ -87,14 +99,31 @@
   .line {
     display: block;
   }
+  
 }
 </style>
 <script>
-import $ from "jquery";
 
+import $ from "jquery";
+import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 export default {
   name: "Nav",
-  
+  computed: { ...mapGetters(['registerBool']), ...mapState(["user"]) },
+   watch: {
+      
+    //監聽是否在登入狀態
+    registerBool: function(newValue, oldValue) {
+      console.log(newValue, oldValue);
+     
+    }
+  },
+  mounted(){
+   $(".humberger").click(function (e) { 
+    $(".humberger").css("opacity", "0");
+     
+   });
+  }
 };
 
 //$(".humberger").click(function(e) {

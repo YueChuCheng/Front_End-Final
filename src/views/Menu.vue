@@ -5,7 +5,7 @@
       <div>
         <div class="restaurant_info">
           <h3>{{restaurantName}}</h3>
-          <p>{{restaurantAdress}}</p>
+          <p>{{restaurantAddress}}</p>
           <p>TEL：{{restaurantTEL}}</p>
           <p>外送時間：{{restaurantOpenTime}}</p>
         </div>
@@ -13,33 +13,44 @@
       </div>
     </header>
     <article>
-      <div class="type" v-for="parent,index in type" :key="index">
-        <div>
-          <h5 class="font_bg">{{parent.name}}</h5>
-          <h5>{{parent.name}}</h5>
-        </div>
-        <div class="food_container">
-          <div class="food" v-for="child,cindex in parent.food" :key="child.index">
-            <ul>
-              <li>
-                <img src="../assets/food.png" class="img_food">
-                <div class="foodinfo_container">
-                  <p class="foodname">{{ child.name }}</p>
-                  <p class="foodprice">NT${{ child.price }}</p>
-                  <div class="foodbtn_container">
-                    <button v-on:click="Decrease(index,cindex)" class="foodbtn decrease"><img src="../assets/icon/minus.png" class="img_foodbtn minus"></button>
-                    <p>{{child.count}}</p>
-                    <button v-on:click="Increase(index,cindex)" class="foodbtn increase"><img src="../assets/icon/plus.png" class="img_foodbtn plus"></button>
+      <div class="menuheader_container">
+        <h4>菜單</h4>
+        <h4 >Menu</h4>
+        <hr>
+      </div>
+      <div class="type_container">
+        <div class="type" v-for="parent,index in type" :key="index">
+          <div>
+            <h5 class="font_bg">{{parent.name}}</h5>
+            <h5>{{parent.name}}</h5>
+          </div>
+          <div class="food_container">
+            <div class="food" v-for="child,cindex in parent.food" :key="child.index">
+              <ul>
+                <li>
+                  <img src="../assets/food.png" class="img_food">
+                  <div class="foodinfo_container">
+                    <p class="foodname">{{ child.name }}</p>
+                    <p class="foodprice">NT${{ child.price }}</p>
+                    <div class="foodbtn_container">
+                      <button v-on:click="Decrease(index,cindex)" class="foodbtn decrease">
+                        <img src="../assets/icon/minus.png" class="img_foodbtn minus">
+                      </button>
+                      <div class="count">{{child.count}}</div>
+                      <button v-on:click="Increase(index,cindex)" class="foodbtn increase">
+                        <img src="../assets/icon/plus.png" class="img_foodbtn plus">
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <p>共計：NT$ {{ totalPrice }}</p>
-      <div class="btn">
-        <button v-on:click="Order">確認訂單</button>
+        <p>共計：NT$ {{ totalPrice }}</p>
+        <div class="btn">
+          <button v-on:click="Order">確認訂單</button>
+        </div>
       </div>
     </article>
     <Footer/>
@@ -50,19 +61,18 @@
 <script>
 import db from "../firebase/index";
 import { mapState } from "vuex";
-import Nav from "../components/Nav"
-import Footer from "../components/Footer"
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default {
-  name: "#app",
-  components:{
+  components: {
     Nav,
-    Footer,
+    Footer
   },
   data() {
     return {
       restaurantName: "",
-      restaurantAdress: "",
+      restaurantAddress: "",
       restaurantTEL: "",
       restaurantOpenTime: "",
       type: [
@@ -113,7 +123,7 @@ export default {
     let doc = await this.$firestore.docRestaurantRef.get();
     if (doc.exists) {
       this.restaurantName = doc.data().Name;
-      this.restaurantAdress = doc.data().Adress;
+      this.restaurantAddress = doc.data().Address;
       this.restaurantTEL = doc.data().TEL;
       this.restaurantOpenTime = doc.data().OpenTime;
     }
@@ -184,35 +194,54 @@ export default {
 <style scoped>
 @import "../css/base.css";
 * {
-  box-sizing: border-box; 
+  box-sizing: border-box;
   font-family: "Noto Sans TC", sans-serif;
+  margin:0;
+  padding:0;
 }
-header{
-  padding-top:120px
+header {
+  padding-top: 120px;
 }
 h1,
 h2,
 h3 {
   font-weight: normal;
 }
-h3 {
-  font-size: 2em;
+h3,h4{
+  font-size: 2.75vw;
   font-weight: 300;
+}
+h4{
+  font-weight: 400;
+  text-align: center;
+}
+h4:nth-child(2){
+  font-size: 2vw;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 4px;
 }
 h5 {
   /* writing-mode:vertical-lr; */
   color: #262626;
   /* border:1px solid #000000; */
-  font-size: 2.5em;
+  font-size: 4vw;
   font-weight: 300;
-  line-height: 1.1em;
+  line-height: 3.5vw;
   position: absolute;
-  width: 1em;
+  width: 3vw;
+}
+hr{
+  border:none;
+  border-top:0.1vw solid #262626;
+  width: 18vw;
+  margin-top:5px;
 }
 p {
-  font-size: 1.2em;
+  font-size: 1.75vw;
   font-family: "Noto Sans TC", sans-serif;
   font-weight: 100;
+  margin-bottom:0.1vw;
 }
 ul {
   list-style-type: none;
@@ -222,89 +251,113 @@ li {
   display: inline-block;
 }
 .img_restaurant {
+  border:none;
   width: 100%;
+  box-sizing:border-box;
 }
 .restaurant_info {
-  width: 20em;
-  padding: 20px 40px;
+  width: 32.5%;
+  padding: 2vw 3vw;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   color: #ffffff;
-  right: 0px;
+  right: 0vw;
   margin-top: 15vw;
+  display:grid;
+  grid-row-gap: 0.01vw;
 }
+/* article */
 article {
+  width: 100%;
   display: grid;
   justify-content: center;
   background-color: #f8f8f8;
+  padding-top:4vw;
+}
+.menuheader_container{
+  display: grid;
+  justify-content: center;
+  margin-bottom: 1.5vw;
+}
+.type_container{
+  margin-top: 20px;
 }
 .type {
-  border: 1px solid #000000;
-  width: 100%;
-  padding-bottom:80px;
+  margin-left:-2vw;
+  width: 80vw;
+  padding-bottom: 80px;
   display: grid;
-  grid-template-columns: 50px auto;
+  grid-template-columns: 6vw auto;
   grid-template-rows: 100%;
 }
 .font_bg {
-  width: 1em;
+  width: 3vw;
   border-radius: 50px;
   background-color: #219e91;
-  margin-top: 20px;
-  margin-left: 10px;
+  margin-top: 2%;
+  margin-left: 1.25%;
   color: rgba(0, 0, 0, 0);
 }
-.food_container{
-  display:grid;
-  grid-template-columns: repeat(3,280px);
+.food_container {
+  grid-row-gap: 2vw;
+  grid-column-gap: 1.5vw;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
 }
-.food ul li{
-  border: 1px solid #000000;
+.food ul li {
   background-color: #ffffff;
-  width: 280px;
-  height: 100px;
-  display:grid;
+  height: auto;
+  display: grid;
   justify-content: space-between;
-  grid-template-columns: 90px auto;
+  grid-template-columns: 9vw auto;
+  box-shadow: 0.1px 0.1px 7px 0.5px #eeeeee;
 }
-.foodinfo_container p{
+.img_food {
+  height: 9vw;
+  margin: 4px;
+}
+.foodinfo_container {
+  display: grid;
+  grid-template-rows: repeat(2, 30px) 30px;
+}
+.foodinfo_container p {
   font-weight: 300;
   text-align: right;
 }
-.foodname{
+.foodname {
   font-weight: 400;
 }
-.img_food {
-  border: 1px solid #000000;
-  height: 90px;
-  margin: 4px;
-}
-.foodbtn_container{
+.foodbtn_container {
   border-radius: 60px;
   display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(3,32.5px);
+  align-content: center;
+  align-items: center;
+  grid-template-columns: repeat(3, 3vw);
 }
-.foodbtn_container p{
+.foodbtn_container .count {
   font-weight: 200;
-  border:#ff794a solid 1px;
-  border-left:none;
-  border-right:none;
+  font-size: 1.2em;
+  border: #ff794a solid 1px;
+  border-left: none;
+  border-right: none;
   text-align: center;
+  height: 3vw;
 }
-.foodbtn{
+.foodbtn {
   background-color: #ff794a;
-  border:#ff794a 1px solid;
-  border-radius: 50px 0px 0px 50px
+  border: #ff794a 1px solid;
+  border-radius: 50px 0px 0px 50px;
+  height: 3vw;
 }
-.increase{
+.increase {
   border-radius: 0px 50px 50px 0px;
 }
 .foodbtn:active {
-  background-color:#c95932;
-  border:#c95932;
+  background-color: #c95932;
+  border: #c95932;
 }
-.img_foodbtn{
-  margin-top:3.5px;
+.img_foodbtn {
+  margin-top: -20%;
+  height: 70%
 }
 </style>

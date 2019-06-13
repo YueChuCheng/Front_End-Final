@@ -5,7 +5,7 @@ import store from './store'
 import './registerServiceWorker'
 import $ from'jquery'
 import VueFirestore from 'vue-firestore'
-
+import './firebase'
 Vue.config.productionTip = false
 Vue.use(VueFirestore)
 

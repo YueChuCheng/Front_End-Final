@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import "firebase/firestore";
+import 'firebase/auth'; //新增此import 才能使用登入功能
 
 let config = {
   apiKey: "AIzaSyBe2QWeHqJvjkSurqXhqZuU-qqyaOCC4KY",
