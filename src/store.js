@@ -47,11 +47,11 @@ export default new Vuex.Store({
         //var user = result.user;
         // ...
         let user = firebase.auth().currentUser.uid;//取得使用者uid
-        let doc = await firebase.firestore().collection("user").doc(user).get()
-
-
-        if (doc.data().registerBool == "true") { //若曾經註冊
-
+        let doc = await firebase.firestore().collection("test").doc(user).get()
+  
+        console.log(doc.data());
+        if (doc.data()) { //若曾經註冊//改了
+         
           return 'login';
         }
         else {//若未註冊
@@ -74,11 +74,11 @@ export default new Vuex.Store({
     },
     async readUser() { //登入時讀取User資料
       var user = firebase.auth().currentUser.uid;
-      let docRef = await firebase.firestore().collection("user").doc(user)
+      let docRef = await firebase.firestore().collection("test").doc(user)
       try {
         let doc = await docRef.get();
         this.state.user.userid = user; //填入User uid
-        this.state.user.username = doc.data().storename;//填入User Name
+        this.state.user.username = doc.data().Name;//填入User Name
         this.state.registerBool = true;//若登入則設為true        
 
       }
@@ -88,7 +88,7 @@ export default new Vuex.Store({
     },
 
     async doStoreDataRead() {//讀取首頁資訊
-      let docRefStoreID = await firebase.firestore().collection("Restaurant1")
+      let docRefStoreID = await firebase.firestore().collection("test")
       try {
         let docStoreID = await docRefStoreID.get();
         
@@ -116,9 +116,9 @@ export default new Vuex.Store({
       }
     },
 
-    async readClick(i){
+    async readClick(i){ 
       console.log("i");    
-      let docRefStoreID = await firebase.firestore().collection("Restaurant1")        
+      let docRefStoreID = await firebase.firestore().collection("test")        
       let docStoreID = await docRefStoreID.get();
       this.state.storeData.storeID=docStoreID.docs;//取所有店家ID
       console.log(this.state.storeData.storeID[1].id);
