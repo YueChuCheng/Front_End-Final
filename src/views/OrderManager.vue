@@ -73,11 +73,11 @@ export default {
       docInfoRef: firebase
         .firestore()
         .collection("test")
-        .doc(this.$store.state.userid),
+        .doc(this.$store.state.user.userid),
       colOrderRef: firebase
         .firestore()
         .collection("test")
-        .doc(this.$store.state.userid)
+        .doc(this.$store.state.user.userid)
         .collection("Order")
     };
   },
@@ -160,6 +160,7 @@ export default {
   },
 
   created: async function() {
+    console.log("id= "+this.$store.state.user.userid)
     let self = this;
     let doc = await this.$firestore.docInfoRef.get();
     this.orderNumber = doc.data().OrderNumber;

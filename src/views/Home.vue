@@ -182,6 +182,7 @@ export default {
     this.store = await this.doStoreDataRead();
     this.store.forEach((ele, id) => {
       console.log(id);
+      console.log("id= "+this.$store.state.user.userid)
     });
   }
 };

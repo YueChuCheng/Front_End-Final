@@ -51,7 +51,6 @@ export default new Vuex.Store({
   
         console.log(doc.data());
         if (doc.data()) { //若曾經註冊//改了
-         
           return 'login';
         }
         else {//若未註冊
@@ -80,7 +79,7 @@ export default new Vuex.Store({
         this.state.user.userid = user; //填入User uid
         this.state.user.username = doc.data().Name;//填入User Name
         this.state.registerBool = true;//若登入則設為true        
-
+        
       }
       catch (error) {
         console.log("提取文件時出錯:", error);

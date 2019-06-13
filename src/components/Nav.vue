@@ -12,7 +12,7 @@
     <div  v-if="registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
       <p class="nav_name">您好，{{this.user.username}}!</p>
       <router-link to="/*" class="nav_btn_style">菜單編輯</router-link>
-      <router-link to="/*" class="nav_btn_style">訂單編輯</router-link>
+      <router-link to="/ordermanager" class="nav_btn_style">訂單編輯</router-link>
     </div>
     <div class="humberger d-flex flex-column justify-content-around">
       <div class="line line1"></div>

@@ -25,7 +25,8 @@
             <h5>{{parent.name}}</h5>
           </div>
           <div class="showtypebtn_container" v-on:click="parent.isShow=!parent.isShow"></div>
-          <div class="food_container" v-show="parent.isShow">
+          <div class="food_container" >
+            <!-- v-show="parent.isShow" -->
             <div class="food" v-for="child,cindex in parent.food" :key="child.index" v-if="child.count > 0" v-bind:style="{ outline:'3px solid #ff794a'}">
               <ul>
                 <li>
@@ -105,7 +106,7 @@ export default {
   },
   computed: mapState({
     totalPrice: state => state.totalPrice,
-    clickID: state => state.clickID
+    clickID: state => state.clickID,
   }),
   firestore() {
     return {
@@ -136,6 +137,9 @@ export default {
         .doc(this.$store.state.clickID)
         .collection("Order")
     };
+  },
+  created(){
+    console.log(this.$store.state.clickID)
   },
   mounted: async function() {
     this.$store.state.totalPrice = 0;
@@ -205,7 +209,7 @@ export default {
       });
       if (this.$store.state.totalPrice == 0) alert("請選擇餐點");
       else this.$router.push("/Order");
-    }
+    },
   }
 };
 </script>
