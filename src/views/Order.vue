@@ -236,18 +236,18 @@ export default {
   firestore() {
     return {
       // Collection
-      // docInfoRef: firebase.firestore().collection("Restaurant").doc("Info"),
-      // colOrderRef: firebase
-      //   .firestore()
-      //   .collection("Restaurant")
-      //   .doc("Info")
-      //   .collection("Order")
-      docInfoRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      docInfoRef: firebase.firestore().collection("Restaurant").doc("Info"),
       colOrderRef: firebase
         .firestore()
-        .collection("test")
-        .doc(this.$store.state.clickID)
+        .collection("Restaurant")
+        .doc("Info")
         .collection("Order")
+      // docInfoRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      // colOrderRef: firebase
+      //   .firestore()
+      //   .collection("test")
+      //   .doc(this.$store.state.clickID)
+      //   .collection("Order")
     };
   },
   created(){
