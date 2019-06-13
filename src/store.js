@@ -79,7 +79,7 @@ export default new Vuex.Store({
         this.state.user.userid = user; //填入User uid
         this.state.user.username = doc.data().Name;//填入User Name
         this.state.registerBool = true;//若登入則設為true        
-
+        
       }
       catch (error) {
         console.log("提取文件時出錯:", error);
