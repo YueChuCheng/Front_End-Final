@@ -29,6 +29,7 @@
 import db from "../firebase/index";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { mapState } from "vuex";
 
 export default {
   name: "OrderManager",
