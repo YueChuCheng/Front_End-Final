@@ -250,10 +250,10 @@ export default {
         .collection("Order")
     };
   },
+  created(){
+    console.log(this.$store.state.clickID)
+  },
   methods: {
-    Submit: function(event){
-        this.$router.push("/?");
-    },
     Delete: function (index) {
       this.$store.state.totalPrice-=this.$store.state.order[index].totalPrice
       this.$store.state.order.splice(index, 1);
@@ -263,7 +263,7 @@ export default {
       let doc = await this.$firestore.docInfoRef.get();
       let i=0;
       let j=0;
-      let orderNumber=[]
+      let orderNumber=[];
       if (doc.exists) {
         i=doc.data().TotalOrderCount
         i++
@@ -298,7 +298,7 @@ export default {
         Time:this.timeOne+'時'+this.timeTwo+'分～'+this.timeThree+'時'+this.timeFour+"分",
         Message:this.message,
     })
-      this.$router.push('/?')
+      this.$router.push('/')
     },
   }
 }
