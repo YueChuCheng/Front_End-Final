@@ -24,32 +24,10 @@
             <h5 class="font_bg">{{parent.name}}</h5>
             <h5>{{parent.name}}</h5>
           </div>
-          <transition enter-active-class="fade-enter-active" leave-active-class="fade-leave-active">
-            <img
-              src="../assets/icon/notshowbtn.png"
-              class="showtypebtn_container"
-              v-bind:id="'showtypebtn_container'+index"
-              v-on:click="parent.isShow=!parent.isShow"
-              v-show="parent.isShow"
-            >
-          </transition>
-          <transition enter-active-class="fade-enter-active" leave-active-class="fade-leave-active">
-            <img
-              src="../assets/icon/toshowbtn.png"
-              class="showtypebtn_container"
-              v-bind:id="'showtypebtn_container'+index"
-              v-on:click="parent.isShow=!parent.isShow"
-              v-show="!parent.isShow"
-            >
-          </transition>
-          <div class="food_container" v-show="(!small)||parent.isShow">
-            <div
-              class="food"
-              v-for="child,cindex in parent.food"
-              :key="child.index"
-              v-if="child.count > 0"
-              v-bind:style="{ outline:'3px solid #ff794a'}"
-            >
+          <div class="showtypebtn_container" v-on:click="parent.isShow=!parent.isShow"></div>
+          <div class="food_container" >
+            <!-- v-show="parent.isShow" -->
+            <div class="food" v-for="child,cindex in parent.food" :key="child.index" v-if="child.count > 0" v-bind:style="{ outline:'3px solid #ff794a'}">
               <ul>
                 <li>
                   <img src="../assets/food.png" class="img_food">
@@ -103,7 +81,6 @@
 <script>
 import db from "../firebase/index";
 import { mapState } from "vuex";
-import $ from "jquery";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
@@ -114,9 +91,7 @@ export default {
   },
   data() {
     return {
-      small: false,
-      imgsrc: "",
-      isShow: [],
+      isShow:[],
       restaurantName: "",
       restaurantAddress: "",
       restaurantTEL: "",
@@ -131,37 +106,40 @@ export default {
   },
   computed: mapState({
     totalPrice: state => state.totalPrice,
-    clickID: state => state.clickID
+    clickID: state => state.clickID,
   }),
   firestore() {
     return {
       // Collection
-      docRestaurantRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colTypeRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Menu"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      // docRestaurantRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colTypeRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Menu"),
       // colOrderRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Order")
+      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colTypeRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Menu"),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
+  },
+  created(){
+    console.log(this.$store.state.clickID)
   },
   mounted: async function() {
     this.$store.state.totalPrice = 0;
@@ -182,7 +160,7 @@ export default {
       typearray.push({
         name: docSnapshot.data().Name,
         food: [],
-        isShow: false
+        isShow:false,
       });
     });
     this.type = typearray;
@@ -203,13 +181,6 @@ export default {
         item.food = foodarray;
       });
     });
-
-    // jquery
-    if ($(window).width() <= 480) {
-      this.small = true;
-    } else {
-      this.small = false;
-    }
   },
   methods: {
     Increase: function(index, cindex) {
@@ -238,7 +209,7 @@ export default {
       });
       if (this.$store.state.totalPrice == 0) alert("請選擇餐點");
       else this.$router.push("/Order");
-    }
+    },
   }
 };
 </script>
@@ -320,6 +291,7 @@ li {
   display: grid;
   grid-row-gap: 0.01vw;
 }
+
 
 /* article */
 article {
@@ -450,122 +422,22 @@ article {
   left: 50%;
   transform: translateX(-50%);
 }
-.mainbtn:active {
-  background-color: #c95932;
-}
-.showtypebtn_container {
+.showtypebtn_container{
   position: absolute;
-  display: none;
+  display:none;
 }
 
-/* 768px */
-@media screen and (max-width: 768px)and (min-width: 481px){
-  h3,
-  h4 {
-    font-size: 4vw;
-  }
-  hr {
-    border-top: 1.5px solid #262626;
-    width: 25vw;
-    margin-top: 1vw;
-  }
-  h5 {
-    font-size: 5vw;
-    line-height: 1em;
-    width: auto;
-    text-align: center;
-    position: relative;
-  }
-  p {
-    font-size: 2vw;
-  }
-  .restaurant_info {
-    width: 45%;
-    padding: 2.5vw 4vw;
-    top:17%;
-    margin-top: 17.5vw;
-  }
-  /* article */
-  .menuheader_container {
-    margin-bottom: 4.5vw;
-  }
-  .type_container {
-    margin-top: 0px;
-  }
-  .type {
-    justify-content: center;
-    justify-items: center;
-    grid-template-rows: 100%;
-    padding-bottom: 5vw;
-    grid-column-gap: 2vw;
-  }
-  .font_bg {
-    width: 4vw;
-    margin-left: 2%;
-    position: absolute;
-  }
-  .food_container {
-    grid-template-columns: repeat(2, 32vw);
-    margin: 0;
-  }
-  .food ul li {
-    padding: 0.3vw 0px;
-  }
-  .img_food {
-    width: 15vw;
-    max-width: 90px;
-    height: auto;
-    margin-left: 10%;
-  }
-  .foodinfo_container {
-    padding: 0px 2vw;
-    margin: 1vw 0;
-  }
-  .foodinfo_container p {
-    font-size: 2.5vw;
-  }
-  .foodinfo_container p:nth-child(2) {
-    font-size: 2vw;
-    margin: 0.5vw 0 0 1vw;
-  }
-  .foodbtn_container .count {
-    font-size: 2vw;
-    height: 3vw;
-  }
-  .foodbtn {
-    height: 3vw;
-  }
-  .foodbtn_container {
-    grid-template-columns: repeat(3, 3.5vw);
-  }
-  .totalprice {
-    font-size: 3.5vw;
-    margin-right:4vw;
-  }
-  .mainbtn {
-    margin-top: 3vw;
-    font-size: 1em;
-    height: 35px;
-    width: 6em;
-    border-radius: 60px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-/* 480px */
-@media screen and (max-width: 480px) {
-  h3,
-  h4 {
+@media screen and (max-width: 480px){
+  h3,h4 {
     font-size: 1.4em;
   }
   h4:nth-child(2) {
-    display: none;
+    display:none;
   }
   hr {
     border-top: 1px solid #262626;
     width: 18vw;
-    margin-top: 10px;
+    margin-top: 3vw;
   }
   h5 {
     /* border:1px solid #000000;  */
@@ -582,7 +454,7 @@ article {
     width: 60vw;
     padding: 15px 25px;
     top: 40vw;
-    margin-top: 0px;
+    margin-top:0px;
   }
   /* article */
   .menuheader_container {
@@ -599,104 +471,73 @@ article {
     justify-items: center;
     grid-template-rows: 10vw auto;
     grid-row-gap: 15px;
-    /* margin-bottom: 30px; */
-    padding-bottom: 0px;
+    padding-bottom: 100px;
   }
   .font_bg {
     width: auto;
-    height: 0.8em;
-    margin-top: 12.5px;
-    margin-left: 7.5px;
+    height: 5vw;
+    margin-top: 15px;
+    margin-left: 10px;
     color: rgba(0, 0, 0, 0);
     position: absolute;
   }
-  .showtypebtn_container {
-    display: block;
-    width: 30px;
-    height: auto;
-    margin-left: 55vw;
+  .showtypebtn_container{
+    display:block;
+    border:1px solid #000000; 
+    width:29px;
+    height:16px;
+    margin-left:55vw;
     margin-top: 2.5vw;
     position: absolute;
   }
   .food_container {
     grid-row-gap: 2.5%;
     grid-template-columns: auto;
-    padding-bottom: 50px;
   }
   .food ul li {
-    padding: 1.5% 0px;
+    padding:1.5% 0px;
     /* border:1px solid #000000;  */
     width: 73vw;
-    grid-template-columns: 9vw auto;
-    justify-content: start;
-    grid-column-gap: 15%;
+    /* grid-template-columns: 9vw auto; */
   }
   .img_food {
     /* border:1px solid #000000;  */
-    height: 20vw;
+    height: 90px;
     margin-left: 10%;
   }
   .foodinfo_container {
-    grid-template-columns: 25vw auto;
-    grid-template-rows: auto;
-    grid-column-gap:4vw;
-    padding: 10px 0;
-    position: relative;
+    padding: 0px 8px;
+    margin-top:-13%;
   }
   .foodinfo_container p {
-    font-size: 1em;
+    font-size: 1.2em;
   }
   .foodinfo_container p:nth-child(2) {
-    font-size: 0.8em;
-    right:48%;
-    top:50%;
-    position: absolute;
+    font-size: 1em;
+    margin-top: 8%
   }
   .foodbtn_container .count {
-    font-size: 0.8em;
-    height: 22.5px;
+    font-size: 1em;
+    height: 27.5px;
   }
   .foodbtn {
-    height: 22.5px;
+    height: 27.5px;
   }
   .foodbtn_container {
-    margin-top:2.5vw;
-    grid-template-columns: repeat(3, 6vw);
+    grid-template-columns: repeat(3, 27.5px);
   }
   .totalprice {
     font-size: 1.1em;
   }
   .mainbtn {
+    margin-top: 40px;
     font-size: 1em;
     width: 100px;
     height: 35px;
-    margin-top: 30px;
-  }
-}
-
-/* vue transition */
-.fade-enter-active {
-  animation: go 0.1s;
-}
-.fade-leave-active {
-  animation: back 0.1s;
-}
-
-@keyframes go {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes back {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
+    border-radius: 60px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>

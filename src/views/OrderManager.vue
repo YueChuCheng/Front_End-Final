@@ -61,24 +61,24 @@ export default {
 
   firestore() {
     return {
-      docInfoRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
       // docInfoRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.user.userid),
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colOrderRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.user.userid)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Order")
+      docInfoRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.user.userid),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.user.userid)
+        .collection("Order")
     };
   },
 
