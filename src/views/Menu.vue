@@ -74,7 +74,7 @@
                 <li>
                   <img src="../assets/food.png" class="img_food">
                   <div class="foodinfo_container">
-                    <p class="foodname">{{ child.name }}</p>
+                    <p class="foodinfo">{{ child.name }}</p>
                     <p class="foodprice">NT${{ child.price }}</p>
                     <div class="foodbtn_container">
                       <button v-on:click="Decrease(index,cindex)" class="foodbtn decrease">
@@ -237,7 +237,7 @@ export default {
         });
       });
       if (this.$store.state.totalPrice == 0) alert("請選擇餐點");
-      else this.$router.push("/Order");
+      else this.$router.push("/order");
     }
   }
 };
@@ -464,6 +464,9 @@ article {
   h4 {
     font-size: 4vw;
   }
+  h4:nth-child(2) {
+    font-size: 2.75vw;
+  }
   hr {
     border-top: 1.5px solid #262626;
     width: 25vw;
@@ -640,8 +643,9 @@ article {
     grid-template-columns: 25vw auto;
     grid-template-rows: auto;
     grid-column-gap:4vw;
-    padding: 10px 0;
+    padding: 3vw 0;
     position: relative;
+    margin-top:-5vw;
   }
   .foodinfo_container p {
     font-size: 1em;
@@ -649,7 +653,7 @@ article {
   .foodinfo_container p:nth-child(2) {
     font-size: 0.8em;
     right:48%;
-    top:50%;
+    top:70%;
     position: absolute;
   }
   .foodbtn_container .count {
