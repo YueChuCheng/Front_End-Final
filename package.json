@@ -13,6 +13,7 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "register-service-worker": "^1.6.2",
+    "scrollmagic": "^2.0.7",
     "vue": "^2.6.10",
     "vue-firestore": "^0.3.21",
     "vue-router": "^3.0.3",
