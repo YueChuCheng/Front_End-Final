@@ -135,7 +135,7 @@
 @media screen and (max-width: 480px) {
   .nav_name {
     position: absolute;
-    margin-left: -20vw;
+    left: -12%;
     margin-top: -5%;
     font-size: 5vw;
   }
@@ -148,7 +148,9 @@
     padding: 18px 10px;
   }
   .logo img {
-    height: 48px;
+    position: relative;
+    left:-2vw;
+    height: 40px;
   }
   .humberger {
     cursor: pointer;
