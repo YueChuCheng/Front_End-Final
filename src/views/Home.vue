@@ -9,7 +9,7 @@
     </div>
     <div class="row subtitle2">
       <div class="col">
-        <span class>找吃的</span>
+        <span>找吃的</span>
       </div>
     </div>
     <!-- 圖片輪播 -->
@@ -37,31 +37,44 @@
       </div>
     </div>
     <!-- 圖片輪播結束 -->
-    <div class="container main_section">
+    <div class="container main_section" id="main">
       <div class="row">
         <div class="col title_section">選擇店家</div>
       </div>
       <div class="row">
-        <div class="col subtitle_section d-flex flex-column align-items-center">
-          <div>CHOOSE RESTAURANT</div>
-          <div class="line"></div>
-        </div>
+        <div class="subtitle_section ouline">CHOOSE RESTAURANT</div>
       </div>
-      <LoginTitle :titleName="'早午餐'" class="logintitle"/>
     </div>
-    <div class="container card_section">
-      <div class="row d-flex justify-content-around">
-        <!-- 印出所有店家的資訊 -->
-        <StoreCard
-         
-          v-for="(ele, id) in store"
-          :storename="ele.Name"
-          :storeAddress="ele.Address"
-          :storeTime="ele.OpenTime"
-          :key="id"
-          :id="id"
-        />
-      </div>
+    <div class="select_section d-flex justify-content-around align-content-center flex-wrap">
+      <select class="select select_area">
+        <option>台北市大安區</option>
+        <option>台北市信義區</option>
+        <option>台北市新店區</option>
+        <option>新北市淡水區</option>
+      </select>
+      <select class="select select_food">
+        <option>早午餐</option>
+        <option>早餐</option>
+        <option>晚餐</option>
+        <option>午餐</option>
+      </select>
+      <select class="select select_rester">
+        <option>餐廳搜尋</option>
+        <option>好食</option>
+        <option>新川屋</option>
+        <option>豚太郎</option>
+      </select>
+    </div>
+    <div class="card_section row d-flex  flex-wrap ">
+      <!-- 印出所有店家的資訊 -->
+      <StoreCard
+        v-for="(ele, id) in store"
+        :storename="ele.Name"
+        :storeAddress="ele.Address"
+        :storeTime="ele.OpenTime"
+        :key="id"
+        :id="id"
+      />
     </div>
 
     <Footer/>
@@ -95,13 +108,13 @@
   z-index: 1000;
   color: #fff;
   font-size: 9vw;
-  height: 80vh;
+  height: 45vw;
   left: 30vw;
 }
 .carousel-item img {
   z-index: 1000;
   width: 100vw;
-  height: 90vh;
+  height: 50vw;
   object-fit: cover;
 }
 span {
@@ -119,34 +132,124 @@ span {
   z-index: 1000;
   position: absolute;
   font-size: 2.2vw;
-  top: 70vh;
+  top: 40vw;
   left: 45vw;
   color: #fff;
 }
 .main_section {
   z-index: 1000;
   text-align: center;
-  min-height: 25vh;
-  margin-top: 50px;
+
+  margin-top: 40px;
 }
 .title_section {
   font-size: 300%;
+
 }
+
+
 .subtitle_section {
-  font-size: 200%;
+  margin: 0 auto;
+  width: 35vw;
+  font-size: 3vw;
+  padding-bottom: 1%;
+  border-bottom: 2px solid #000;
 }
-.line {
-  margin-top: 15px;
-  border: solid #000 1.5px;
-  height: 0px;
-  width: 400px;
-}
+
+
 .logintitle {
   margin-top: 40px;
 }
 .card_section {
-  margin-top: 60px;
+  margin: 0 auto;
+  margin-top: 2%;
   width: 80vw;
+}
+.title {
+  z-index: 1000;
+  position: absolute;
+  width: 30px;
+  margin-top: 10%;
+  font-size: 60px;
+}
+.title_look {
+  z-index: 100;
+  position: absolute;
+  background-color: #219e91;
+  height: 200px;
+  width: 70px;
+  margin-top: 15%;
+  margin-left: 1%;
+  border-radius: 50px;
+}
+.select_section {
+  margin: 20px auto;
+  width: 80vw;
+  height: 60px;
+}
+.select {
+  border-radius: 10px;
+  height: 40px;
+}
+.select_area {
+  width: 24%;
+}
+.select_food {
+  width: 24%;
+}
+.select_rester {
+  width: 48%;
+}
+@media screen and (max-width: 768px) {
+  .subtitle_section {
+    width: 33vw;
+    font-size: 2.8vw;
+  }
+  .title_section {
+    font-size: 230%;
+  }
+  .select_section {
+    width: 50vw;
+    margin-top: 30px;
+  }
+  .select_area {
+    width: 47%;
+  }
+  .select_food {
+    width: 47%;
+  }
+  .select_rester {
+    margin-top: 10px;
+    width: 98%;
+  }
+  .card_section {
+    margin-top: 5%;
+  }
+  .carousel-indicators li {
+    margin-top: -6px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .subtitle_section {
+    width: 200px;
+    font-size: 18px;
+  }
+  .title_section {
+    font-size: 200%;
+  }
+  .select_section {
+    width: 65vw;
+  }
+  .card_section {
+    margin-top: 7%;
+  }
+   .carousel-indicators li {
+    margin-top: -10px;
+    height: 7px;
+    width: 7px;
+  }
+
+ 
 }
 </style>
 <script>
@@ -160,6 +263,7 @@ import Footer from "@/components/Footer.vue";
 import $ from "jquery";
 import { mapState } from "vuex";
 import { mapActions } from "vuex";
+import ScrollMagic from "scrollmagic";
 export default {
   name: "home",
   data() {
@@ -175,15 +279,22 @@ export default {
   },
   methods: {
     ...mapState(["storeData"]),
-    ...mapActions(["doStoreDataRead"]),
-  
+    ...mapActions(["doStoreDataRead"])
   },
   async created() {
     this.store = await this.doStoreDataRead();
     this.store.forEach((ele, id) => {
       console.log(id);
-      console.log("id= "+this.$store.state.user.userid)
+      console.log("id= " + this.$store.state.user.userid);
     });
+  },
+  mounted() {
+    let controller = new ScrollMagic.Controller();
+    new ScrollMagic.Scene({
+      triggerElement: "#main"
+    })
+      .setClassToggle(".main", "bgc-black")
+      .addTo(controller);
   }
 };
 </script>
