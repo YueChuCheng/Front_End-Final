@@ -237,7 +237,7 @@ export default {
         });
       });
       if (this.$store.state.totalPrice == 0) alert("請選擇餐點");
-      else this.$router.push("/Order");
+      else this.$router.push("/order");
     }
   }
 };
@@ -640,8 +640,9 @@ article {
     grid-template-columns: 25vw auto;
     grid-template-rows: auto;
     grid-column-gap:4vw;
-    padding: 10px 0;
+    padding: 3vw 0;
     position: relative;
+    margin-top:-5vw;
   }
   .foodinfo_container p {
     font-size: 1em;
@@ -649,7 +650,7 @@ article {
   .foodinfo_container p:nth-child(2) {
     font-size: 0.8em;
     right:48%;
-    top:50%;
+    top:70%;
     position: absolute;
   }
   .foodbtn_container .count {
