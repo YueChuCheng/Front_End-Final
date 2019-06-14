@@ -10,7 +10,7 @@
         <p class="info_span">{{storeTime}}</p>
       </div>
       <div class="submit">
-        <div @click="readClickID(id)" class="submit_btn">吃這間吧</div>
+        <div @click="readClickID(id)" class="submit_btn">吃這家吧</div>
       </div>
     </div>
   </div>
@@ -51,14 +51,16 @@ export default {
       console.log(this.$store.state.store.storClick);
     },
 
-    async readClickID(i) {//點擊店家後儲存ID
+    async readClickID(i) {
+      //點擊店家後儲存ID
       let docRefStoreID = await firebase.firestore().collection("test");
       let docStoreID = await docRefStoreID.get();
       this.storeData.storeID = docStoreID.docs; //取所有店家ID
-      this.$store.state.clickID= await this.storeData.storeID[i].id;
-      console.log(this.$store.state.clickID);//點擊到的店家ID
-      this.$router.push('/menu')
-  }}
+      this.$store.state.clickID = await this.storeData.storeID[i].id;
+      console.log(this.$store.state.clickID); //點擊到的店家ID
+      this.$router.push("/menu");
+    }
+  }
 };
 </script>
 
@@ -68,10 +70,12 @@ export default {
 }
 .card_style {
   background: #fff;
-  width: 360px;
-  height: 600px;
-  padding: 30px;
+  width: 24%;
+  height: 20%;
+  padding: 3%;
   box-shadow: 4px 4px 12px -2px rgba(20%, 20%, 40%, 0.5);
+  margin-bottom: 2%;
+  margin-left:1%;
 }
 img {
   width: 100%;
@@ -87,11 +91,11 @@ img {
 
 .info_time_p {
   margin: 3px;
-  padding-left: 20px;
+  padding-left: 1%;
   font-size: 18px;
 }
 .info_span {
-  margin-left: 30px;
+  margin-left: 10%;
 }
 .submit {
   display: flex;
@@ -103,9 +107,37 @@ img {
   text-align: center;
   color: #fff;
   background-color: #ff794a;
-  height: 50px;
-  width: 150px;
+  height: 4vw;
+  width: 12.2vw;
   border-radius: 100px;
-  line-height: 50px;
+  line-height: 4vw;
+  font-size: 100%;
+}
+.submit_btn:active {
+  background-color: #c95932;
+}
+@media screen and (max-width: 768px) {
+  .card_style {
+    width: 30%;
+    height: 20%;
+     margin-left:3%;
+  }
+  .submit_btn {
+    height: 40px;
+    width: 110px;
+    line-height: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card_style {
+    width: 45%;
+    height: 20%;
+  }
+  .submit_btn {
+    height: 8vw;
+    width: 20vw;
+    line-height: 8vw;
+  }
 }
 </style>
