@@ -74,7 +74,7 @@
                 <li>
                   <img src="../assets/food.png" class="img_food">
                   <div class="foodinfo_container">
-                    <p class="foodname">{{ child.name }}</p>
+                    <p class="foodinfo">{{ child.name }}</p>
                     <p class="foodprice">NT${{ child.price }}</p>
                     <div class="foodbtn_container">
                       <button v-on:click="Decrease(index,cindex)" class="foodbtn decrease">
@@ -463,6 +463,9 @@ article {
   h3,
   h4 {
     font-size: 4vw;
+  }
+  h4:nth-child(2) {
+    font-size: 2.75vw;
   }
   hr {
     border-top: 1.5px solid #262626;
