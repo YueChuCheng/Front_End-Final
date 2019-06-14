@@ -3,222 +3,244 @@
     <Nav/>
     <article>
       <div class="menuheader_container">
-        <h4>菜單</h4>
-        <h4>Menu</h4>
+        <h4>確認訂單</h4>
+        <h4>CheckOrder</h4>
         <hr>
       </div>
       <section>
         <div class="order_container">
-          <div class="orderheader"></div>
+          <div class="orderheader">
+            <p class="foodinfo_p">餐點</p>
+            <div class="foodsmallinfo">
+              <p class="foodinfo_p">數量</p>
+              <p class="foodinfo_p">小計</p>
+            </div>
+          </div>
           <div class="food_container" v-for="item,index in order">
             <ul>
               <li>
-                <button v-on:click="Delete(index)">Delete</button>
+                <button v-on:click="Delete(index)" class="deletebtn">
+                  <img src="../assets/icon/middelete.png" class="img_delete">
+                </button>
                 <p class="foodinfo_p">{{ item.name }}</p>
-                <p class="foodinfo_p">{{ item.count }}</p>
-                <p class="foodinfo_p">{{ item.totalPrice }}</p>
+                <div class="foodsmallinfo">
+                  <p class="foodinfo_p">{{ item.count }}</p>
+                  <p class="foodinfo_p">NT$ {{ item.totalPrice }}</p>
+                </div>
               </li>
             </ul>
           </div>
+          <hr>
+          <div class="totalpricebox">
+            <p>總付款金額</p>
+            <p>NT$ {{ totalPrice }}</p>
+          </div>
         </div>
-        <p>共計：NT$ {{ totalPrice }}</p>
-        <div>
-          <form>
-            外送地址：
-            <input type="text" placeholder="請輸入外送地址" v-model="addressText" required>
-            訂購人：
-            <input type="text" placeholder="請輸入姓名" required v-model="nameText">
-            手機：
-            <input
-              type="tel"
-              placeholder="請輸入手機號碼"
-              maxlength="10"
-              required
-              v-model="TELText"
-            >
-            預計送達時間:
-            <select name="YourLocation" required v-model="timeOne">
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>14</option>
-              <option>15</option>
-              <option>16</option>
-              <option>17</option>
-              <option>18</option>
-              <option>19</option>
-              <option>20</option>
-              <option>21</option>
-              <option>22</option>
-              <option>23</option>
-              <option>24</option>
-            </select>時
-            <select name="YourLocation" required v-model="timeTwo">
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>14</option>
-              <option>15</option>
-              <option>16</option>
-              <option>17</option>
-              <option>18</option>
-              <option>19</option>
-              <option>20</option>
-              <option>21</option>
-              <option>22</option>
-              <option>23</option>
-              <option>24</option>
-              <option>25</option>
-              <option>26</option>
-              <option>27</option>
-              <option>28</option>
-              <option>29</option>
-              <option>30</option>
-              <option>31</option>
-              <option>32</option>
-              <option>33</option>
-              <option>34</option>
-              <option>35</option>
-              <option>36</option>
-              <option>37</option>
-              <option>38</option>
-              <option>39</option>
-              <option>40</option>
-              <option>41</option>
-              <option>42</option>
-              <option>43</option>
-              <option>44</option>
-              <option>45</option>
-              <option>46</option>
-              <option>47</option>
-              <option>48</option>
-              <option>49</option>
-              <option>50</option>
-              <option>51</option>
-              <option>52</option>
-              <option>53</option>
-              <option>54</option>
-              <option>55</option>
-              <option>56</option>
-              <option>57</option>
-              <option>58</option>
-              <option>59</option>
-              <option>60</option>
-            </select>～
-            <select name="YourLocation" required v-model="timeThree">
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>14</option>
-              <option>15</option>
-              <option>16</option>
-              <option>17</option>
-              <option>18</option>
-              <option>19</option>
-              <option>20</option>
-              <option>21</option>
-              <option>22</option>
-              <option>23</option>
-              <option>24</option>
-            </select>時
-            <select name="YourLocation" required v-model="timeFour">
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>14</option>
-              <option>15</option>
-              <option>16</option>
-              <option>17</option>
-              <option>18</option>
-              <option>19</option>
-              <option>20</option>
-              <option>21</option>
-              <option>22</option>
-              <option>23</option>
-              <option>24</option>
-              <option>25</option>
-              <option>26</option>
-              <option>27</option>
-              <option>28</option>
-              <option>29</option>
-              <option>30</option>
-              <option>31</option>
-              <option>32</option>
-              <option>33</option>
-              <option>34</option>
-              <option>35</option>
-              <option>36</option>
-              <option>37</option>
-              <option>38</option>
-              <option>39</option>
-              <option>40</option>
-              <option>41</option>
-              <option>42</option>
-              <option>43</option>
-              <option>44</option>
-              <option>45</option>
-              <option>46</option>
-              <option>47</option>
-              <option>48</option>
-              <option>49</option>
-              <option>50</option>
-              <option>51</option>
-              <option>52</option>
-              <option>53</option>
-              <option>54</option>
-              <option>55</option>
-              <option>56</option>
-              <option>57</option>
-              <option>58</option>
-              <option>59</option>
-              <option>60</option>
-            </select>分
-            備註：
-            <textarea rows="2" cols="50" v-model="message"></textarea>
-          </form>
-        </div>
-        <button v-on:click="SendOrder" type="submit">送出訂單</button>
+        <section>
+          <div class="menuheader_container">
+            <div class="font_bg">填寫訂購人資料</div>
+            <h5 class="menuheader2_h5">填寫訂購人資料</h5>
+            <hr class="menuheader2_hr">
+          </div>
+          <div>
+            <form>
+              <div class="formtext">
+                <p>外送地址</p>
+                <p>訂購人</p>
+                <p>手機</p>
+                <p>預計送達時間</p>
+                <p>備註</p>
+              </div>
+              <div class="input_container">
+                <input type="text" placeholder="請輸入外送地址" v-model="addressText" required>
+                <input type="text" placeholder="請輸入姓名" required v-model="nameText">
+                <input type="tel" placeholder="請輸入手機號碼" maxlength="10" required v-model="TELText">
+                <div class="time_container">
+                  <select name="timeselect" required v-model="timeOne">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>04</option>
+                    <option>05</option>
+                    <option>06</option>
+                    <option>07</option>
+                    <option>08</option>
+                    <option>09</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                  </select> 時
+                  <select name="timeselect" required v-model="timeTwo">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>04</option>
+                    <option>05</option>
+                    <option>06</option>
+                    <option>07</option>
+                    <option>08</option>
+                    <option>09</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                    <option>32</option>
+                    <option>33</option>
+                    <option>34</option>
+                    <option>35</option>
+                    <option>36</option>
+                    <option>37</option>
+                    <option>38</option>
+                    <option>39</option>
+                    <option>40</option>
+                    <option>41</option>
+                    <option>42</option>
+                    <option>43</option>
+                    <option>44</option>
+                    <option>45</option>
+                    <option>46</option>
+                    <option>47</option>
+                    <option>48</option>
+                    <option>49</option>
+                    <option>50</option>
+                    <option>51</option>
+                    <option>52</option>
+                    <option>53</option>
+                    <option>54</option>
+                    <option>55</option>
+                    <option>56</option>
+                    <option>57</option>
+                    <option>58</option>
+                    <option>59</option>
+                    <option>60</option>
+                  </select> 分 ～
+                  <select name="timeselect" required v-model="timeThree">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>04</option>
+                    <option>05</option>
+                    <option>06</option>
+                    <option>07</option>
+                    <option>08</option>
+                    <option>09</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                  </select> 時
+                  <select name="timeselect" required v-model="timeFour">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>04</option>
+                    <option>05</option>
+                    <option>06</option>
+                    <option>07</option>
+                    <option>08</option>
+                    <option>09</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                    <option>32</option>
+                    <option>33</option>
+                    <option>34</option>
+                    <option>35</option>
+                    <option>36</option>
+                    <option>37</option>
+                    <option>38</option>
+                    <option>39</option>
+                    <option>40</option>
+                    <option>41</option>
+                    <option>42</option>
+                    <option>43</option>
+                    <option>44</option>
+                    <option>45</option>
+                    <option>46</option>
+                    <option>47</option>
+                    <option>48</option>
+                    <option>49</option>
+                    <option>50</option>
+                    <option>51</option>
+                    <option>52</option>
+                    <option>53</option>
+                    <option>54</option>
+                    <option>55</option>
+                    <option>56</option>
+                    <option>57</option>
+                    <option>58</option>
+                    <option>59</option>
+                    <option>60</option>
+                  </select> 分
+                </div>
+                <textarea rows="2" cols="50" v-model="message"></textarea>
+              </div>
+            </form>
+          </div>
+        </section>
+        <button class="mainbtn" v-on:click="SendOrder" type="submit">送出訂單</button>
       </section>
+      <img src="../assets/draw_new (2).png" alt="" class="img_draw">
     </article>
     <Footer/>
   </div>
@@ -361,9 +383,10 @@ h1,
 h2 {
   font-weight: normal;
 }
-h4 {
+h4,
+h5 {
   font-size: 3vw;
-  font-weight: 300;
+  font-weight: 400;
 }
 h4:nth-child(2) {
   font-size: 2vw;
@@ -372,10 +395,10 @@ h4:nth-child(2) {
   margin-top: 4px;
 }
 p {
-    font-size: 1.75vw;
-    font-weight: 300;
-    margin-bottom: 0.1vw;
-  }
+  font-size: 2vw;
+  font-weight: 300;
+  margin-bottom: 0.1vw;
+}
 ul {
   list-style-type: none;
   padding: 0;
@@ -389,12 +412,12 @@ a {
 }
 hr {
   border: none;
-  border-top: 0.2vw solid #262626;
+  border-top: 0.15vw solid #262626;
   width: 18vw;
   margin-top: 0.5vw;
 }
-form{
-  display: grid
+form {
+  display: grid;
 }
 article {
   width: 100%;
@@ -402,17 +425,18 @@ article {
   justify-content: center;
   background-color: #f8f8f8;
   padding-top: 90px;
-  padding-bottom: 8vw;
+  padding-bottom: 3vw;
   grid-template-columns: 100%;
 }
-section{
+section {
   display: grid;
   justify-content: center;
+  grid-template-columns: 80vw;
 }
 .menuheader_container {
   display: grid;
   justify-content: center;
-  margin-bottom: 1.5vw;
+  margin-bottom: 4vw;
   justify-items: center;
 }
 .order_container {
@@ -420,31 +444,137 @@ section{
   padding-bottom: 5vw;
   display: grid;
   justify-content: center;
-  grid-template-columns:100%;
+  grid-template-columns: 100%;
   grid-template-rows: 5vw;
 }
-.orderheader{
+.orderheader {
   z-index: 1;
   background-color: #219e91;
+  color: #ffffff;
   border-radius: 30px 30px 0px 0px;
+  display: grid;
+  justify-content: end;
+  grid-template-columns: auto 17.5vw;
+  align-items: center;
+  grid-column-gap: 40vw;
+  justify-content: end;
+  padding-right: 5vw;
 }
-
-.food_container{
+.food_container {
   z-index: 0;
-  border: 1px solid #000000;
   display: grid;
   width: 80vw;
-  padding:1vw 2.5vw;
+  padding: 1vw 2.5vw;
   background-color: #ffffff;
-  box-shadow: 0.1px 0.1px 7px 0.5px #eeeeee;
+  box-shadow: 0.1px -1px 5px 0.5px #e6e6e6;
 }
-.food_container ul li{
-  border: 1px solid #000000;
+.food_container ul li {
   display: grid;
-  grid-template-columns: 5vw auto 15vw 15vw;
+  grid-template-columns: 5vw auto 17.5vw;
   grid-template-rows: 5vw;
   background-color: #ffffff;
   align-items: center;
+  grid-column-gap: 5vw;
+}
+.deletebtn {
+  background-color: #ff794a;
+  border: #ff794a;
+  border-radius: 50px;
+  width: 4.5vw;
+  height: 4.5vw;
+}
+.img_delete {
+  height: 2vw;
+  margin-top: -2px;
+}
+.foodsmallinfo p {
+  text-align: end;
+}
+.foodsmallinfo {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 5vw;
+}
+.order_container hr {
+  margin: 10px 0 2vw;
+  width: 100%;
+  border-top: 0.15vw solid #686868;
+}
+.totalpricebox {
+  margin: 0 3.5vw;
+  display: grid;
+  grid-template-columns: auto 14vw;
+  text-align: end;
+}
+.totalpricebox p:nth-child(2) {
+  color: #219e91;
+  font-weight: 500;
+}
+.menuheader2_h5 {
+  z-index: 1;
+}
+.menuheader2_hr {
+  z-index: 1;
+  border-top: 1.5px solid #262626;
+  width: 21vw;
+}
+.font_bg {
+  width: 22.5vw;
+  border-radius: 50px;
+  background-color: #219e91;
+  height: 3vw;
+  margin-top: 2%;
+  margin-left: 31.5%;
+  position: absolute;
+  color: rgba(0, 0, 0, 0);
+  z-index: 0;
+}
+form {
+  background-color: #ffffff;
+  padding: 5vw;
+  box-shadow: 0.1px 0.1px 7px 0.5px #e6e6e6;
+  display: grid;
+  grid-template-columns: 13vw auto;
+  font-size: 1.5vw;
+  margin-bottom:1.5vw;
+}
+.input_container {
+  margin-left: 2vw;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(3, 4.9vw) 5vw auto;
+}
+input {
+  border: #7c7c7c 1px solid;
+  border-radius: 7.5px;
+  height: 3.5vw;
+  padding-left: 1vw;
+}
+textarea {
+  border: #7c7c7c 1px solid;
+  border-radius: 7.5px;
+  height: 8vw;
+  padding-left: 1vw;
+  margin-top:0.3vw;
+}
+select {
+  border: #7c7c7c 1px solid;
+  background-color: #ffffff;
+  border-radius: 7.5px;
+  height: 3vw;
+  padding-left: 1vw;
+  color: #262626;
+  margin-top:0.3vw
+}
+option {
+  color: #262626;
+  background-color: #ffffff
+}
+.formtext {
+  margin-top:0.1%;
+  display: grid;
+  text-align: end;
+  grid-template-rows: repeat(3, 4.9vw) 5vw auto;
 }
 .mainbtn {
   margin-top: 3vw;
@@ -464,6 +594,12 @@ section{
 .mainbtn:active {
   background-color: #c95932;
 }
+.img_draw{
+  width:18vw;
+  margin-top:5vw;
+  margin-left:77.5vw;
+}
+
 @media screen and (max-width: 768px) and (min-width: 481px) {
   h4 {
     font-size: 4vw;
@@ -475,6 +611,9 @@ section{
     border-top: 1.5px solid #262626;
     width: 25vw;
     margin-top: 1vw;
+  }
+  p {
+    font-size: 2.5vw;
   }
   /* article */
   .menuheader_container {
