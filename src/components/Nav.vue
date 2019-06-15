@@ -83,6 +83,9 @@
   background-color: #fff;
   color: #262626;
 }
+.nav_btn_style:active {
+ text-decoration:none;
+}
 .humberger {
   display: none;
   position: relative;
@@ -101,14 +104,15 @@
 }
 .nav_name {
   position: relative;
-  margin-top: 10px;
-  margin-right: 10px;
+  margin-top: 0px;
+  margin-right: 15px;
   font-size: 20px;
+  font-weight: 200;
 }
 .sm_btn {
   position: absolute;
   display: none;
-  top: 12vh;
+  top: 60px;
   width: 100vw;
   height: 10px;
   font-size: 4vw;
@@ -119,7 +123,10 @@
 .sm_btn_text {
   color: #fff;
 }
+a :active {
+  color: #fff;
 
+}
 @media screen and (max-width: 2000px) {
   .humberger {
     display: none;
@@ -128,7 +135,8 @@
 }
 @media screen and (max-width: 768px) {
   .nav_btn_style {
-    font-size: 16px;
+    /* font-size: 16px; */
+    font-size: 2vw;
     font-weight: 300;
     border: #fff 0.5px solid;
     border-radius: 30px;
@@ -138,6 +146,7 @@
   }
   .nav_name {
     font-size: 2.5vw;
+    margin-top:15px;
   }
   .logo img {
     height: 50px;
@@ -149,14 +158,16 @@
     top: -10px;
     right: -2.5vw;
   }
+  
+
 }
 
 @media screen and (max-width: 480px) {
   .nav_name {
     position: absolute;
-    left: -12%;
-    margin-top: -5px;
-    font-size: 5px;
+    left: -20%;
+    margin-top:3px;
+    font-size: 20px;
   }
   .nav_btn_style {
     display: none;

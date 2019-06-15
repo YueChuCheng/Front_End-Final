@@ -70,49 +70,50 @@ export default {
 }
 .card_style {
   background: #fff;
-  width: 24%;
+  width: 22%;
   height: 20%;
-  padding: 3%;
+  padding: 1.5% 2%;
  box-shadow: 0.1px 0.1px 7px 0.5px #eeeeee;
   margin-bottom: 2%;
-  margin-left:1%;
+  margin-right:2.5%;
 }
 img {
   width: 100%;
 }
 .storeName {
   margin:0px;
-  margin-top: 10px;
+  margin-top: 2%;
   text-align: center;
   font-size: 2vw;
   font-weight:400; 
 }
 .info {
-  margin-top: 15px;
+  margin-top: 8%;
 }
 
 .info_time_p {
-  margin-top: -1.5vw;
+  margin-top: -8%;
   padding-left: 1%;
-  font-size: 1.5vw;
+  font-size: 1.4vw;
   font-weight: 400;
 }
 .info_span {
   margin-left: 10%;
-  margin-top:-1.8vw;
+  margin-top:-13%;
+  font-size: 1.4vw;
 }
 .submit {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: -7%;
 }
 .submit_btn {
   cursor: pointer;
   text-align: center;
   color: #fff;
   background-color: #ff794a;
-  height: 3vw;
-  width: 8vw;
+  height: 3%;
+  width: 50%;
   border-radius: 100px;
   line-height: 3vw;
   font-size: 1.25vw;
@@ -125,24 +126,26 @@ img {
   .card_style {
     width: 30%;
     height: 20%;
-     margin-left:3%;
+    margin-right:auto;
+    margin-left:3%;
   }
   .submit_btn {
-    height: 40px;
-    width: 110px;
-    line-height: 40px;
+    height: 33%;
+    width: 50%;
+    line-height: 33px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .card_style {
-    width: 45%;
+    width: 46.5%;
     height: 20%;
+    margin-left:auto;
   }
   .submit_btn {
-    height: 8vw;
-    width: 20vw;
-    line-height: 8vw;
+    height: 7vw;
+    width: 50%;
+    line-height: 7vw;
   }
 }
 </style>
