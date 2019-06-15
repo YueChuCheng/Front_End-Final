@@ -379,6 +379,11 @@ export default {
   margin: 0;
   padding: 0;
 }
+/* nav */
+.main {
+  padding: 14px 10px;
+  background-color: #262626;
+}
 h1,
 h2 {
   font-weight: normal;
@@ -424,7 +429,7 @@ article {
   display: grid;
   justify-content: center;
   background-color: #f8f8f8;
-  padding-top: 90px;
+  padding-top: 10vw;
   padding-bottom: 3vw;
   grid-template-columns: 100%;
 }
@@ -615,6 +620,9 @@ option {
     width: 25vw;
     margin-top: 1vw;
   }
+  article {
+    padding-top: 15vw;
+  }
   .menuheader2_hr {
     width: 30vw;
   }
@@ -685,6 +693,9 @@ option {
   p {
     font-size: 0.9em;
     font-weight: 200;
+  }
+  article {
+    padding-top: 20vw;
   }
    .menuheader2_hr {
     width: 200px;
@@ -757,6 +768,7 @@ option {
     text-align: start;
     grid-template-rows: repeat(3, 4.9vw) 5vw auto;
     grid-row-gap:38px;
+    z-index: 0;
   }
   .formtext>p{
     font-size:17.5px;
@@ -766,6 +778,7 @@ option {
     margin-left:0;
     grid-template-rows: repeat(4, 5vw) auto;
     grid-row-gap: 37.5px;
+    z-index: 1;
   }
   input {
     height: 27.5px;
