@@ -4,9 +4,9 @@
       <img src="../assets/restaurant/restaurant (1).png" alt>
       <h5 class="storeName">{{storename}}</h5>
       <div class="info">
-        <p class="info_time_p">地址:</p>
+        <p class="info_time_p">地址：</p>
         <p class="info_span">{{storeAddress}}</p>
-        <p class="info_time_p">營業時間:</p>
+        <p class="info_time_p">營業時間：</p>
         <p class="info_span">{{storeTime}}</p>
       </div>
       <div class="submit">
@@ -73,7 +73,7 @@ export default {
   width: 24%;
   height: 20%;
   padding: 3%;
-  box-shadow: 4px 4px 12px -2px rgba(20%, 20%, 40%, 0.5);
+ box-shadow: 0.1px 0.1px 7px 0.5px #eeeeee;
   margin-bottom: 2%;
   margin-left:1%;
 }
@@ -81,37 +81,42 @@ img {
   width: 100%;
 }
 .storeName {
+  margin:0px;
   margin-top: 10px;
   text-align: center;
-  font-size: 30px;
+  font-size: 2vw;
+  font-weight:400; 
 }
 .info {
   margin-top: 15px;
 }
 
 .info_time_p {
-  margin: 3px;
+  margin-top: -1.5vw;
   padding-left: 1%;
-  font-size: 18px;
+  font-size: 1.5vw;
+  font-weight: 400;
 }
 .info_span {
   margin-left: 10%;
+  margin-top:-1.8vw;
 }
 .submit {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .submit_btn {
   cursor: pointer;
   text-align: center;
   color: #fff;
   background-color: #ff794a;
-  height: 4vw;
-  width: 12.2vw;
+  height: 3vw;
+  width: 8vw;
   border-radius: 100px;
-  line-height: 4vw;
-  font-size: 100%;
+  line-height: 3vw;
+  font-size: 1.25vw;
+  font-weight: 300;
 }
 .submit_btn:active {
   background-color: #c95932;
