@@ -1,12 +1,6 @@
 <template>
   <div class="home">
     <Nav/>
-    <div class="row position-absolute">
-      <div class="col mainImg_title d-flex justify-content-center align-items-center flex-column">
-        <span>巷口麵店</span>
-        <span class="subtitle">找到家鄉的滋味</span>
-      </div>
-    </div>
     <div class="row subtitle2">
       <div class="col">
         <span>找吃的</span>
@@ -26,24 +20,34 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../assets/picture (1).png" class="d-block w-100" alt="...">
+          <img src="../assets/main_pic0.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../assets/main_pic1.jpeg" class="d-block w-100" alt="...">
+          <img src="../assets/main_pic2.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../assets/main_pic2.jpeg" class="d-block w-100" alt="...">
+          <img src="../assets/main_pic3.png" class="d-block w-100" alt="...">
         </div>
       </div>
     </div>
     <!-- 圖片輪播結束 -->
-    <div class="container main_section" id="main">
+    <!-- <div class="container main_section" id="main">
       <div class="row">
         <div class="col title_section">選擇店家</div>
       </div>
       <div class="row">
         <div class="subtitle_section ouline">CHOOSE RESTAURANT</div>
       </div>
+    </div>-->
+
+    <div class="menuheader_container">
+      <h4>選擇店家</h4>
+      <h4>CHOOSE RESTAURANT</h4>
+      <hr>
+    </div>
+    <div class="card_deco ">
+      <h5 class="font_bg ">早午餐</h5>
+      <h5>早午餐</h5>
     </div>
     <div class="select_section d-flex justify-content-around align-content-center flex-wrap">
       <select class="select select_area">
@@ -65,7 +69,7 @@
         <option>豚太郎</option>
       </select>
     </div>
-    <div class="card_section row d-flex  flex-wrap ">
+    <div class="  card_section  d-flex flex-wrap">
       <!-- 印出所有店家的資訊 -->
       <StoreCard
         v-for="(ele, id) in store"
@@ -82,16 +86,62 @@
 </template>
 
 <style scoped>
+.card_deco {
+  position: relative;
+  top: 10.5vw;
+  left: 8vw;
+}
+h5 {
+  /* writing-mode:vertical-lr; */
+  color: #262626;
+  /* border:1px solid #000000; */
+  font-size: 4vw;
+  font-weight: 300;
+  line-height: 4.25vw;
+  position: absolute;
+  width: 3vw;
+}
+.font_bg {
+  width: 3vw;
+  border-radius: 50px;
+  background-color: #219e91;
+  margin-top: 2%;
+  margin-left: 1.25%;
+  color: rgba(0, 0, 0, 0);
+}
+h4 {
+  font-size: 3vw;
+  font-weight: 400;
+}
+h4:nth-child(2) {
+  font-size: 2vw;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 4px;
+}
+.menuheader_container {
+  margin-top: 5vw;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+hr {
+  border: none;
+  border-top: 0.15vw solid #262626;
+  width: 25vw;
+  margin-top: 0.5vw;
+}
 .home {
   z-index: -1000;
   background-color: #f8f8f8;
+  overflow-x: hidden;
 }
 /* 更改輪播形狀 */
 .carousel {
 }
 .carousel-indicators {
   position: absolute;
-  top: -10%;
+  top: 2%;
   left: 83%;
 }
 .carousel-indicators li {
@@ -144,9 +194,7 @@ span {
 }
 .title_section {
   font-size: 300%;
-
 }
-
 
 .subtitle_section {
   margin: 0 auto;
@@ -156,13 +204,13 @@ span {
   border-bottom: 2px solid #000;
 }
 
-
 .logintitle {
   margin-top: 40px;
 }
 .card_section {
   margin: 0 auto;
   margin-top: 2%;
+  margin-left: 14vw;
   width: 80vw;
 }
 .title {
@@ -186,19 +234,22 @@ span {
   margin: 20px auto;
   width: 80vw;
   height: 60px;
+  padding-left: 30px;
 }
 .select {
   border-radius: 10px;
   height: 40px;
 }
 .select_area {
-  width: 24%;
+  width: 18%;
 }
 .select_food {
-  width: 24%;
+  width: 18%;
+  margin-left: 30px
 }
 .select_rester {
-  width: 48%;
+  width: 47%;
+  margin-left: 30px
 }
 @media screen and (max-width: 768px) {
   .subtitle_section {
@@ -210,23 +261,38 @@ span {
   }
   .select_section {
     width: 50vw;
-    margin-top: 30px;
+    margin-top: 2%;
+    padding-left: 0px;
   }
   .select_area {
-    width: 47%;
+    width: 45%;
   }
   .select_food {
-    width: 47%;
+    width: 45%;
   }
   .select_rester {
     margin-top: 10px;
     width: 98%;
   }
   .card_section {
-    margin-top: 5%;
+    margin-top: 15vw;
+    margin-left: auto;
   }
   .carousel-indicators li {
     margin-top: -6px;
+  }
+  h5 {
+    width: 20vw;
+  }
+  .card_deco {
+    top: 100px;
+    left: 43vw;
+  }
+  .font_bg {
+    width: 15vw;
+    height: 3.5vw;
+    margin-top: 3%;
+    margin-left: 1.25%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -239,17 +305,32 @@ span {
   }
   .select_section {
     width: 65vw;
+    margin-top: 40px;
   }
   .card_section {
-    margin-top: 7%;
+    margin-top: 20%;
+    width: 83vw;
   }
-   .carousel-indicators li {
+  .carousel-indicators li {
     margin-top: -10px;
     height: 7px;
     width: 7px;
   }
-
- 
+  .select_area {
+    width: 55%;
+  }
+  .select_food {
+    margin-top: 7px;
+    width: 55%;
+  }
+  .select_rester {
+    margin-top: 7px;
+    width: 98%;
+  }
+   .card_deco {
+    top: 145px;
+    left: 43vw;
+  }
 }
 </style>
 <script>
@@ -291,7 +372,7 @@ export default {
   mounted() {
     let controller = new ScrollMagic.Controller();
     new ScrollMagic.Scene({
-      triggerElement: "#main"
+      triggerElement: ".menuheader_container"
     })
       .setClassToggle(".main", "bgc-black")
       .addTo(controller);
