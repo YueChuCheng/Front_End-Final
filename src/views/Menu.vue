@@ -594,7 +594,7 @@ article {
   .restaurant_info {
     width: 60vw;
     padding: 15px 25px;
-    top: 40vw;
+    top: 22vw;
     margin-top: 0px;
   }
   /* article */
