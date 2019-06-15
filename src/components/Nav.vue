@@ -135,8 +135,20 @@ a :active {
     display: none;
     margin-right: 0px;
   }
+    .sm_btn{
+    display: none;
+    opacity: 0;
+  }
 }
 @media screen and (max-width: 768px) {
+   .humberger {
+    display: none;
+    margin-right: 0px;
+  }
+  .sm_btn{
+    display: none;
+    opacity: 0;
+  }
   .nav_btn_style {
     /* font-size: 16px; */
     font-size: 2vw;
@@ -246,6 +258,7 @@ export default {
         $(".humberger").css("height", "20px");
         $(".humberger").css("margin-top", "12px");
         $(".sm_btn").css("display", "block");
+         $(".sm_btn").css("opacity", "1");
         $(".main ").css("height", "190px");
       } else {
         $(".line1").css("transform", "rotate(0deg)");
