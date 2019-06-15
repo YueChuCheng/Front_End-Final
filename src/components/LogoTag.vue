@@ -2,15 +2,22 @@
   <div class="row">
     <div class="col">
       <div class="logo_style d-flex align-items-center justify-content-center">
-        <img src="../assets/logo.png" alt>
+        <img src="../assets/logo.png" alt id="tag_img">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
     name:"LogoTag",
+    mounted(){
+      $('#tag_img').click(function () { 
+       
+        window.location.assign("/"); //按圖片跳轉頁面
+      });
+    }
 };
 </script>
 
@@ -29,6 +36,9 @@ export default {
   margin-left: -6%;
   margin-top: -20px;
   border-radius: 10vw;
+}
+.logo_style :hover{
+  cursor: pointer;
 }
 img {
   position: absolute;

@@ -1,18 +1,18 @@
 <template>
   <div class="main_section">
     <LogoTag/>
-    <div class="card_deco ">
+    <div class="card_deco">
       <h5 class="font_bg">註冊</h5>
       <h5>註冊</h5>
     </div>
-    <div class=" rest_text or_style align-items-center d-flex justify-content-center">
-      <div class=" rest_line"></div>
-      <div class=" text">輸入店家基本資料</div>
-      <div class=" rest_line"></div>
+    <div class="rest_text or_style align-items-center d-flex justify-content-center">
+      <div class="rest_line"></div>
+      <div class="text">輸入店家基本資料</div>
+      <div class="rest_line"></div>
     </div>
     <div class="d-flex justify-content-center mt-4">
       <div class="input_style">
-        <div class="input_w ">
+        <div class="input_w">
           <span>店名</span>
           <input name="name" type="text " class="input" placeholder="填寫餐廳名稱">
         </div>
@@ -59,6 +59,7 @@
   padding-top: 6%;
   min-height: 80vh;
   background-color: #f8f8f8;
+  height: 100vh;
 }
 .or_style {
   font-size: 21px;
@@ -173,14 +174,14 @@ h5 {
   margin-top: 7px;
 }
 .rest_text {
-    width: 100%;
-  }
-  .rest_line {
-    width: 180px;
-  }
-  .text {
-    width: 150px;
-  }
+  width: 100%;
+}
+.rest_line {
+  width: 180px;
+}
+.text {
+  width: 150px;
+}
 @media screen and (max-width: 768px) {
   .input_style {
     margin-top: -28px;
@@ -213,21 +214,21 @@ h5 {
     margin-left: 75vw;
     margin-top: 20px;
   }
-  h5{
+  h5 {
     font-size: 30px;
   }
   .font_bg {
-  width: 9.5vw;
-  height: 2.5vw;
-  margin-top: 2.4%;
-  margin-left: 1.4%;
-}
-.rest_text{
-  margin-top:10px;
-}
-.submit{
-  margin-top: 20px;
-}
+    width: 9.5vw;
+    height: 2.5vw;
+    margin-top: 2.4%;
+    margin-left: 1.4%;
+  }
+  .rest_text {
+    margin-top: 10px;
+  }
+  .submit {
+    margin-top: 20px;
+  }
 }
 @media screen and (max-width: 480px) {
   h5 {
@@ -262,27 +263,23 @@ h5 {
   .text {
     width: 150px;
   }
-  .card_deco{
-    margin-top:110px;
-margin-left: 40%;
+  .card_deco {
+    margin-top: 110px;
+    margin-left: 40%;
   }
   .input_style {
-  margin-top: -5px;
-}
-.btn_img{
- border-radius: 10px 
-}
-.input_w span{
-  font-size: 18px;
-  
+    margin-top: -5px;
+  }
+  .btn_img {
+    border-radius: 10px;
+  }
+  .input_w span {
+    font-size: 18px;
+  }
 
-}
-
-.input {
- 
-  width: 220px;
- 
-}
+  .input {
+    width: 220px;
+  }
 }
 </style>
 
@@ -312,7 +309,7 @@ export default {
           OrderNumber: [],
           RegisterBool: "true"
         });
-        alert("註冊成功請再次登入");
+      alert("註冊成功請再次登入");
       this.$router.push("/");
     }
   }

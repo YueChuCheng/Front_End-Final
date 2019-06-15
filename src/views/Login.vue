@@ -53,6 +53,7 @@
 
 
 <style scoped>
+
 @import "../css/base.css";
 * {
   text-align: center;
@@ -101,6 +102,7 @@ h5 {
   min-height: 80vh;
   overflow-x: hidden;
   background-color: #f8f8f8;
+  height: 100vh;
 }
 .subtitle_row {
   margin-top: 110px;

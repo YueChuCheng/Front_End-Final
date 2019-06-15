@@ -63,6 +63,9 @@
 .logo img {
   height: 58px;
 }
+.logo img:hover{
+  cursor: pointer;
+}
 .nav_btn {
   height: 50px;
   color: #fff;
@@ -254,6 +257,11 @@ export default {
         $(".main ").css("height", "60px");
       }
     });
+ $('.logo').click(function () { 
+       
+        window.location.assign("/"); //按圖片跳轉頁面
+      });
+    
   }
 };
 </script>
