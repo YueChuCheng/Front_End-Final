@@ -2,26 +2,50 @@
   <div class="hello">
     <Nav/>
     <article>
-      <div class="food" v-for="parent,index in order" :key="index">
-        <div>{{ index+1 }}</div>
-        <ul>
-          <li v-for="child,cindex in parent.food" :key="child.index">
-            <div>{{ child.name }}</div>
-            <div>數量：{{ child.count }}</div>
-          </li>
-          <li>
-            <div>共計：{{ parent.info.totalPrice}}</div>
-            <div>訂購人：{{ parent.info.name }}</div>
-            <div>送達時間：{{ parent.info.time }}</div>
-            <div>手機：{{ parent.info.TEL }}</div>
-            <div>外送地址：{{ parent.info.address }}</div>
-            <div>備註：{{ parent.info.message }}</div>
-            <button v-on:click="Finish(index)">完成</button>
-          </li>
-        </ul>
+      <div class="menuheader_container">
+        <h4>訂單管理</h4>
+        <h4>Order Manager</h4>
+        <hr>
       </div>
-      <Footer/>
+      <section>
+        <div class="order_container" v-for="parent,index in order" :key="index">
+          <div class="orderheader">
+            <div class="ordernumber orderheadertext">{{ index+1 }}</div>
+            <div class="orderheadertext">餐點</div>
+            <div class="orderheadertext">數量</div>
+          </div>
+          <div>
+            <ul>
+              <li class="food_container" v-for="child,cindex in parent.food" :key="child.index">
+                <div>{{ child.name }}</div>
+                <div>{{ child.count }}</div>
+              </li>
+              <li class="orderinfo">
+                <div class="infoheader_container">
+                  <div>共計</div>
+                  <div>訂購人</div>
+                  <div>送達時間</div>
+                  <div>手機</div>
+                  <div>外送地址</div>
+                  <div>備註</div>
+                </div>
+                <div class="info_container">
+                  <div>{{ parent.info.totalPrice}}</div>
+                  <div>{{ parent.info.name }}</div>
+                  <div>{{ parent.info.time }}</div>
+                  <div>{{ parent.info.TEL }}</div>
+                  <div>{{ parent.info.address }}</div>
+                  <div>{{ parent.info.message }}</div>
+                </div>
+                <button class="deletebtn" v-on:click="Finish(index)">完成</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <img src="../assets/draw_new (2).png" alt class="img_draw">
     </article>
+    <Footer/>
   </div>
 </template>
 
@@ -160,7 +184,7 @@ export default {
   },
 
   created: async function() {
-    console.log("id= "+this.$store.state.user.userid)
+    console.log("id= " + this.$store.state.user.userid);
     let self = this;
     let doc = await this.$firestore.docInfoRef.get();
     this.orderNumber = doc.data().OrderNumber;
@@ -173,37 +197,58 @@ export default {
     let changeId = "empty";
 
     //監聽資料
-    this.$firestore.colOrderRef.onSnapshot({
+    this.$firestore.colOrderRef.onSnapshot(
+      {
         // Listen for document metadata changes
         includeMetadataChanges: false
-    },
+      },
       async res => {
         const changes = res.docChanges();
         changes.forEach(async change => {
           changeId = change.doc.id;
-          changeId=changeId.substring(changeId.length,5);
+          changeId = changeId.substring(changeId.length, 5);
           if (change.type === "modified") {
-            console.log(await self.getOrderInfo(changeId))
+            console.log(await self.getOrderInfo(changeId));
           }
           // if (change.type === "removed") console.log(changeId);
         });
-        
       }
     );
-
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-article {
-  border: 1px solid #000000;
-  padding-top: 130px;
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans TC", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 h1,
 h2 {
   font-weight: normal;
+}
+h4 {
+  font-size: 3vw;
+  font-weight: 400;
+}
+h4:nth-child(2) {
+  font-size: 2vw;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 4px;
+}
+hr {
+  border: none;
+  border-top: 0.15vw solid #262626;
+  width: 18vw;
+  margin-top: 0.5vw;
+}
+p {
+  font-size: 2vw;
+  font-weight: 300;
 }
 ul {
   list-style-type: none;
@@ -211,13 +256,109 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
 }
 a {
   color: #42b983;
 }
-.food {
-  border: 1px solid #000000;
-  width: 100px;
+article {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  background-color: #f8f8f8;
+  padding-top: 90px;
+  padding-bottom: 3vw;
+  grid-template-columns: 100%;
+}
+.menuheader_container {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 4vw;
+  justify-items: center;
+}
+section {
+  display: grid;
+  grid-template-columns: repeat(2,35vw);
+  justify-content: center;
+  grid-column-gap: 5vw;
+  grid-row-gap: 4vw;
+  /* grid-auto-rows: 1px; */
+  grid-auto-flow: row dense;
+  align-items: start;
+}
+.order_container {
+  /* border: 1px solid #000000; */
+  width: 35vw;
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  grid-template-columns: 100%;
+  height: auto;
+}
+.orderheader {
+  background-color: #219e91;
+  border-radius: 20px 20px 0px 0px;
+  display: grid;
+  height:4.5vw;
+  grid-template-columns: 20% 60% 20%;
+  color: #ffffff;
+  font-size:2vw;
+  font-weight:200;
+  padding: 0 3vw;
+  align-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.ordernumber{
+  font-size:2.5vw;
+  font-weight:400;
+}
+.food_container {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px 0.5px #e6e6e6;
+  width:100%;
+  z-index: 0;
+  padding: 5px 4vw;
+  font-size:1.8vw;
+  display: grid;
+  grid-template-columns: 45% 25%;
+  justify-items: center;
+  grid-column-gap: 32%
+}
+.orderinfo{
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px 0.5px #e6e6e6;
+  width:100%;
+  z-index: -1;
+  font-size:1.5vw;
+  padding:1.5vw 1.5vw;
+  display: grid;
+  grid-template-columns: 20% repeat(auto-fill,60%);
+  grid-template-rows: auto 5vw;
+  justify-content: center;
+  grid-column-gap: 5%;
+  border-radius: 0px 0px 20px 20px;
+}
+.deletebtn {
+  margin-top: 2vw;
+  background-color: #ff794a;
+  border: #ff794a;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 200;
+  font-size:1.5vw;
+  width: 8vw;
+  height: 3vw;
+  border-radius: 60px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  transform: translateX(1vw)
+}
+.deletebtn:active {
+  background-color: #c95932;
+}
+.img_draw {
+  width: 18vw;
+  margin-top: 5vw;
+  margin-left: 77.5vw;
 }
 </style>
