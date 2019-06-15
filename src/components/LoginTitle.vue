@@ -19,9 +19,9 @@ export default {
   font-family: "Noto Sans TC", sans-serif;
 }
 /* h5 { */
-  writing-mode:vertical-lr;
+  /* writing-mode:vertical-lr; */
   /* color: #262626; */
-  border:1px solid #000000;
+  /* border:1px solid #000000; */
   /* font-size: 4vw; */
   /* font-weight: 300; */
   /* line-height: 4.25vw; */

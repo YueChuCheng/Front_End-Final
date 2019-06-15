@@ -6,7 +6,7 @@
     <!-- 未登入前的nav -->
     <div v-if="!registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
       <router-link to="/login" class="nav_btn_style">賣家登入</router-link>
-      <router-link to="/register" class="nav_btn_style">賣家註冊</router-link>
+      <router-link to="/register1" class="nav_btn_style">賣家註冊</router-link>
     </div>
     <!-- 登入後的nav -->
     <div v-if="registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
@@ -27,7 +27,7 @@
         <router-link to="/login" class="sm_btn_text">
           <div class="border_bt2">賣家登入</div>
         </router-link>
-        <router-link to="/register" class="sm_btn_text">
+        <router-link to="/register1" class="sm_btn_text">
           <div class="border_bt3">賣家註冊</div>
         </router-link>
       </div>

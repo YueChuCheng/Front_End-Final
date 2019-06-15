@@ -1,7 +1,10 @@
 <template>
   <div class="main_section">
     <LogoTag/>
-    <logintitle :titleName="'註冊'"/>
+     <div class="card_deco">
+      <h5 class="font_bg">註冊</h5>
+      <h5>註冊</h5>
+    </div>
     <div class="row mt-5 or_style d-flex justify-content-center align-items-center mt-4">
       <div class="col-2 line"></div>
       <div class="col-2 text">輸入店家基本資料</div>
@@ -100,8 +103,8 @@
   padding: 15px;
 }
 .btn_img {
-  height: 3.3vw;
-  width: 8vw;
+  height: 40px;
+  width: 100px;
   background-color: #fff;
   border-radius: 1vw;
   border: #262626 solid 1px;
@@ -117,6 +120,54 @@
   margin-left: 65%;
   margin-top: 2%;
 }
+h5 {
+  /* writing-mode:vertical-lr; */
+  color: #262626;
+  /* border:1px solid #000000; */
+  font-size: 4vw;
+  font-weight: 300;
+  line-height: 4.25vw;
+  position: absolute;
+  width: 3vw;
+}
+h5 {
+  width: 20vw;
+}
+.font_bg {
+  width: 3vw;
+  border-radius: 50px;
+  background-color: #219e91;
+  margin-top: 2%;
+  margin-left: 1.25%;
+  color: rgba(0, 0, 0, 0);
+}
+.font_bg {
+  width: 9vw;
+  height: 3vw;
+  margin-top: 2.4%;
+  margin-left: 7%;
+}
+@media screen and (max-width: 480px) {
+  h5 {
+    /* writing-mode:vertical-lr; */
+    color: #262626;
+    /* border:1px solid #000000; */
+    font-size: 5.9vw;
+    font-weight: 300;
+    line-height: 4.25vw;
+    position: absolute;
+    width: 3vw;
+  }
+  .font_bg {
+    width: 14vw;
+     height: 4.2vw;
+    border-radius: 50px;
+    background-color: #219e91;
+    margin-top: 2%;
+    margin-left: 6%;
+    color: rgba(0, 0, 0, 0);
+  }
+  }
 </style>
 
 <script>

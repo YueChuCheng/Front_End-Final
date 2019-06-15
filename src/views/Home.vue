@@ -49,7 +49,7 @@
       <h5 class="font_bg ">早午餐</h5>
       <h5>早午餐</h5>
     </div>
-    <div class="select_section d-flex justify-content-around align-content-center flex-wrap">
+    <div class=" select_section d-flex justify-content-around align-content-center flex-wrap">
       <select class="select select_area">
         <option>台北市大安區</option>
         <option>台北市信義區</option>
@@ -234,7 +234,7 @@ span {
   margin: 20px auto;
   width: 80vw;
   height: 60px;
-  padding-left: 30px;
+  padding-left: 3.5vw;
 }
 .select {
   border-radius: 10px;
@@ -269,10 +269,12 @@ span {
   }
   .select_food {
     width: 45%;
+    margin-left: 0px
   }
   .select_rester {
     margin-top: 10px;
     width: 98%;
+    margin-left: 0px
   }
   .card_section {
     margin-top: 15vw;
