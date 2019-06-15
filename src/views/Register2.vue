@@ -1,35 +1,35 @@
 <template>
   <div class="main_section">
     <LogoTag/>
-     <div class="card_deco">
+    <div class="card_deco ">
       <h5 class="font_bg">註冊</h5>
       <h5>註冊</h5>
     </div>
-    <div class="row mt-5 or_style d-flex justify-content-center align-items-center mt-4">
-      <div class="col-2 line"></div>
-      <div class="col-2 text">輸入店家基本資料</div>
-      <div class="col-2 line"></div>
+    <div class=" rest_text or_style align-items-center d-flex justify-content-center">
+      <div class=" rest_line"></div>
+      <div class=" text">輸入店家基本資料</div>
+      <div class=" rest_line"></div>
     </div>
-    <div class="input d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center mt-4">
       <div class="input_style">
-        <div class="mt-3 input_w">
-          店名
+        <div class="input_w ">
+          <span>店名</span>
           <input name="name" type="text " class="input" placeholder="填寫餐廳名稱">
         </div>
-        <div class="mt-3 input_w">
-          地址
+        <div class="input_w">
+          <span>地址</span>
           <input name="address" type="text " class="input" placeholder="填寫餐廳地址">
         </div>
-        <div class="mt-3 input_w">
-          TEL
+        <div class="input_w">
+          <span>TEL</span>
           <input name="tel" type="text " class="input" placeholder="填寫餐廳電話">
         </div>
-        <div class="mt-3 input_w">
-          外送時間
+        <div class="input_w">
+          <span>外送時間</span>
           <input name="time" type="text " class="input" placeholder="填寫外送時間">
         </div>
-        <div class="mt-3 input_w pic">
-          選擇照片
+        <div class="input_w pic">
+          <span>選擇照片</span>
           <button class="btn_img">上傳照片</button>
         </div>
       </div>
@@ -58,73 +58,85 @@
 .main_section {
   padding-top: 6%;
   min-height: 80vh;
+  background-color: #f8f8f8;
 }
 .or_style {
   font-size: 21px;
 }
-.line {
-  border: #262626 solid 0.5px;
+.rest_line {
+  border-bottom: #262626 solid 1px;
   height: 0;
+  width: 50px;
 }
 .input {
   margin: 0 auto;
   position: relative;
-
+  height: 35px;
+  width: 250px;
   margin-left: 20px;
-  border-radius: 0.5vw;
+  border-radius: 10px;
 }
 
 .text {
   text-align: center;
+  width: 500px;
+  font-size: 15px;
 }
 .input_style {
   text-align: right;
   padding-right: 4vw;
+  margin-top: -35px;
 }
 .input_w {
   font-size: 25px;
 }
+.input_w span {
+  font-size: 20px;
+  font-weight: 300;
+}
 .submit {
   cursor: pointer;
   color: #fff;
-  height: 3.5vw;
-  width: 10.5vw;
+  height: 40px;
+  width: 125px;
   text-align: center;
   background: #ff794a;
   border-radius: 40px;
-  font-size: 150%;
-  line-height: 3.5vw;
-  margin-left: 46%;
-  margin-top: 2%;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 40px;
+
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
 .input::-webkit-input-placeholder {
-  font-size: 20px;
-  padding: 15px;
+  font-size: 15px;
+  padding-left: 15px;
 }
 .btn_img {
-  height: 40px;
+  height: 30px;
   width: 100px;
   background-color: #fff;
   border-radius: 1vw;
   border: #262626 solid 1px;
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 15px;
 }
 .pic {
   float: left;
 }
 .deco_img {
   text-align: center;
-  width: 15vw;
-  margin-left: 65%;
-  margin-top: 2%;
+  width: 20vw;
+  margin-left: 73vw;
+  margin-top: -18px;
 }
 h5 {
   /* writing-mode:vertical-lr; */
   color: #262626;
   /* border:1px solid #000000; */
-  font-size: 4vw;
+  font-size: 3vw;
   font-weight: 300;
   line-height: 4.25vw;
   position: absolute;
@@ -142,49 +154,151 @@ h5 {
   color: rgba(0, 0, 0, 0);
 }
 .font_bg {
-  width: 9vw;
-  height: 3vw;
+  width: 7.5vw;
+  height: 2.5vw;
   margin-top: 2.4%;
-  margin-left: 7%;
+  margin-left: 1.4%;
+}
+.card_deco {
+  margin-top: 80px;
+  margin-left: 45%;
+}
+.rest_text {
+  position: relative;
+  top: 50px;
+  width: 480px;
+  margin: 100px auto;
+}
+.input_w {
+  margin-top: 7px;
+}
+.rest_text {
+    width: 100%;
+  }
+  .rest_line {
+    width: 180px;
+  }
+  .text {
+    width: 150px;
+  }
+@media screen and (max-width: 768px) {
+  .input_style {
+    margin-top: -28px;
+  }
+  .rest_text {
+    width: 100%;
+  }
+  .rest_line {
+    width: 150px;
+  }
+  .text {
+    width: 150px;
+  }
+  .submit {
+    margin: 0 auto;
+    height: 38px;
+    width: 125px;
+    font-size: 15px;
+    line-height: 38px;
+    margin-top: 2%;
+  }
+  .input_style {
+    margin-top: -25px;
+  }
+  .input_w {
+    margin-top: 5px;
+  }
+  .deco_img {
+    width: 20vw;
+    margin-left: 75vw;
+    margin-top: 20px;
+  }
+  h5{
+    font-size: 30px;
+  }
+  .font_bg {
+  width: 9.5vw;
+  height: 2.5vw;
+  margin-top: 2.4%;
+  margin-left: 1.4%;
+}
+.rest_text{
+  margin-top:10px;
+}
+.submit{
+  margin-top: 20px;
+}
 }
 @media screen and (max-width: 480px) {
   h5 {
     /* writing-mode:vertical-lr; */
     color: #262626;
     /* border:1px solid #000000; */
-    font-size: 5.9vw;
+    font-size: 7vw;
     font-weight: 300;
     line-height: 4.25vw;
     position: absolute;
-    width: 3vw;
+    width: 30vw;
   }
   .font_bg {
     width: 14vw;
-     height: 4.2vw;
+    height: 4.2vw;
     border-radius: 50px;
     background-color: #219e91;
-    margin-top: 2%;
-    margin-left: 6%;
+    margin-top: 2.5%;
+    margin-left: 3%;
     color: rgba(0, 0, 0, 0);
   }
+  .deco_img {
+    display: none;
   }
+  .rest_text {
+    width: 100%;
+    margin: 80px auto;
+  }
+  .rest_line {
+    width: 100px;
+  }
+  .text {
+    width: 150px;
+  }
+  .card_deco{
+    margin-top:110px;
+margin-left: 40%;
+  }
+  .input_style {
+  margin-top: -5px;
+}
+.btn_img{
+ border-radius: 10px 
+}
+.input_w span{
+  font-size: 18px;
+  
+
+}
+
+.input {
+ 
+  width: 220px;
+ 
+}
+}
 </style>
 
 <script>
 import LogoTag from "@/components/LogoTag.vue";
-import logintitle from "@/components/LoginTitle.vue";
-import "../firebase"
-import $ from "jquery"
+import "../firebase";
+import $ from "jquery";
 export default {
   name: "register",
   components: {
-    LogoTag,
-    logintitle
+    LogoTag
   },
   methods: {
-    set() {
+    async set() {
       var user = firebase.auth().currentUser.uid;
-      firebase
+      await firebase
         .firestore()
         .collection("test")
         .doc(user)
@@ -198,6 +312,8 @@ export default {
           OrderNumber: [],
           RegisterBool: "true"
         });
+        alert("註冊成功請再次登入");
+      this.$router.push("/");
     }
   }
 };

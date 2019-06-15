@@ -66,7 +66,7 @@ h5 {
   /* writing-mode:vertical-lr; */
   color: #262626;
   /* border:1px solid #000000; */
-  font-size: 4vw;
+  font-size: 3vw;
   font-weight: 300;
   line-height: 4.25vw;
   position: absolute;
@@ -84,13 +84,13 @@ h5 {
   width: 20vw;
 }
 .font_bg {
-  width: 9vw;
-  height: 3vw;
+  width: 8vw;
+  height: 2.5vw;
   margin-top: 2.4%;
-  margin-left: 7%;
+  margin-left: 8%;
 }
 .card_deco {
-  margin-top: 5%;
+  margin-top: 70px;
   margin-left: 39.5%;
 }
 .outline {
@@ -103,7 +103,7 @@ h5 {
   background-color: #f8f8f8;
 }
 .subtitle_row {
-  margin-top: 9.5%;
+  margin-top: 110px;
 }
 .subtitle {
   font-size: 100%;
@@ -161,8 +161,8 @@ h5 {
   background-color: #ff794a;
   height: 40px;
   width: 100px;
-  font-size: 21px;
-  border-radius: 10px;
+  font-size: 18px;
+  border-radius: 20px;
   line-height: 38px;
   font-weight: 200;
 }
@@ -220,6 +220,12 @@ a {
   
   height: 70%;
 }
+.card_deco {
+  margin-top: 90px;
+  }
+  h5{
+    font-size:28px;
+  }
  
 }
 
@@ -277,6 +283,15 @@ a {
 .deco_img{
   display:none;
 }
+.card_deco {
+  margin-top: 130px;
+  }
+   h5{
+    font-size:30px;
+  }
+ .subtitle_row{
+    margin-top: 150px;
+ }
 }
 </style>
 

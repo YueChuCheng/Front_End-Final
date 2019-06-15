@@ -63,7 +63,7 @@ h5 {
   /* writing-mode:vertical-lr; */
   color: #262626;
   /* border:1px solid #000000; */
-  font-size: 4vw;
+  font-size: 3.5vw;
   font-weight: 300;
   line-height: 4.25vw;
   position: absolute;
@@ -84,10 +84,10 @@ h5 {
   width: 9vw;
   height: 3vw;
   margin-top: 2.4%;
-  margin-left: 7%;
+  margin-left: 8%;
 }
 .card_deco {
-  margin-top: 5%;
+  margin-top: 60px;
   margin-left: 39.5%;
 }
 .outline {
@@ -100,7 +100,7 @@ h5 {
   background-color: #f8f8f8;
 }
 .subtitle_row {
-  margin-top: 9.5%;
+  margin-top: 100px;
 }
 .subtitle {
   font-size: 100%;
@@ -218,6 +218,12 @@ a {
   .icon{
   
   height: 70%;
+}
+.card_deco{
+  margin-top: 100px;
+}
+.subtitle_row{
+  margin-top: 120px;
 }
  
 }
