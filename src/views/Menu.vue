@@ -253,6 +253,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+/* nav */
 .main {
   padding: 14px 10px;
   background-color: #262626;
@@ -463,7 +464,7 @@ article {
 }
 
 /* 768px */
-@media screen and (max-width: 768px) and (min-width: 481px) {
+@media screen and (max-width: 768px){
   header {
     padding-top: 60px;
   }
@@ -493,7 +494,7 @@ article {
     width: 45%;
     padding: 2.5vw 4vw;
     top: 17%;
-    margin-top: 17.5vw;
+    margin-top: 0vw;
   }
   /* article */
   .menuheader_container {

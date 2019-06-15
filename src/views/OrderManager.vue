@@ -30,7 +30,7 @@
                   <div>備註</div>
                 </div>
                 <div class="info_container">
-                  <div>{{ parent.info.totalPrice}}</div>
+                  <div>{{ parent.info.totalPrice}} 元</div>
                   <div>{{ parent.info.name }}</div>
                   <div>{{ parent.info.time }}</div>
                   <div>{{ parent.info.TEL }}</div>
@@ -226,6 +226,11 @@ export default {
   margin: 0;
   padding: 0;
 }
+/* nav */
+.main {
+  padding: 14px 10px;
+  background-color: #262626;
+}
 h1,
 h2 {
   font-weight: normal;
@@ -265,19 +270,20 @@ article {
   display: grid;
   justify-content: center;
   background-color: #f8f8f8;
-  padding-top: 90px;
+  padding-top: 10vw;
   padding-bottom: 3vw;
   grid-template-columns: 100%;
 }
 .menuheader_container {
   display: grid;
   justify-content: center;
-  margin-bottom: 4vw;
+  margin-bottom: 5vw;
   justify-items: center;
 }
 section {
   display: grid;
-  grid-template-columns: repeat(2,35vw);
+  grid-template-columns: repeat(2, 35vw);
+  grid-template-rows: auto;
   justify-content: center;
   grid-column-gap: 5vw;
   grid-row-gap: 4vw;
@@ -298,41 +304,41 @@ section {
   background-color: #219e91;
   border-radius: 20px 20px 0px 0px;
   display: grid;
-  height:4.5vw;
+  height: 4.5vw;
   grid-template-columns: 20% 60% 20%;
   color: #ffffff;
-  font-size:2vw;
-  font-weight:200;
+  font-size: 2vw;
+  font-weight: 200;
   padding: 0 3vw;
   align-content: center;
   align-items: center;
   z-index: 1;
 }
-.ordernumber{
-  font-size:2.5vw;
-  font-weight:400;
+.ordernumber {
+  font-size: 2.5vw;
+  font-weight: 400;
 }
 .food_container {
   background-color: #ffffff;
   box-shadow: 0px 0px 5px 0.5px #e6e6e6;
-  width:100%;
+  width: 100%;
   z-index: 0;
   padding: 5px 4vw;
-  font-size:1.8vw;
+  font-size: 1.8vw;
   display: grid;
   grid-template-columns: 45% 25%;
   justify-items: center;
-  grid-column-gap: 32%
+  grid-column-gap: 32%;
 }
-.orderinfo{
+.orderinfo {
   background-color: #ffffff;
   box-shadow: 0px 0px 5px 0.5px #e6e6e6;
-  width:100%;
+  width: 100%;
   z-index: -1;
-  font-size:1.5vw;
-  padding:1.5vw 1.5vw;
+  font-size: 1.5vw;
+  padding: 1.5vw 1.5vw;
   display: grid;
-  grid-template-columns: 20% repeat(auto-fill,60%);
+  grid-template-columns: 20% repeat(auto-fill, 60%);
   grid-template-rows: auto 5vw;
   justify-content: center;
   grid-column-gap: 5%;
@@ -345,13 +351,13 @@ section {
   text-align: center;
   color: #ffffff;
   font-weight: 200;
-  font-size:1.5vw;
+  font-size: 1.5vw;
   width: 8vw;
   height: 3vw;
   border-radius: 60px;
   grid-column-start: 2;
   grid-column-end: 3;
-  transform: translateX(1vw)
+  transform: translateX(1vw);
 }
 .deletebtn:active {
   background-color: #c95932;
@@ -360,5 +366,112 @@ section {
   width: 18vw;
   margin-top: 5vw;
   margin-left: 77.5vw;
+}
+
+@media screen and (max-width: 768px) {
+  h4{
+    font-size: 4vw;
+  }
+  h4:nth-child(2) {
+    font-size: 2.75vw;
+  }
+  hr {
+    border-top: 1.5px solid #262626;
+    width: 25vw;
+    margin-top: 1vw;
+  }
+  article {
+    padding-top: 15vw;
+  }
+  section {
+    display: grid;
+    grid-template-columns: repeat(1, 50vw);
+    grid-column-gap: 0vw;
+  }
+  .order_container {
+    width: 50vw;
+  }
+  .orderheader {
+    height: 5.25vw;
+    grid-template-columns: 25% 60% 20%;
+    font-size: 2.25vw;
+    padding: 0 5vw;
+  }
+  .ordernumber {
+    font-size: 2.75vw;
+    font-weight: 400;
+  }
+  .food_container {
+    font-size: 2vw;
+  }
+  .orderinfo {
+    font-size: 2vw;
+    padding: 1.75vw 1.5vw;
+    grid-template-columns: 25% repeat(auto-fill, 55%);
+    grid-template-rows: auto 7vw;
+    grid-column-gap: 2%;
+  }
+  .deletebtn {
+    font-size: 1.85vw;
+    width: 12vw;
+    height: 4vw;
+    transform: translateX(0vw);
+  }
+}
+
+/* 480px */
+@media screen and (max-width: 480px) {
+  h4{
+    font-size: 1.4em;
+  }
+  h4:nth-child(2) {
+    display: none;
+  }
+  hr {
+    border-top: 1px solid #262626;
+    width: 120px;
+    margin-top: 10px;
+  }
+  .menuheader_container {
+    margin-bottom: 4.5vw;
+  }
+  article {
+    padding-top: 20vw;
+    padding-bottom: 15vw;
+  }
+  section {
+    grid-template-columns: repeat(1, 75vw);
+  }
+  .order_container {
+    width: 75vw;
+  }
+  .orderheader {
+    height: 35px;
+    font-size: 1em;
+    padding: 0 40px;
+  }
+  .ordernumber {
+    font-size: 1.2em;
+  }
+  .food_container {
+    font-size: 0.9em;
+    grid-template-columns: 45% 15%;
+  }
+  .orderinfo {
+    font-size: 0.8em;
+    padding: 10px 0px;
+    justify-content: center;
+    grid-template-columns: 22.5% repeat(auto-fill, 60%);
+    grid-template-rows: auto 30px;
+  }
+  .deletebtn {
+    font-size: 0.5em;
+    width: 70px;
+    height: 22.5px;
+    transform: translateX(5vw);
+  }
+  .img_draw {
+    display: none;
+  }
 }
 </style>
