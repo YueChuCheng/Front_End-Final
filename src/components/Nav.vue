@@ -1,5 +1,5 @@
 <template>
-  <div class="row main">
+  <div class="row main d-flex ">
     <div class="col logo">
       <img src="../assets/logo.png" alt>
     </div>
@@ -20,14 +20,20 @@
       <div class="line line3"></div>
     </div>
     <div class="sm_btn">
-      <div v-if="!registerBool" class=" col d-flex flex-column justify-content-end">
-         <router-link to="/" class="sm_btn_text">首頁</router-link>
-        <router-link to="/login" class="sm_btn_text">賣家登入</router-link>
-        <router-link to="/register" class="sm_btn_text">賣家註冊</router-link>
+      <div v-if="!registerBool" class="col d-flex flex-column justify-content-center align-items-center">
+        <router-link to="/" class="sm_btn_text">
+          <div class="border_bt1 ">首頁</div>
+        </router-link>
+        <router-link to="/login" class="sm_btn_text">
+          <div class="border_bt2">賣家登入</div>
+        </router-link>
+        <router-link to="/register" class="sm_btn_text">
+          <div class="border_bt3">賣家註冊</div>
+        </router-link>
       </div>
       <!-- 登入後的nav -->
-      <div v-if="registerBool" class=" col d-flex flex-column justify-content-end">
-     <router-link to="/" class="sm_btn_text">首頁</router-link>
+      <div v-if="registerBool" class="col d-flex flex-column justify-content-end">
+        <router-link to="/" class="sm_btn_text">首頁</router-link>
         <router-link to="/*" class="sm_btn_text">菜單編輯</router-link>
         <router-link to="/ordermanager" class="sm_btn_text">訂單編輯</router-link>
       </div>
@@ -36,14 +42,14 @@
 </template>
 
 
-<style >
+<style>
 /* 不用scoped因為Home的nav顏色要調整 */
 .outline {
   outline: red solid 2px;
 }
 .main {
   position: fixed;
-  padding: 14px 10px;
+  padding: 16px 10px;
   margin: 0;
   background-color: unset;
   height: 70px;
@@ -55,7 +61,7 @@
   background-color: #262626;
 }
 .logo img {
-  height: 80px;
+  height: 58px;
 }
 .nav_btn {
   height: 50px;
@@ -63,17 +69,22 @@
 }
 .nav_btn_style {
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 300;
   border: #fff 1px solid;
   border-radius: 30px;
-  padding: 8px 20px;
+  padding: 5px 15px;
   margin-right: 3%;
+  margin-top:-15px;
+
 }
 .nav_btn_style:hover {
   cursor: pointer;
   background-color: #fff;
   color: #262626;
+}
+.nav_btn_style:active {
+ text-decoration:none;
 }
 .humberger {
   display: none;
@@ -86,32 +97,36 @@
 }
 .line {
   display: none;
-  border-top: 1.5px solid #fff;
-  border-radius: 2px;
+  border-top: 2px solid #fff;
+  border-radius: 50px;
   transition: all 0.5s;
   transform-origin: 4px 1px;
 }
 .nav_name {
   position: relative;
-  margin-top: 10px;
-  margin-right: 10px;
+  margin-top: 0px;
+  margin-right: 15px;
   font-size: 20px;
+  font-weight: 200;
 }
 .sm_btn {
   position: absolute;
   display: none;
-  top: 7vh;
+  top: 60px;
   width: 100vw;
   height: 10px;
   font-size: 4vw;
   text-align: center;
- 
- 
+  border-top: #fff 1px solid;
+  left: 0px;
 }
-.sm_btn_text{
- color:#fff;
+.sm_btn_text {
+  color: #fff;
 }
+a :active {
+  color: #fff;
 
+}
 @media screen and (max-width: 2000px) {
   .humberger {
     display: none;
@@ -120,24 +135,39 @@
 }
 @media screen and (max-width: 768px) {
   .nav_btn_style {
-    font-size: 1.8%;
+    /* font-size: 16px; */
+    font-size: 2vw;
     font-weight: 300;
-    border: #fff 1px solid;
+    border: #fff 0.5px solid;
     border-radius: 30px;
-    padding: 4px 15px;
-    margin-right: 3%;
+    padding: 3px 13px;
+    margin-left: 2px;
+     margin-top:0px;
   }
   .nav_name {
     font-size: 2.5vw;
+    margin-top:15px;
   }
+  .logo img {
+    height: 50px;
+  }
+  .main {
+    height: 60px;
+  }
+  .nav_btn {
+    top: -10px;
+    right: -2.5vw;
+  }
+  
+
 }
 
 @media screen and (max-width: 480px) {
   .nav_name {
     position: absolute;
-    left: -12%;
-    margin-top: -5%;
-    font-size: 5vw;
+    left: -20%;
+    margin-top:3px;
+    font-size: 20px;
   }
   .nav_btn_style {
     display: none;
@@ -145,23 +175,48 @@
   .main {
     background-color: #232323;
     height: 60px;
-    padding: 18px 10px;
+    padding: 14px 10px;
+    
   }
   .logo img {
     position: relative;
-    left:-2vw;
-    height: 40px;
+    left: -2vw;
+    height: 50px;
   }
   .humberger {
     cursor: pointer;
     display: block;
-    height: 40px;
-    width: 45px;
+    height: 30px;
+    width: 28px;
     transition: all 0.5s;
+    margin-right:10px;
+    margin-top:8px;
   }
   .line {
     display: block;
   }
+  .sm_btn_text {
+    font-weight: 200;
+    margin-top: 15px;
+  }
+  .border_bt1 {
+    font-size: 15px;
+    width: 40px;
+  }
+  
+  .border_bt2 {
+   
+    font-size: 15px;
+    width: 60px;
+  }
+  .border_bt3 {
+    font-size: 15px;
+    width: 60px;
+  }
+
+
+
+
 }
 </style>
 <script>
@@ -185,14 +240,16 @@ export default {
         $(".line1").css("transform", "rotate(45deg)");
         $(".line2").css("opacity", "0");
         $(".line3").css("transform", "rotate(-45deg)");
-        $(".humberger").css("width", "46px");
+        $(".humberger").css("height", "20px");
+        $(".humberger").css("margin-top", "12px");
         $(".sm_btn").css("display", "block");
-        $(".main ").css("height", "120px");
-     } else {
+        $(".main ").css("height", "190px");
+      } else {
         $(".line1").css("transform", "rotate(0deg)");
         $(".line2").css("opacity", "1");
         $(".line3").css("transform", "rotate(0deg)");
-        $(".humberger").css("width", "45px");
+        $(".humberger").css("margin-top", "8px");
+        $(".humberger").css("height", "30px");
         $(".sm_btn").css("display", "none");
         $(".main ").css("height", "60px");
       }

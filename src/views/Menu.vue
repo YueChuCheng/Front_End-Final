@@ -253,8 +253,12 @@ export default {
   margin: 0;
   padding: 0;
 }
+.main {
+  padding: 14px 10px;
+  background-color: #262626;
+}
 header {
-  padding-top: 120px;
+  padding-top: 70px;
 }
 h1,
 h2,
@@ -459,7 +463,10 @@ article {
 }
 
 /* 768px */
-@media screen and (max-width: 768px)and (min-width: 481px){
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  header {
+    padding-top: 60px;
+  }
   h3,
   h4 {
     font-size: 4vw;
@@ -485,7 +492,7 @@ article {
   .restaurant_info {
     width: 45%;
     padding: 2.5vw 4vw;
-    top:17%;
+    top: 17%;
     margin-top: 17.5vw;
   }
   /* article */
@@ -543,7 +550,7 @@ article {
   }
   .totalprice {
     font-size: 3.5vw;
-    margin-right:4vw;
+    margin-right: 4vw;
   }
   .mainbtn {
     margin-top: 3vw;
@@ -558,6 +565,9 @@ article {
 }
 /* 480px */
 @media screen and (max-width: 480px) {
+  header {
+    padding-top: 60px;
+  }
   h3,
   h4 {
     font-size: 1.4em;
@@ -642,18 +652,18 @@ article {
   .foodinfo_container {
     grid-template-columns: 25vw auto;
     grid-template-rows: auto;
-    grid-column-gap:4vw;
+    grid-column-gap: 4vw;
     padding: 3vw 0;
     position: relative;
-    margin-top:-5vw;
+    margin-top: -5vw;
   }
   .foodinfo_container p {
     font-size: 1em;
   }
   .foodinfo_container p:nth-child(2) {
     font-size: 0.8em;
-    right:48%;
-    top:70%;
+    right: 48%;
+    top: 70%;
     position: absolute;
   }
   .foodbtn_container .count {
@@ -664,7 +674,7 @@ article {
     height: 22.5px;
   }
   .foodbtn_container {
-    margin-top:2.5vw;
+    margin-top: 2.5vw;
     grid-template-columns: repeat(3, 6vw);
   }
   .totalprice {
