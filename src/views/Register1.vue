@@ -3,12 +3,12 @@
     <LogoTag/>
 
     <div class="card_deco">
-      <h5 class="font_bg">登入</h5>
-      <h5>登入</h5>
+      <h5 class="font_bg">註冊</h5>
+      <h5>註冊</h5>
     </div>
 
     <div class="row subtitle_row">
-      <div class="col subtitle mt-4">以社群媒體登入</div>
+      <div class="col subtitle mt-4">以社群媒體註冊</div>
     </div>
     <div class="d-flex justify-content-center login_btn mt-4">
       <div @click="doLogin" class="col googleLogin d-flex align-items-center justify-content-center">
@@ -35,13 +35,10 @@
         <!-- <img src="../assets/icon/icon_locked.png" alt="" class="icon_placeh"> -->
       </div>
     </div>
-    <div class=" row mt-5 d-flex align-items-center justify-content-around  submit_row">
-      <div class="col  d-flex  justify-content-end">
-        <div class="submit">登入</div>
-      </div>
-      <div class="forget_style  col d-flex align-items-center">
-        <a href class="forget_style">忘記密碼?</a>
-      </div>
+    <div class=" row mt-5 d-flex align-items-center justify-content-center  submit_row">
+      
+        <div class="submit">註冊</div>
+     
     </div>
     <div class="row">
       <div class="col">
@@ -53,7 +50,6 @@
 
 
 <style scoped>
-
 @import "../css/base.css";
 * {
   text-align: center;
@@ -67,7 +63,7 @@ h5 {
   /* writing-mode:vertical-lr; */
   color: #262626;
   /* border:1px solid #000000; */
-  font-size: 3vw;
+  font-size: 3.5vw;
   font-weight: 300;
   line-height: 4.25vw;
   position: absolute;
@@ -85,13 +81,13 @@ h5 {
   width: 20vw;
 }
 .font_bg {
-  width: 8vw;
-  height: 2.5vw;
+  width: 9vw;
+  height: 3vw;
   margin-top: 2.4%;
   margin-left: 8%;
 }
 .card_deco {
-  margin-top: 70px;
+  margin-top: 60px;
   margin-left: 39.5%;
 }
 .outline {
@@ -105,7 +101,7 @@ h5 {
   height: 100vh;
 }
 .subtitle_row {
-  margin-top: 110px;
+  margin-top: 100px;
 }
 .subtitle {
   font-size: 100%;
@@ -163,10 +159,11 @@ h5 {
   background-color: #ff794a;
   height: 40px;
   width: 100px;
-  font-size: 18px;
-  border-radius: 20px;
+  font-size: 21px;
+  border-radius: 50px;
   line-height: 38px;
   font-weight: 200;
+  margin-left:-20px;
 }
 a {
   color: #ff794a !important;
@@ -179,6 +176,7 @@ a {
 }
 .submit_row{
   margin-left:20px;
+  
 }
 .icon_placeh{
   position:absolute;
@@ -222,12 +220,12 @@ a {
   
   height: 70%;
 }
-.card_deco {
-  margin-top: 90px;
-  }
-  h5{
-    font-size:28px;
-  }
+.card_deco{
+  margin-top: 100px;
+}
+.subtitle_row{
+  margin-top: 120px;
+}
  
 }
 
@@ -271,7 +269,7 @@ a {
   height: 40px;
   width: 120px;
   font-size: 18px;
-  border-radius: 20px;
+  border-radius:50px; 
   line-height: 38px;
  
 }
@@ -285,15 +283,6 @@ a {
 .deco_img{
   display:none;
 }
-.card_deco {
-  margin-top: 130px;
-  }
-   h5{
-    font-size:30px;
-  }
- .subtitle_row{
-    margin-top: 150px;
- }
 }
 </style>
 
