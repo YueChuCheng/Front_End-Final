@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Menu from '@/views/Menu'
 import OrderManager from '@/views/OrderManager'
+import MenuManager from '@/views/MenuManager'
 import Order from '@/views/Order'
 Vue.use(Router)
 
@@ -51,6 +52,11 @@ export default new Router({
       path: '/ordermanager',
       name: 'ordermanager',
       component: OrderManager
+    },
+    {
+      path: '/menumanager',
+      name: 'menumanager',
+      component: MenuManager
     }
   ]
 })
