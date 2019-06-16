@@ -130,10 +130,12 @@ img {
     margin-left: 3%;
   }
   .submit_btn {
-    height: 33%;
-    width: 50%;
-    line-height: 33px;
+    height: 30px;
+    width: 75px;
+    line-height: 30px;
+    font-size: 10px;
   }
+  
    .info_time_p {
     font-size: 1.7vw;
    
