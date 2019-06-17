@@ -11,21 +11,24 @@
       <div class="col subtitle mt-4">以社群媒體登入</div>
     </div>
     <div class="d-flex justify-content-center login_btn mt-4">
-      <div @click="doLogin" class="col googleLogin d-flex align-items-center justify-content-center">
-        <img src="../assets/icon/google_icon.png" alt="" class="icon">
+      <div
+        @click="doLogin"
+        class="col googleLogin d-flex align-items-center justify-content-center"
+      >
+        <img src="../assets/icon/google_icon.png" alt class="icon">
       </div>
       <div class="col fbLogin d-flex align-items-center justify-content-center">
-        <img src="../assets/icon/icon_fb.png" alt="" class="icon">
+        <img src="../assets/icon/icon_fb.png" alt class="icon">
       </div>
     </div>
-    <div class="row or_style d-flex justify-content-center align-items-center mt-4 ">
+    <div class="row or_style d-flex justify-content-center align-items-center mt-4">
       <div class="col-3 Login_line"></div>
       <div class="col-1 text">或</div>
       <div class="col-3 Login_line"></div>
     </div>
     <div class="row mt-3">
       <div class="col">
-        <input type="text " class="input input1" placeholder="信箱" >
+        <input type="text " class="input input1" placeholder="信箱">
         <!-- <img src="../assets/icon/icon_letter.png" alt="" class="icon_placeh">  -->
       </div>
     </div>
@@ -35,11 +38,11 @@
         <!-- <img src="../assets/icon/icon_locked.png" alt="" class="icon_placeh"> -->
       </div>
     </div>
-    <div class=" row mt-5 d-flex align-items-center justify-content-around  submit_row">
-      <div class="col  d-flex  justify-content-end">
+    <div class="row mt-5 d-flex align-items-center justify-content-around submit_row">
+      <div class="col d-flex justify-content-end">
         <div class="submit">登入</div>
       </div>
-      <div class="forget_style  col d-flex align-items-center">
+      <div class="forget_style col d-flex align-items-center">
         <a href class="forget_style">忘記密碼?</a>
       </div>
     </div>
@@ -53,14 +56,12 @@
 
 
 <style scoped>
-
 @import "../css/base.css";
 * {
   text-align: center;
   font-family: "Noto Sans TC", sans-serif;
 }
-.icon{
-  
+.icon {
   height: 70%;
 }
 h5 {
@@ -100,7 +101,7 @@ h5 {
 .main_section {
   padding-top: 7%;
   min-height: 80vh;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: #f8f8f8;
   height: 100vh;
 }
@@ -134,9 +135,7 @@ h5 {
 }
 
 .or_style {
- 
   font-size: 21px;
-  
 }
 .Login_line {
   margin-top: -5px;
@@ -154,8 +153,8 @@ h5 {
   width: 250px;
   border-radius: 10px;
   text-align: left;
-  padding-left:40px;
-  
+  padding-left: 40px;
+  border: #262626 0.5px solid;
 }
 .submit {
   cursor: pointer;
@@ -173,27 +172,26 @@ a {
 }
 .deco_img {
   text-align: center;
-  width: 20vw;
-  margin-left: 65%;
-  margin-top: -4%;
+   width: 17vw;
+  margin-left: 74vw;
+  margin-top: -100px;
 }
-.submit_row{
-  margin-left:20px;
+.submit_row {
+  margin-left: 20px;
 }
-.icon_placeh{
-  position:absolute;
+.icon_placeh {
+  position: absolute;
   height: 60%;
-  margin-left:-28%;
-  top:14%;
+  margin-left: -28%;
+  top: 14%;
 }
-.input1{
+.input1 {
   background-image: url(../assets/icon/icon_letter.png);
   background-repeat: no-repeat;
   background-size: auto 60%;
   background-position: 5% 55%;
-
 }
-.input2{
+.input2 {
   background-image: url(../assets/icon/icon_locked.png);
   background-repeat: no-repeat;
   background-size: auto 60%;
@@ -218,17 +216,15 @@ a {
   .deco_img {
     margin-left: 70%;
   }
-  .icon{
-  
-  height: 70%;
-}
-.card_deco {
-  margin-top: 90px;
+  .icon {
+    height: 70%;
   }
-  h5{
-    font-size:28px;
+  .card_deco {
+    margin-top: 90px;
   }
- 
+  h5 {
+    font-size: 28px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -244,7 +240,7 @@ a {
   }
   .font_bg {
     width: 14vw;
-     height: 4.2vw;
+    height: 4.2vw;
     border-radius: 50px;
     background-color: #219e91;
     margin-top: 2%;
@@ -252,48 +248,42 @@ a {
     color: rgba(0, 0, 0, 0);
   }
   h5 {
-   
     width: 20vw;
   }
   .login_btn {
-  width: 270px;
-  
-}
- .login_btn div {
-  border-radius: 10px;
-  
-}
-.submit {
-  
-  cursor: pointer;
-  color: #fff;
-  background-color: #ff794a;
-  height: 40px;
-  width: 120px;
-  font-size: 18px;
-  border-radius: 20px;
-  line-height: 38px;
- 
-}
-.forget_style{
-  margin-left: 5px;
-}
-.icon{
-  
-  height: 60%;
-}
-.deco_img{
-  display:none;
-}
-.card_deco {
-  margin-top: 130px;
+    width: 270px;
   }
-   h5{
-    font-size:30px;
+  .login_btn div {
+    border-radius: 10px;
   }
- .subtitle_row{
+  .submit {
+    cursor: pointer;
+    color: #fff;
+    background-color: #ff794a;
+    height: 40px;
+    width: 120px;
+    font-size: 18px;
+    border-radius: 20px;
+    line-height: 38px;
+  }
+  .forget_style {
+    margin-left: 5px;
+  }
+  .icon {
+    height: 60%;
+  }
+  .deco_img {
+    display: none;
+  }
+  .card_deco {
+    margin-top: 130px;
+  }
+  h5 {
+    font-size: 30px;
+  }
+  .subtitle_row {
     margin-top: 150px;
- }
+  }
 }
 </style>
 
@@ -323,7 +313,10 @@ export default {
       this.readUser();
       if (status === "login") this.$router.push({ path: "/" });
       //if not register ever change to register page
-      else if (status === "register") this.$router.push({ path: "/register2" }); //if not register ever change to register page
+      else if (status === "register") {
+        alert("需註冊才能使用店家功能!");
+        this.$router.push({ path: "/register2" });
+      } //if not register ever change to register page
     }
   }
 };

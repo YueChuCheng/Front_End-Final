@@ -34,7 +34,7 @@ export default {
   height: 60px;
   width: 240px;
   margin-left: -6%;
-  margin-top: -20px;
+  margin-top: -40px;
   border-radius: 10vw;
 }
 .logo_style :hover{
@@ -53,6 +53,9 @@ img {
   top: 13px;
   left: 80px;
   height: 80%;
+}
+.logo_style {
+  margin-top: -25px;
 }
 }
 

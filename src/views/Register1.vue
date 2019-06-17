@@ -87,7 +87,7 @@ h5 {
   margin-left: 8%;
 }
 .card_deco {
-  margin-top: 60px;
+  margin-top: 8vh;
   margin-left: 39.5%;
 }
 .outline {
@@ -96,7 +96,7 @@ h5 {
 .main_section {
   padding-top: 7%;
   min-height: 80vh;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: #f8f8f8;
   height: 100vh;
 }
@@ -148,6 +148,7 @@ h5 {
   margin-top: -5px;
   height: 40px;
   width: 250px;
+  border: #262626 0.5px solid;
   border-radius: 10px;
   text-align: left;
   padding-left:40px;
@@ -170,9 +171,9 @@ a {
 }
 .deco_img {
   text-align: center;
-  width: 20vw;
-  margin-left: 65%;
-  margin-top: -4%;
+   width: 17vw;
+  margin-left: 74vw;
+  margin-top: -100px;
 }
 .submit_row{
   margin-left:20px;

@@ -56,10 +56,11 @@
   outline: solid 2px red;
 }
 .main_section {
+  overflow: hidden;
   padding-top: 6%;
-  min-height: 80vh;
-  background-color: #f8f8f8;
   height: 100vh;
+  background-color: #f8f8f8;
+ 
 }
 .or_style {
   font-size: 21px;
@@ -76,6 +77,7 @@
   width: 250px;
   margin-left: 20px;
   border-radius: 10px;
+  border: #262626 0.5px solid;
 }
 
 .text {
@@ -86,7 +88,7 @@
 .input_style {
   text-align: right;
   padding-right: 4vw;
-  margin-top: -35px;
+  margin-top: -50px;
 }
 .input_w {
   font-size: 25px;
@@ -129,9 +131,9 @@
 }
 .deco_img {
   text-align: center;
-  width: 20vw;
-  margin-left: 73vw;
-  margin-top: -18px;
+  width: 17vw;
+  margin-left: 74vw;
+  margin-top: -100px;
 }
 h5 {
   /* writing-mode:vertical-lr; */
@@ -161,12 +163,12 @@ h5 {
   margin-left: 1.4%;
 }
 .card_deco {
-  margin-top: 80px;
+  margin-top: 8vh;
   margin-left: 45%;
 }
 .rest_text {
   position: relative;
-  top: 50px;
+  top: 30px;
   width: 480px;
   margin: 100px auto;
 }
@@ -187,6 +189,7 @@ h5 {
     margin-top: -28px;
   }
   .rest_text {
+    top:55px;
     width: 100%;
   }
   .rest_line {

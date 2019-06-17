@@ -54,7 +54,7 @@ export default new Vuex.Store({
           return 'login';
         }
         else {//若未註冊
-          alert("需註冊才能使用店家功能!");
+         
           return 'register';
         }
 
