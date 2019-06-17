@@ -3,31 +3,96 @@
     <Nav/>
     <article>
       <section>
-        <!-- <div>
-          <div class="restaurant_info">
-            <div class="restaurantname_container">
-              <div class="">{{restaurantName}}</div>
-              <h3 class="">{{restaurantName}}</h3>
-              <hr class="">
-            </div>
-            <h3>{{restaurantName}}</h3>
-            <p>{{restaurantAddress}}</p>
-            <p>TEL：{{restaurantTEL}}</p>
-            <p>外送時間：{{restaurantOpenTime}}</p>
+        <div class="restaurant_info">
+          <div class="restaurantname_container">
+            <!-- <h3 class="restaurantname_font_bg">{{restaurantName}}</h3> -->
+            <h3 class="restaurantname">{{restaurantName}}</h3>
+            <div class="restaurantname_hr">{{restaurantName}}</div>
           </div>
-        </div> -->
+          <div class="restaurantotherinfo_container">
+            <div class="restaurantotherinfoheader">
+              <p>地址：</p>
+              <p>TEL：</p>
+              <p>外送時間：</p>
+            </div>
+            <div class="restaurantotherinfo">
+              <p class="inputinfoedit_p editaddress_p">{{restaurantAddress}}</p>
+              <input
+                class="inputinfoedit editaddress"
+                type="text"
+                placeholder="輸入地址"
+                v-model="restaurantAddress"
+                required
+              >
+              <p class="inputinfoedit_p editTEL_p">{{restaurantTEL}}</p>
+              <input
+                class="inputinfoedit editTEL"
+                type="text"
+                placeholder="輸入電話"
+                v-model="restaurantTEL"
+                required
+              >
+
+              <p class="inputinfoedit_p editopentime_p">{{restaurantOpenTime}}</p>
+              <input
+                class="inputinfoedit editopentime"
+                type="text"
+                placeholder="輸入外送時間"
+                v-model="restaurantOpenTime"
+                required
+              >
+            </div>
+            <div class="restaurantinfoset_container">
+              <div class="editbtn">
+                <img
+                  class="img_edit editbtnimg1"
+                  v-on:click="EditInfo(1)"
+                  src="../assets/icon/graywrite.png"
+                  alt
+                >
+                <button class="finisheditbtn finisheditaddressbtn" v-on:click="FinishEditInfo(1)">完成</button>
+              </div>
+              <div class="editbtn">
+                <img
+                  class="img_edit editbtnimg2"
+                  v-on:click="EditInfo(2)"
+                  src="../assets/icon/graywrite.png"
+                  alt
+                >
+                <button class="finisheditbtn finisheditTELbtn" v-on:click="FinishEditInfo(2)">完成</button>
+              </div>
+              <div class="editbtn">
+                <img
+                  v-on:click="EditInfo(3)"
+                  class="img_edit editbtnimg3"
+                  src="../assets/icon/graywrite.png"
+                  alt
+                >
+                <button
+                  class="finisheditbtn finisheditopentimebtn"
+                  v-on:click="FinishEditInfo(3)"
+                >完成</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <section>
         <div class="menuheader_container">
-          <h4>菜單</h4>
-          <h4>Menu</h4>
+          <h4>菜單管理</h4>
+          <h4>Menu Manager</h4>
           <hr>
         </div>
         <div class="type_container">
           <div class="type" v-for="parent,index in type" :key="index">
             <div>
               <h5 class="font_bg">{{parent.name}}</h5>
-              <h5>{{parent.name}}</h5>
+              <h5>
+                {{parent.name}}
+                <div class="typedeletebtn" v-on:click="DeleteType(index)">
+                  <img class="img_typedeletebtn" src="../assets/icon/greendelete.png" alt>
+                </div>
+              </h5>
             </div>
             <transition
               enter-active-class="fade-enter-active"
@@ -149,6 +214,7 @@ export default {
       newFoodNameText: [],
       newFoodPriceText: [],
       newTypeNameText: "",
+      newInfoName: "",
       imgsrc: "",
       isShow: [],
       restaurantName: "",
@@ -317,6 +383,114 @@ export default {
         .set({
           Name: this.newTypeNameText
         });
+    },
+    DeleteType(index) {
+      this.DeleteLocalType(index);
+      this.DeleteTypeFirestore(index);
+    },
+    DeleteLocalType(index) {
+      //local
+      console.log(index);
+      this.type.splice(index, 1);
+    },
+    async DeleteTypeFirestore(index) {
+      let DeleteType = await this.$firestore.colTypeRef
+        .doc("Type" + (index + 1))
+        .delete();
+    },
+    EditInfo(number) {
+      switch (number) {
+        case 0:
+          break;
+        case 1:
+          $(".editbtnimg1").css({ display: "none" });
+          $(".editaddress_p").css({ display: "none" });
+          $(".editaddress").css({ display: "block" });
+          $(".finisheditaddressbtn").css({ display: "block" });
+          break;
+        case 2:
+          $(".editbtnimg2").css({ display: "none" });
+          $(".editTEL_p").css({ display: "none" });
+          $(".editTEL").css({ display: "block" });
+          $(".finisheditTELbtn").css({ display: "block" });
+          break;
+        case 3:
+          $(".editbtnimg3").css({ display: "none" });
+          $(".editopentime_p").css({ display: "none" });
+          $(".editopentime").css({ display: "block" });
+          $(".finisheditopentimebtn").css({ display: "block" });
+          break;
+        default:
+          break;
+      }
+    },
+    FinishEditInfo(number) {
+      switch (number) {
+        case 0:
+          break;
+        case 1:
+          $(".editbtnimg1").css({ display: "inline-block" });
+          $(".editaddress_p").css({ display: "block" });
+          $(".editaddress").css({ display: "none" });
+          $(".finisheditaddressbtn").css({ display: "none" });
+          this.SetInfoFirestore(1);
+          break;
+        case 2:
+          $(".editbtnimg2").css({ display: "inline-block" });
+          $(".editTEL_p").css({ display: "block" });
+          $(".editTEL").css({ display: "none" });
+          $(".finisheditTELbtn").css({ display: "none" });
+          this.SetInfoFirestore(2);
+          break;
+        case 3:
+          $(".editbtnimg3").css({ display: "inline-block" });
+          $(".editopentime_p").css({ display: "block" });
+          $(".editopentime").css({ display: "none" });
+          $(".finisheditopentimebtn").css({ display: "none" });
+          this.SetInfoFirestore(3);
+          break;
+        default:
+          break;
+      }
+    },
+    async SetInfoFirestore(number) {
+      let self=this;
+      switch (number) {
+        case 0:
+          break;
+        case 1:
+          //address
+          console.log(this.restaurantAddress)
+          let setAddressCount = await self.$firestore.docInfoRef.set(
+            {
+              Address:this.restaurantAddress
+            },
+            { merge: true }
+          );
+          break;
+        case 2:
+          //tel
+          console.log(this.restaurantTEL)
+          // let setTELCount = await this.$firestore.docInfoRef.set(
+          //   {
+          //     TEL:this.restaurantTEL
+          //   },
+          //   { merge: true }
+          // );
+          break;
+        case 3:
+          //opentime
+          console.log(this.restaurantOpenTime)
+          // let setOpenTimeCount = await this.$firestore.docInfoRef.set(
+          //   {
+          //     OpenTime:this.restaurantOpenTime
+          //   },
+          //   { merge: true }
+          // );
+          break;
+        default:
+          break;
+      }
     }
   }
 };
@@ -339,14 +513,26 @@ export default {
   background-color: #262626;
 }
 h3 {
-  font-weight: normal;
+  font-size: 3.5vw;
+  font-weight: 400;
+  text-align: center;
+  width: auto;
 }
-h3,
+.restaurantname_hr {
+  width: auto;
+  height: 5vw;
+  font-size: 3.5vw;
+  font-weight: 400;
+  position: absolute;
+  top: 0%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  border-bottom: 0.2vw solid #262626;
+  padding: 1vw 0;
+}
 h4 {
   font-size: 3vw;
-  font-weight: 300;
-}
-h4 {
   font-weight: 400;
   text-align: center;
 }
@@ -373,8 +559,8 @@ hr {
   margin-top: 1vw;
 }
 p {
-  font-size: 1.75vw;
-  font-weight: 100;
+  font-size: 2vw;
+  font-weight: 350;
   margin-bottom: 0.1vw;
 }
 ul {
@@ -391,20 +577,6 @@ input {
   color: #686868;
   font-weight: 300;
 }
-.img_restaurant {
-  border: none;
-  width: 100%;
-  box-sizing: border-box;
-}
-/* .restaurant_info {
-  width: 32.5%;
-  padding: 2vw 3vw;
-  right: 0vw;
-  margin-top: 15vw;
-  display: grid;
-  grid-row-gap: 0.01vw;
-} */
-
 /* article */
 article {
   width: 100%;
@@ -414,6 +586,68 @@ article {
   background-color: #f8f8f8;
   padding-top: 12vw;
   padding-bottom: 8vw;
+}
+section {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 5vw;
+}
+
+.img_restaurant {
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.restaurantname_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.restaurantotherinfo_container {
+  margin-top: 3vw;
+  display: grid;
+  grid-template-columns: 11vw auto 6vw;
+  grid-column-gap: 1vw;
+  letter-spacing: 0.5px;
+  line-height: 3vw;
+}
+.restaurantotherinfoheader {
+  width: 11vw;
+  text-align: end;
+  display: grid;
+  grid-row-gap: 1.1vw;
+}
+.restaurantinfoset_container {
+  display: grid;
+  justify-content: center;
+  grid-template-rows: repeat(3, 2.5vw);
+  grid-template-columns: 2.5vw;
+  align-content: space-around;
+  align-items: start;
+}
+.restaurantotherinfo {
+  display: grid;
+  grid-row-gap: 1vw;
+}
+.inputinfoedit {
+  /* position:absolute; */
+  border: #7c7c7c 1px solid;
+  border-radius: 7.5px;
+  padding-left: 5px;
+  background-color: #ffffff;
+  display: none;
+}
+.img_edit {
+  height: 2.5vw;
+  margin-top: -1vw;
+}
+.finisheditbtn {
+  display: none;
+  position: absolute;
+  text-decoration: underline;
+  color: #686868;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 .menuheader_container {
   display: grid;
@@ -426,7 +660,7 @@ article {
 .type {
   margin-left: -2vw;
   width: 80vw;
-  padding-bottom: 5vw;
+  padding-bottom: 10vw;
   display: grid;
   grid-template-columns: 6vw auto;
   grid-template-rows: 100%;
@@ -581,5 +815,12 @@ article {
 .showtypebtn_container {
   position: absolute;
   display: none;
+}
+.typedeletebtn {
+  margin-top: 2.5vw;
+  margin-left: 1vw;
+}
+.img_typedeletebtn {
+  width: 2.5vw;
 }
 </style>
