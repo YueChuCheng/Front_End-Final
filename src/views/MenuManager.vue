@@ -243,7 +243,7 @@ export default {
   },
   computed: mapState({
     totalPrice: state => state.totalPrice,
-    clickID: state => state.clickID
+    userid: state => state.user.userid
   }),
   firestore() {
     return {
@@ -264,16 +264,16 @@ export default {
       //   .doc("Info")
       //   .collection("Order")
       colRestaurantRef: firebase.firestore().collection("test"),
-      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.user.userid),
       colTypeRef: firebase
         .firestore()
         .collection("test")
-        .doc(this.$store.state.clickID)
+        .doc(this.$store.state.user.userid)
         .collection("Menu"),
       colOrderRef: firebase
         .firestore()
         .collection("test")
-        .doc(this.$store.state.clickID)
+        .doc(this.$store.state.user.userid)
         .collection("Order")
     };
   },
@@ -388,7 +388,7 @@ export default {
         food: [],
         isShow: false,
         newFoodNameText: this.newFoodNameText.push(""),
-        newFoodPriceText: this.newFoodPriceText.push("")
+        newFoodPriceText: this.newFoodPriceText.push(""),
       });
       console.log(this.type);
     },
@@ -398,7 +398,8 @@ export default {
       let SetType = await this.$firestore.colTypeRef
         .doc("Type" + this.type.length)
         .set({
-          Name: this.newTypeNameText
+          Name: this.newTypeNameText,
+          FoodDataCount:0
         });
     },
     DeleteType(index) {
