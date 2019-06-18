@@ -45,7 +45,7 @@ export default new Vuex.Store({
       }, function(error) {
         console.error('Sign Out Error', error);
       });
-      location.reload();
+      location.assign('/')
       console.log("after="+this.state.user.userid);
     },
     async loginWithGoogle() { //google登入函式
