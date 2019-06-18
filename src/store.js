@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { firebase } from '@firebase/app';
+import VueRouter from 'vue-router';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -36,6 +37,17 @@ export default new Vuex.Store({
 
   },
   actions: {
+    signout() { //登出函式
+      console.log("signout");
+      firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+      
+      }, function(error) {
+        console.error('Sign Out Error', error);
+      });
+      location.reload();
+      console.log("after="+this.state.user.userid);
+    },
     async loginWithGoogle() { //google登入函式
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
