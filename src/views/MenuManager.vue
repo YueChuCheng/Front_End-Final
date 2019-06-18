@@ -248,32 +248,33 @@ export default {
   firestore() {
     return {
       // Collection
-      colRestaurantRef: firebase.firestore().collection("Restaurant"),
-      docRestaurantRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colTypeRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Menu"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      // colRestaurantRef: firebase.firestore().collection("Restaurant"),
+      // docRestaurantRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colTypeRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Menu"),
       // colOrderRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Order")
+      colRestaurantRef: firebase.firestore().collection("test"),
+      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colTypeRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Menu"),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
   },
   mounted: async function() {

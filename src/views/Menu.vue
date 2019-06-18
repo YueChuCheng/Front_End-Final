@@ -136,31 +136,31 @@ export default {
   firestore() {
     return {
       // Collection
-      docRestaurantRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colTypeRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Menu"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      // docRestaurantRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colTypeRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Menu"),
       // colOrderRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Order")
+      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colTypeRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Menu"),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
   },
   mounted: async function() {
