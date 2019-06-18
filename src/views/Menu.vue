@@ -648,7 +648,8 @@ article {
   .img_food {
     /* border:1px solid #000000;  */
     height: 20vw;
-    margin-left: 10%;
+    width:auto;
+    margin-left: 30%;
   }
   .foodinfo_container {
     grid-template-columns: 25vw auto;

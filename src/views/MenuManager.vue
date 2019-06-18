@@ -3,11 +3,22 @@
     <Nav/>
     <article>
       <section>
-        <div class="restaurant_info">
+        <div>
           <div class="restaurantname_container">
-            <!-- <h3 class="restaurantname_font_bg">{{restaurantName}}</h3> -->
+            <h3 class="restaurantname_font_bg">{{restaurantName}}</h3>
             <h3 class="restaurantname">{{restaurantName}}</h3>
             <div class="restaurantname_hr">{{restaurantName}}</div>
+            <input class="inputinfoedit editname" type="text" v-model="restaurantNewName" required>
+            <img
+              class="img_edit editbtnimg0"
+              v-on:click="EditInfo(0)"
+              src="../assets/icon/graywrite.png"
+              alt
+            >
+            <button
+              class="finisheditbtn finisheditnamebtn editbtnimg0"
+              v-on:click="FinishEditInfo(0)"
+            >完成</button>
           </div>
           <div class="restaurantotherinfo_container">
             <div class="restaurantotherinfoheader">
@@ -211,6 +222,7 @@ export default {
   data() {
     return {
       small: false,
+      restaurantNewName: "",
       newFoodNameText: [],
       newFoodPriceText: [],
       newTypeNameText: "",
@@ -236,6 +248,7 @@ export default {
   firestore() {
     return {
       // Collection
+      colRestaurantRef: firebase.firestore().collection("Restaurant"),
       docRestaurantRef: firebase
         .firestore()
         .collection("Restaurant")
@@ -270,6 +283,7 @@ export default {
     let doc = await this.$firestore.docRestaurantRef.get();
     if (doc.exists) {
       this.restaurantName = doc.data().Name;
+      this.restaurantNewName = this.restaurantName;
       this.restaurantAddress = doc.data().Address;
       this.restaurantTEL = doc.data().TEL;
       this.restaurantOpenTime = doc.data().OpenTime;
@@ -284,7 +298,8 @@ export default {
         food: [],
         isShow: false,
         newFoodNameText: this.newFoodNameText.push(""),
-        newFoodPriceText: this.newFoodPriceText.push("")
+        newFoodPriceText: this.newFoodPriceText.push(""),
+        fooddatacount: docSnapshot.data().FoodDataCount
       });
     });
     this.type = typearray;
@@ -299,13 +314,13 @@ export default {
       querySnapshot.forEach(docSnapshot => {
         foodarray.push({
           name: docSnapshot.data().Name,
-          price: docSnapshot.data().Price,
-          count: 0
+          price: docSnapshot.data().Price
         });
         item.food = foodarray;
       });
     });
 
+    
     // jquery
     if ($(window).width() <= 480) {
       this.small = true;
@@ -326,6 +341,7 @@ export default {
     },
     SetLocalNewFood(index) {
       //local
+      this.type[index].fooddatacount++;
       this.type[index].food.push({
         name: this.newFoodNameText[index],
         price: this.newFoodPriceText[index],
@@ -338,7 +354,7 @@ export default {
       let setNewFood = await this.$firestore.colTypeRef
         .doc("Type" + (index + 1))
         .collection("Food")
-        .doc("Food" + this.type[index].food.length)
+        .doc("Food" + this.type[index].fooddatacount)
         .set({
           Name: this.newFoodNameText[index],
           Price: this.newFoodPriceText[index]
@@ -394,6 +410,11 @@ export default {
       this.type.splice(index, 1);
     },
     async DeleteTypeFirestore(index) {
+      let querySnapshot = await this.$firestore.colTypeRef
+        .doc("Type" + (index + 1))
+        .collection("Food")
+        .get();
+      querySnapshot.forEach(docSnapshot => docSnapshot.ref.delete());
       let DeleteType = await this.$firestore.colTypeRef
         .doc("Type" + (index + 1))
         .delete();
@@ -401,6 +422,10 @@ export default {
     EditInfo(number) {
       switch (number) {
         case 0:
+          $(".editbtnimg0").css({ display: "none" });
+          $(".restaurantname").css({ display: "none" });
+          $(".editname").css({ display: "block" });
+          $(".finisheditnamebtn").css({ display: "block" });
           break;
         case 1:
           $(".editbtnimg1").css({ display: "none" });
@@ -424,69 +449,89 @@ export default {
           break;
       }
     },
-    FinishEditInfo(number) {
+    async FinishEditInfo(number) {
       switch (number) {
         case 0:
+          $(".editbtnimg0").css({ display: "inline-block" });
+          $(".restaurantname").css({ display: "block" });
+          $(".editname").css({ display: "none" });
+          $(".finisheditnamebtn").css({ display: "none" });
+          this.restaurantName = this.restaurantNewName;
+          await this.SetInfoFirestore(0);
           break;
         case 1:
           $(".editbtnimg1").css({ display: "inline-block" });
           $(".editaddress_p").css({ display: "block" });
           $(".editaddress").css({ display: "none" });
           $(".finisheditaddressbtn").css({ display: "none" });
-          this.SetInfoFirestore(1);
+          await this.SetInfoFirestore(1);
           break;
         case 2:
           $(".editbtnimg2").css({ display: "inline-block" });
           $(".editTEL_p").css({ display: "block" });
           $(".editTEL").css({ display: "none" });
           $(".finisheditTELbtn").css({ display: "none" });
-          this.SetInfoFirestore(2);
+          await this.SetInfoFirestore(2);
           break;
         case 3:
           $(".editbtnimg3").css({ display: "inline-block" });
           $(".editopentime_p").css({ display: "block" });
           $(".editopentime").css({ display: "none" });
           $(".finisheditopentimebtn").css({ display: "none" });
-          this.SetInfoFirestore(3);
+          await this.SetInfoFirestore(3);
           break;
         default:
           break;
       }
     },
     async SetInfoFirestore(number) {
-      let self=this;
+      let self = this;
       switch (number) {
         case 0:
-          break;
-        case 1:
-          //address
-          console.log(this.restaurantAddress)
-          let setAddressCount = await self.$firestore.docInfoRef.set(
+          let setName = await self.$firestore.colRestaurantRef.doc("Info").set(
             {
-              Address:this.restaurantAddress
+              Name: this.restaurantName
             },
             { merge: true }
           );
+          console.log(this.restaurantNewName);
+          console.log(this.restaurantName);
+          break;
+        case 1:
+          //address
+          console.log(this.restaurantAddress);
+          let setAddress = await self.$firestore.colRestaurantRef
+            .doc("Info")
+            .set(
+              {
+                Address: this.restaurantAddress
+              },
+              { merge: true }
+            );
           break;
         case 2:
           //tel
-          console.log(this.restaurantTEL)
-          // let setTELCount = await this.$firestore.docInfoRef.set(
-          //   {
-          //     TEL:this.restaurantTEL
-          //   },
-          //   { merge: true }
-          // );
+          console.log(this.restaurantTEL);
+          let setTELCount = await await self.$firestore.colRestaurantRef
+            .doc("Info")
+            .set(
+              {
+                TEL: this.restaurantTEL
+              },
+              { merge: true }
+            );
           break;
         case 3:
           //opentime
-          console.log(this.restaurantOpenTime)
-          // let setOpenTimeCount = await this.$firestore.docInfoRef.set(
-          //   {
-          //     OpenTime:this.restaurantOpenTime
-          //   },
-          //   { merge: true }
-          // );
+          console.log(this.restaurantOpenTime);
+          let setOpenTimeCount = await self.$firestore.colRestaurantRef
+            .doc("Info")
+            .set(
+              {
+                OpenTime: this.restaurantOpenTime
+              },
+              { merge: true }
+            );
           break;
         default:
           break;
@@ -603,6 +648,25 @@ section {
   display: flex;
   justify-content: center;
 }
+.restaurantname_font_bg {
+  background-color: #219e91;
+  color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 65%;
+  margin: 0 0 0 5%;
+  border-radius: 20px;
+  height: 3vw;
+}
+.restaurantname {
+  z-index: 0;
+}
+.editname {
+  height: 4.5vw;
+  font-size: 3vw;
+  width: 20vw;
+  text-align: center;
+  z-index: 1;
+}
 .restaurantotherinfo_container {
   margin-top: 3vw;
   display: grid;
@@ -641,6 +705,11 @@ section {
   height: 2.5vw;
   margin-top: -1vw;
 }
+.editbtnimg0 {
+  position: absolute;
+  left: 87%;
+  top: 70%;
+}
 .finisheditbtn {
   display: none;
   position: absolute;
@@ -648,6 +717,9 @@ section {
   color: #686868;
   border: none;
   background-color: rgba(0, 0, 0, 0);
+}
+.finisheditnamebtn {
+  top: 45%;
 }
 .menuheader_container {
   display: grid;
@@ -812,15 +884,414 @@ section {
   width: 3vw;
   height: auto;
 }
-.showtypebtn_container {
-  position: absolute;
-  display: none;
-}
 .typedeletebtn {
   margin-top: 2.5vw;
   margin-left: 1vw;
 }
 .img_typedeletebtn {
   width: 2.5vw;
+}
+.showtypebtn_container {
+  position: absolute;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  h3,
+  .restaurantname_hr {
+    font-size: 4.5vw;
+  }
+  h4 {
+    font-size: 4vw;
+  }
+  h4:nth-child(2) {
+    font-size: 2.75vw;
+  }
+  h5 {
+    font-size: 5vw;
+    line-height: 1em;
+    width: auto;
+    text-align: center;
+    position: relative;
+  }
+  hr {
+    border-top: 1px solid #262626;
+    width: 22vw;
+    margin-top: 10px;
+  }
+  p {
+    font-size: 2.5vw;
+  }
+  /* article */
+  article {
+    padding-top: 15vw;
+  }
+  /* header */
+  .restaurantname_hr {
+    padding: 3vw 0;
+  }
+  .restaurantinfoset_container {
+    grid-template-rows: repeat(3, 3.5vw);
+    grid-row-gap: 1vw;
+  }
+  .menuheader_container {
+    margin-bottom: 4.5vw;
+  }
+  .inputinfoedit {
+    font-size: 2.25vw;
+    /* position:absolute; */
+    border: #7c7c7c 1px solid;
+    border-radius: 7.5px;
+    padding-left: 5px;
+    background-color: #ffffff;
+    display: none;
+  }
+  .img_edit {
+    height: 3.5vw;
+    width: auto;
+  }
+  .editbtnimg0 {
+    left: 90%;
+  }
+  .editname {
+    font-size: 4vw;
+    width: 25vw;
+    height: 5vw;
+  }
+  .finisheditbtn {
+    width: 5vw;
+    font-size: 2vw;
+  }
+  .restaurantotherinfo_container {
+    grid-template-columns: 15vw auto 6vw;
+    grid-column-gap: 1vw;
+  }
+  .restaurantotherinfoheader {
+    width: 15vw;
+  }
+  /* food */
+  .type_container {
+    margin-top: 0px;
+  }
+  .type {
+    padding-bottom: 7.5vw;
+    grid-column-gap: 3vw;
+  }
+  .font_bg {
+    width: 4vw;
+    margin-left: 2%;
+    position: absolute;
+  }
+  .food_container {
+    grid-template-columns: repeat(2, 32.5vw);
+    margin: 0;
+    grid-column-gap: 2.5vw;
+  }
+  .food ul li {
+    padding: 0.3vw 0px;
+    height: auto;
+  }
+  .img_food {
+    width: 15vw;
+    max-width: 90px;
+    height: auto;
+    margin-left: 10%;
+  }
+  .foodinfo_container {
+    padding: 0px 2vw;
+    margin: 1vw 0;
+  }
+  .foodinfo_container p {
+    font-size: 2.5vw;
+  }
+  .foodinfo_container p:nth-child(2) {
+    font-size: 2vw;
+    margin: 0.5vw 0 0 1vw;
+  }
+  /* new */
+  .img_typedeletebtn {
+    width: 3vw;
+  }
+  .foodbtn_container {
+    width: 5vw;
+    height: 5vw;
+    left: -5%;
+  }
+  .foodaddbtn {
+    left: 90%;
+  }
+  .img_foodbtn,
+  .img_deletebtn {
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+  .img_addfood_container {
+    border: #dddddd solid 1px;
+    width: 15vw;
+    max-width: 90px;
+    height: 15vw;
+    max-height: 90px;
+  }
+  .inputfoodname {
+    font-weight: 200;
+    font-size: 2vw;
+    width: 16vw;
+    height: 3.25vw;
+  }
+  .inputfoodprice_container {
+    color: #262626;
+    font-size: 1.75vw;
+  }
+  .inputfoodprice {
+    font-weight: 200;
+    height: 2.75vw;
+    font-size: 1.75vw;
+    width: 10vw;
+  }
+  .addtypebtn_container {
+    width: 7vw;
+    height: 7vw;
+    margin-left: -1vw;
+  }
+  .img_addtypebtn {
+    width: 3.5vw;
+    height: 3.5vw;
+  }
+  .inputtypename {
+    margin-left: 2vw;
+    height: 4vw;
+    font-size: 2.5vw;
+    width: 22.5vw;
+    padding-bottom: 0.1vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  h3,
+  .restaurantname_hr {
+    font-size: 1.75em;
+    letter-spacing: 0.1vw;
+  }
+  h4 {
+    font-size: 1.4em;
+  }
+  h4:nth-child(2) {
+    display: none;
+  }
+  h5 {
+    font-size: 1.5em;
+    line-height: 1em;
+    width: auto;
+    text-align: center;
+    position: relative;
+  }
+  hr {
+    border-top: 1px solid #262626;
+    width: 100px;
+    margin-top: 5px;
+  }
+  p {
+    font-size: 4vw;
+  }
+  /* article */
+  article {
+    padding-top: 90px;
+    padding-bottom: 15vw;
+  }
+  section {
+    margin-bottom: 25px;
+  }
+  /* header */
+  .restaurantname_font_bg {
+    height: 22.5px;
+  }
+  .restaurantname_hr {
+    padding: 20px 0;
+  }
+  .restaurantotherinfo_container {
+    margin-top: 25px;
+    grid-template-columns: 100px auto 30px;
+    grid-column-gap: 1.5vw;
+    line-height: 25px;
+  }
+  .restaurantotherinfoheader {
+    width: 100px;
+  }
+  .restaurantinfoset_container {
+    grid-template-rows: repeat(3, 3.5vw);
+    grid-row-gap: 1.5vw;
+  }
+  .inputinfoedit {
+    border: #7c7c7c 1px solid;
+    border-radius: 7.5px;
+    padding-left: 5px;
+    background-color: #ffffff;
+    display: none;
+  }
+  .img_edit {
+    height: 22.5px;
+    margin-top: -2vw;
+  }
+  .editbtnimg0 {
+    left: 92.5%;
+  }
+  .editname {
+    font-size: 4vw;
+    width: 25vw;
+    height: 5vw;
+  }
+  .finisheditbtn {
+    width: 10vw;
+    font-size: 2vw;
+  }
+  .menuheader_container {
+    margin-bottom: 4.5vw;
+  }
+  /* food */
+  .type {
+    width: 75vw;
+    grid-template-columns: 100%;
+    justify-content: center;
+    justify-items: center;
+    grid-template-rows: 10vw auto;
+    grid-row-gap: 15px;
+    padding-bottom: 4vw;
+  }
+  .font_bg {
+    width: auto;
+    height: 0.8em;
+    margin-top: 12.5px;
+    margin-left: 7.5px;
+  }
+  .food_container {
+    grid-row-gap: 5%;
+    grid-template-columns: auto;
+    padding-bottom: 50px;
+  }
+  .food ul li {
+    padding: 0% 10% 1.5% 5%;
+    width: 73vw;
+    grid-template-columns: 20vw auto;
+    justify-content: start;
+    justify-content: space-between;
+    height: 20vw;
+  }
+  .img_food {
+    /* border:1px solid #000000;  */
+    height: 20vw;
+    width: auto;
+  }
+  .foodinfo_container {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-column-gap: 4vw;
+    grid-row-gap: 0.5vw;
+    padding: 0.5vw 0;
+    margin-top: 0vw;
+  }
+  .foodinfo_container p {
+    font-size: 4vw;
+  }
+  .foodinfo_container p:nth-child(2) {
+    font-size: 4vw;
+    top: 70%;
+  }
+  .foodinfo_container p:nth-child(2) {
+    font-size: 3vw;
+    margin: 0.5vw 0 0 1vw;
+  }
+  /* new */
+  .img_typedeletebtn {
+    position: absolute;
+    top: 2.5vw;
+    width: 22px;
+    height: auto;
+    margin-left: 30vw;
+    margin-top: -0.5vw;
+  }
+  .foodbtn_container {
+    width: 7vw;
+    height: 7vw;
+    left: -3.5%;
+  }
+  .foodaddbtn {
+    left: 92.5%;
+  }
+  .img_foodbtn,
+  .img_deletebtn {
+    width: 3.5vw;
+    height: 3.5vw;
+  }
+  .img_addfood_container {
+    width: 17.5vw;
+    max-width: 90px;
+    height: 17.5vw;
+    max-height: 90px;
+    margin-top: 5px;
+  }
+  .inputfoodname {
+    font-weight: 200;
+    font-size: 4vw;
+    width: 35vw;
+    height: 5.25vw;
+  }
+  .inputfoodprice_container {
+    font-size: 3vw;
+  }
+  .inputfoodprice {
+    height: 4.25vw;
+    font-size: 3vw;
+    width: 20vw;
+  }
+  .addtypebtn_container {
+    width: 10vw;
+    height: 10vw;
+    margin-top:5vw;
+  }
+  .img_addtypebtn {
+    width: 5vw;
+    height: 5vw;
+  }
+  .inputtypename {
+    margin-left: 3vw;
+    height: 6vw;
+    font-size: 4vw;
+    width: 35vw;
+    padding-bottom:0vw;
+    margin-top:4vw;
+  }
+  .showtypebtn_container {
+    display: block;
+    width: 30px;
+    height: auto;
+    margin-left: 55vw;
+    margin-top: 2.5vw;
+    position: absolute;
+  }
+}
+
+/* vue transition */
+.fade-enter-active {
+  animation: go 0.1s;
+}
+.fade-leave-active {
+  animation: back 0.1s;
+}
+
+@keyframes go {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes back {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 </style>
