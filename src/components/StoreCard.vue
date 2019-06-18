@@ -126,8 +126,8 @@ img {
   .card_style {
     width: 30%;
     height: 20%;
-    margin-right: auto;
-    margin-left: 3%;
+    /* margin-right: auto;
+    margin-left: 3%; */
   }
   .submit_btn {
     height: 30px;
@@ -153,7 +153,7 @@ img {
   .card_style {
     width: 46.5%;
     height: 22%;
-    margin-left: auto;
+  
   }
   .submit_btn {
     height: 6vw;

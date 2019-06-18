@@ -9,8 +9,8 @@
       <router-link to="/register1" class="nav_btn_style">賣家註冊</router-link>
     </div>
     <!-- 登入後的nav -->
-    <div v-if="registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
-      <p class="nav_name">您好，{{this.user.username}}！</p>
+    <div v-if="registerBool" class=" col d-flex nav_btn justify-content-end align-items-center">
+      <p class="  nav_name">您好，{{this.user.username}}！</p>
       
       <router-link to="/menumanager" class="nav_btn_style">菜單管理</router-link>
       <router-link to="/ordermanager" class="nav_btn_style">訂單管理</router-link>

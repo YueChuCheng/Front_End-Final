@@ -310,7 +310,8 @@ export default {
           TotalOrderCount: 0,
           OrderCount: 0,
           OrderNumber: [],
-          RegisterBool: "true"
+          RegisterBool: "true",
+          MenuTypeCount:"0"
         });
       alert("註冊成功請再次登入");
       this.$router.push("/");
