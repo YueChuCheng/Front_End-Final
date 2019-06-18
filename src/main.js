@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.use(VueFirestore)
 
 new Vue({
+  
   router,
   store,
   render: h => h(App)
