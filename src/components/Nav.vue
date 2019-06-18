@@ -10,9 +10,9 @@
     </div>
     <!-- 登入後的nav -->
     <div v-if="registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
-      <p class="nav_name">您好，{{this.user.username}}!</p>
-      <router-link to="/*" class="nav_btn_style">菜單編輯</router-link>
-      <router-link to="/ordermanager" class="nav_btn_style">訂單編輯</router-link>
+      <p class="nav_name">您好，{{this.user.username}}！</p>
+      <router-link to="/menumanager" class="nav_btn_style">菜單管理</router-link>
+      <router-link to="/ordermanager" class="nav_btn_style">訂單管理</router-link>
     </div>
     <div class="humberger d-flex flex-column justify-content-around">
       <div class="line line1"></div>
@@ -34,8 +34,8 @@
       <!-- 登入後的nav -->
       <div v-if="registerBool" class="col d-flex flex-column justify-content-end">
         <router-link to="/" class="sm_btn_text">首頁</router-link>
-        <router-link to="/*" class="sm_btn_text">菜單編輯</router-link>
-        <router-link to="/ordermanager" class="sm_btn_text">訂單編輯</router-link>
+        <router-link to="/menumanager" class="sm_btn_text">菜單管理</router-link>
+        <router-link to="/ordermanager" class="sm_btn_text">訂單管理</router-link>
       </div>
     </div>
   </div>
