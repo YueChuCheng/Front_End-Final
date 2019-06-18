@@ -222,6 +222,7 @@ export default {
   data() {
     return {
       small: false,
+      typedatacount: 0,
       restaurantNewName: "",
       newFoodNameText: [],
       newFoodPriceText: [],
@@ -264,7 +265,10 @@ export default {
       //   .doc("Info")
       //   .collection("Order")
       colRestaurantRef: firebase.firestore().collection("test"),
-      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.user.userid),
+      docRestaurantRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.user.userid),
       colTypeRef: firebase
         .firestore()
         .collection("test")
@@ -288,6 +292,7 @@ export default {
       this.restaurantAddress = doc.data().Address;
       this.restaurantTEL = doc.data().TEL;
       this.restaurantOpenTime = doc.data().OpenTime;
+      this.typedatacount=doc.data().MenuTypeCount;
     }
     //餐點類型資料
     let querySnapshot = await this.$firestore.colTypeRef.get();
@@ -300,7 +305,8 @@ export default {
         isShow: false,
         newFoodNameText: this.newFoodNameText.push(""),
         newFoodPriceText: this.newFoodPriceText.push(""),
-        fooddatacount: docSnapshot.data().FoodDataCount
+        fooddatacount: docSnapshot.data().FoodDataCount,
+        typeindex: docSnapshot.data().TypeIndex
       });
     });
     this.type = typearray;
@@ -321,7 +327,6 @@ export default {
       });
     });
 
-    
     // jquery
     if ($(window).width() <= 480) {
       this.small = true;
@@ -331,12 +336,6 @@ export default {
   },
   methods: {
     AddFood: function(index) {
-      console.log(this.newFoodNameText);
-      console.log(this.newFoodPriceText);
-      this.SetNewFood(index);
-    },
-    DeleteFood: function(index, cindex) {},
-    SetNewFood(index) {
       this.SetLocalNewFood(index);
       this.SetFoodFirestore(index);
     },
@@ -346,24 +345,35 @@ export default {
       this.type[index].food.push({
         name: this.newFoodNameText[index],
         price: this.newFoodPriceText[index],
-        count: 0
+        count: 0,
+        foodindex: this.type[index].fooddatacount
       });
-      console.log(this.type);
+      console.log(this.type[index].food);
     },
     async SetFoodFirestore(index) {
       //firestore
+      let typeindex=this.type[index].typeindex;
       let setNewFood = await this.$firestore.colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" + typeindex)
         .collection("Food")
         .doc("Food" + this.type[index].fooddatacount)
         .set({
           Name: this.newFoodNameText[index],
-          Price: this.newFoodPriceText[index]
+          Price: this.newFoodPriceText[index],
+          Foodindex: this.type[index].fooddatacount
         });
+      let SetType = await this.$firestore.colTypeRef
+        .doc("Type" + typeindex)
+        .set(
+          {
+            FoodDataCount: this.type[index].fooddatacount
+          },
+          { merge: true }
+        );
     },
     DeleteFood(index, cindex) {
-      this.DeleteLocalFood(index, cindex);
       this.DeleteFoodFirestore(index, cindex);
+      this.DeleteLocalFood(index, cindex);
     },
     DeleteLocalFood(index, cindex) {
       //local
@@ -371,54 +381,67 @@ export default {
     },
     async DeleteFoodFirestore(index, cindex) {
       //firestore
+      let typeindex=this.type[index].typeindex;
+      let foodindex = this.type[index].food[cindex].foodindex;
+      console.log(this.type[index].food[cindex].foodindex);
       let DeleteFood = await this.$firestore.colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" + typeindex)
         .collection("Food")
-        .doc("Food" + (cindex + 1))
+        .doc("Food" + foodindex)
         .delete();
     },
     AddType() {
       this.AddLocalType();
       this.AddTypeFirestore();
+      console.log(this.type);
     },
     AddLocalType() {
       //local
+      this.typedatacount++;
       this.type.push({
         name: this.newTypeNameText,
         food: [],
         isShow: false,
         newFoodNameText: this.newFoodNameText.push(""),
         newFoodPriceText: this.newFoodPriceText.push(""),
+        fooddatacount: 0,
+        typeindex: this.typedatacount
       });
-      console.log(this.type);
     },
     async AddTypeFirestore() {
       // this.type.length已新增
       // firestore
       let SetType = await this.$firestore.colTypeRef
-        .doc("Type" + this.type.length)
+        .doc("Type" + this.typedatacount)
         .set({
           Name: this.newTypeNameText,
-          FoodDataCount:0
+          FoodDataCount: 0,
+          TypeIndex: this.typedatacount
         });
+      let SetTypeCount = await this.$firestore.colRestaurantRef
+        .doc(this.$store.state.user.userid)
+        .set({
+          MenuTypeCount:this.typedatacount
+        }, { merge: true });
     },
     DeleteType(index) {
-      this.DeleteLocalType(index);
       this.DeleteTypeFirestore(index);
+      this.DeleteLocalType(index);
     },
     DeleteLocalType(index) {
       //local
-      console.log(index);
       this.type.splice(index, 1);
     },
     async DeleteTypeFirestore(index) {
+      let typeindex=this.type[index].typeindex;
+      console.log(typeindex);
       let querySnapshot = await this.$firestore.colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" + typeindex)
         .collection("Food")
         .get();
       querySnapshot.forEach(docSnapshot => docSnapshot.ref.delete());
       let DeleteType = await this.$firestore.colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" +typeindex)
         .delete();
     },
     EditInfo(number) {
@@ -490,7 +513,7 @@ export default {
       let self = this;
       switch (number) {
         case 0:
-          let setName = await self.$firestore.colRestaurantRef.doc("Info").set(
+          let setName = await self.$firestore.colRestaurantRef.doc(this.$store.state.user.userid).set(
             {
               Name: this.restaurantName
             },
@@ -503,7 +526,7 @@ export default {
           //address
           console.log(this.restaurantAddress);
           let setAddress = await self.$firestore.colRestaurantRef
-            .doc("Info")
+            .doc(this.$store.state.user.userid)
             .set(
               {
                 Address: this.restaurantAddress
@@ -515,7 +538,7 @@ export default {
           //tel
           console.log(this.restaurantTEL);
           let setTELCount = await await self.$firestore.colRestaurantRef
-            .doc("Info")
+            .doc(this.$store.state.user.userid)
             .set(
               {
                 TEL: this.restaurantTEL
@@ -527,7 +550,7 @@ export default {
           //opentime
           console.log(this.restaurantOpenTime);
           let setOpenTimeCount = await self.$firestore.colRestaurantRef
-            .doc("Info")
+            .doc(this.$store.state.user.userid)
             .set(
               {
                 OpenTime: this.restaurantOpenTime
@@ -1247,7 +1270,7 @@ section {
   .addtypebtn_container {
     width: 10vw;
     height: 10vw;
-    margin-top:5vw;
+    margin-top: 5vw;
   }
   .img_addtypebtn {
     width: 5vw;
@@ -1258,8 +1281,8 @@ section {
     height: 6vw;
     font-size: 4vw;
     width: 35vw;
-    padding-bottom:0vw;
-    margin-top:4vw;
+    padding-bottom: 0vw;
+    margin-top: 4vw;
   }
   .showtypebtn_container {
     display: block;
