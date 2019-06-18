@@ -182,7 +182,8 @@ export default {
       typearray.push({
         name: docSnapshot.data().Name,
         food: [],
-        isShow: false
+        isShow: false,
+        typeindex:docSnapshot.data().TypeIndex
       });
     });
     this.type = typearray;
@@ -190,7 +191,7 @@ export default {
     const colTypeRef = this.$firestore.colTypeRef;
     this.type.forEach(async function(item, index, array) {
       querySnapshot = await colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" + item.typeindex)
         .collection("Food")
         .get();
       let foodarray = [];

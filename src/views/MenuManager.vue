@@ -168,7 +168,6 @@
                           class="inputfoodprice"
                           type="number"
                           min="0"
-                          max="9"
                           placeholder="輸入價格"
                           v-model="newFoodPriceText[index]"
                           required
@@ -304,7 +303,7 @@ export default {
         food: [],
         isShow: false,
         newFoodNameText: this.newFoodNameText.push(""),
-        newFoodPriceText: this.newFoodPriceText.push(""),
+        newFoodPriceText: this.newFoodPriceText.push(0),
         fooddatacount: docSnapshot.data().FoodDataCount,
         typeindex: docSnapshot.data().TypeIndex
       });
@@ -314,14 +313,15 @@ export default {
     const colTypeRef = this.$firestore.colTypeRef;
     this.type.forEach(async function(item, index, array) {
       querySnapshot = await colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" + item.typeindex)
         .collection("Food")
         .get();
       let foodarray = [];
       querySnapshot.forEach(docSnapshot => {
         foodarray.push({
           name: docSnapshot.data().Name,
-          price: docSnapshot.data().Price
+          price: docSnapshot.data().Price,
+          foodindex:docSnapshot.data().FoodIndex
         });
         item.food = foodarray;
       });
@@ -342,9 +342,10 @@ export default {
     SetLocalNewFood(index) {
       //local
       this.type[index].fooddatacount++;
+      let priceint= parseInt(this.newFoodPriceText[index])
       this.type[index].food.push({
         name: this.newFoodNameText[index],
-        price: this.newFoodPriceText[index],
+        price: priceint,
         count: 0,
         foodindex: this.type[index].fooddatacount
       });
@@ -353,14 +354,15 @@ export default {
     async SetFoodFirestore(index) {
       //firestore
       let typeindex=this.type[index].typeindex;
+      let priceint= parseInt(this.newFoodPriceText[index])
       let setNewFood = await this.$firestore.colTypeRef
         .doc("Type" + typeindex)
         .collection("Food")
         .doc("Food" + this.type[index].fooddatacount)
         .set({
           Name: this.newFoodNameText[index],
-          Price: this.newFoodPriceText[index],
-          Foodindex: this.type[index].fooddatacount
+          Price: priceint,
+          FoodIndex: this.type[index].fooddatacount
         });
       let SetType = await this.$firestore.colTypeRef
         .doc("Type" + typeindex)
@@ -371,8 +373,8 @@ export default {
           { merge: true }
         );
     },
-    DeleteFood(index, cindex) {
-      this.DeleteFoodFirestore(index, cindex);
+    async DeleteFood(index, cindex) {
+      await this.DeleteFoodFirestore(index, cindex);
       this.DeleteLocalFood(index, cindex);
     },
     DeleteLocalFood(index, cindex) {
@@ -381,9 +383,10 @@ export default {
     },
     async DeleteFoodFirestore(index, cindex) {
       //firestore
+      console.log(index,cindex)
       let typeindex=this.type[index].typeindex;
       let foodindex = this.type[index].food[cindex].foodindex;
-      console.log(this.type[index].food[cindex].foodindex);
+      console.log(this.type);
       let DeleteFood = await this.$firestore.colTypeRef
         .doc("Type" + typeindex)
         .collection("Food")
