@@ -2,8 +2,10 @@
   <div class="home">
     <Nav/>
     <div class="row subtitle2">
-      <div class="col">
+      <div class="col d-flex flex-column justify-content-center align-items-center">
+        
         <span>找吃的</span>
+        <img src="../assets/icon/icon (2).png" alt="" class="find_arrow">
       </div>
     </div>
     <!-- 圖片輪播 -->
@@ -250,6 +252,11 @@ span {
 .select_rester {
   width: 47%;
   margin-left: 30px
+}
+.find_arrow{
+  width: 50%;
+  margin-top:15%;
+
 }
 @media screen and (max-width: 768px) {
   .subtitle_section {

@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "start": "http-server ./dist -c-1 -p 3000"
+    "start": "http-server  -c-1 -p 3000"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
