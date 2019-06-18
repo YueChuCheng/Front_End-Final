@@ -245,10 +245,23 @@ export default {
     }
   },
   methods:{
-    ...mapActions(["signout"]),
+    //...mapActions(["signout"]),
     toHome(){
       this.$router.push("/");
-    }
+    },
+    signout() { //登出函式
+      console.log("signout");
+      firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+      
+      }, function(error) {
+        console.error('Sign Out Error', error);
+      });
+       this.$router.push("/");
+       location.reload();
+      //location.assign('https://test-firestore-847fa.firebaseapp.com/');
+      console.log("after="+this.state.user.userid);
+    },
   
   },
   mounted() {
