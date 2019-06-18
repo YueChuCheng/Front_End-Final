@@ -154,7 +154,7 @@ h5 {
   border-radius: 10px;
   text-align: left;
   padding-left: 40px;
-  border: #262626 0.5px solid;
+  border: #7c7c7c 0.5px solid;
 }
 .submit {
   cursor: pointer;

@@ -210,6 +210,7 @@ span {
   margin-top: 40px;
 }
 .card_section {
+  padding-bottom: 10vw;
   margin: 0 auto;
   margin-top: 2%;
   margin-left: 14vw;
