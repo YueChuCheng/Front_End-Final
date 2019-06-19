@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { firebase } from '@firebase/app';
+
+import VueRouter from 'vue-router';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -36,6 +38,7 @@ export default new Vuex.Store({
 
   },
   actions: {
+    
     async loginWithGoogle() { //google登入函式
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/contacts.readonly');

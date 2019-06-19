@@ -83,65 +83,17 @@
                     <option>24</option>
                   </select> 時
                   <select name="timeselect" required v-model="timeTwo">
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                    <option>04</option>
                     <option>05</option>
-                    <option>06</option>
-                    <option>07</option>
-                    <option>08</option>
-                    <option>09</option>
                     <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
                     <option>15</option>
-                    <option>16</option>
-                    <option>17</option>
-                    <option>18</option>
-                    <option>19</option>
                     <option>20</option>
-                    <option>21</option>
-                    <option>22</option>
-                    <option>23</option>
-                    <option>24</option>
                     <option>25</option>
-                    <option>26</option>
-                    <option>27</option>
-                    <option>28</option>
-                    <option>29</option>
                     <option>30</option>
-                    <option>31</option>
-                    <option>32</option>
-                    <option>33</option>
-                    <option>34</option>
                     <option>35</option>
-                    <option>36</option>
-                    <option>37</option>
-                    <option>38</option>
-                    <option>39</option>
                     <option>40</option>
-                    <option>41</option>
-                    <option>42</option>
-                    <option>43</option>
-                    <option>44</option>
                     <option>45</option>
-                    <option>46</option>
-                    <option>47</option>
-                    <option>48</option>
-                    <option>49</option>
                     <option>50</option>
-                    <option>51</option>
-                    <option>52</option>
-                    <option>53</option>
-                    <option>54</option>
                     <option>55</option>
-                    <option>56</option>
-                    <option>57</option>
-                    <option>58</option>
-                    <option>59</option>
                     <option>60</option>
                   </select> 分 ～
                   <select name="timeselect" required v-model="timeThree">
@@ -171,65 +123,17 @@
                     <option>24</option>
                   </select> 時
                   <select name="timeselect" required v-model="timeFour">
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                    <option>04</option>
                     <option>05</option>
-                    <option>06</option>
-                    <option>07</option>
-                    <option>08</option>
-                    <option>09</option>
                     <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
                     <option>15</option>
-                    <option>16</option>
-                    <option>17</option>
-                    <option>18</option>
-                    <option>19</option>
                     <option>20</option>
-                    <option>21</option>
-                    <option>22</option>
-                    <option>23</option>
-                    <option>24</option>
                     <option>25</option>
-                    <option>26</option>
-                    <option>27</option>
-                    <option>28</option>
-                    <option>29</option>
                     <option>30</option>
-                    <option>31</option>
-                    <option>32</option>
-                    <option>33</option>
-                    <option>34</option>
                     <option>35</option>
-                    <option>36</option>
-                    <option>37</option>
-                    <option>38</option>
-                    <option>39</option>
                     <option>40</option>
-                    <option>41</option>
-                    <option>42</option>
-                    <option>43</option>
-                    <option>44</option>
                     <option>45</option>
-                    <option>46</option>
-                    <option>47</option>
-                    <option>48</option>
-                    <option>49</option>
                     <option>50</option>
-                    <option>51</option>
-                    <option>52</option>
-                    <option>53</option>
-                    <option>54</option>
                     <option>55</option>
-                    <option>56</option>
-                    <option>57</option>
-                    <option>58</option>
-                    <option>59</option>
                     <option>60</option>
                   </select> 分
                 </div>
@@ -279,21 +183,21 @@ export default {
   firestore() {
     return {
       // Collection
-      docInfoRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docInfoRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      // docInfoRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colOrderRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Order")
+      docInfoRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
   },
   created() {
@@ -379,6 +283,11 @@ export default {
   margin: 0;
   padding: 0;
 }
+/* nav */
+.main {
+  padding: 14px 10px;
+  background-color: #262626;
+}
 h1,
 h2 {
   font-weight: normal;
@@ -424,7 +333,7 @@ article {
   display: grid;
   justify-content: center;
   background-color: #f8f8f8;
-  padding-top: 90px;
+  padding-top: 10vw;
   padding-bottom: 3vw;
   grid-template-columns: 100%;
 }
@@ -615,6 +524,9 @@ option {
     width: 25vw;
     margin-top: 1vw;
   }
+  article {
+    padding-top: 15vw;
+  }
   .menuheader2_hr {
     width: 30vw;
   }
@@ -685,6 +597,9 @@ option {
   p {
     font-size: 0.9em;
     font-weight: 200;
+  }
+  article {
+    padding-top: 20vw;
   }
    .menuheader2_hr {
     width: 200px;
@@ -757,6 +672,7 @@ option {
     text-align: start;
     grid-template-rows: repeat(3, 4.9vw) 5vw auto;
     grid-row-gap:38px;
+    z-index: 0;
   }
   .formtext>p{
     font-size:17.5px;
@@ -766,6 +682,7 @@ option {
     margin-left:0;
     grid-template-rows: repeat(4, 5vw) auto;
     grid-row-gap: 37.5px;
+    z-index: 1;
   }
   input {
     height: 27.5px;

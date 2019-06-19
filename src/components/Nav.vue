@@ -1,7 +1,7 @@
 <template>
-  <div class="row main d-flex ">
-    <div class="col logo">
-      <img src="../assets/logo.png" alt>
+  <div class="row main d-flex">
+    <div class="col logo" @click="toHome">
+     <img src="../assets/logo.png" alt>
     </div>
     <!-- 未登入前的nav -->
     <div v-if="!registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
@@ -9,10 +9,12 @@
       <router-link to="/register1" class="nav_btn_style">賣家註冊</router-link>
     </div>
     <!-- 登入後的nav -->
-    <div v-if="registerBool" class="col d-flex nav_btn justify-content-end align-items-center">
-      <p class="nav_name">您好，{{this.user.username}}!</p>
-      <router-link to="/*" class="nav_btn_style">菜單編輯</router-link>
-      <router-link to="/ordermanager" class="nav_btn_style">訂單編輯</router-link>
+    <div v-if="registerBool" class=" col d-flex nav_btn justify-content-end align-items-center">
+      <p class="  nav_name">您好，{{this.user.username}}！</p>
+      
+      <router-link to="/menumanager" class="nav_btn_style">菜單管理</router-link>
+      <router-link to="/ordermanager" class="nav_btn_style">訂單管理</router-link>
+      <button @click="signout" class="nav_btn_style">登出</button>
     </div>
     <div class="humberger d-flex flex-column justify-content-around">
       <div class="line line1"></div>
@@ -20,9 +22,12 @@
       <div class="line line3"></div>
     </div>
     <div class="sm_btn">
-      <div v-if="!registerBool" class="col d-flex flex-column justify-content-center align-items-center">
+      <div
+        v-if="!registerBool"
+        class="col d-flex flex-column justify-content-center align-items-center"
+      >
         <router-link to="/" class="sm_btn_text">
-          <div class="border_bt1 ">首頁</div>
+          <div class="border_bt1">首頁</div>
         </router-link>
         <router-link to="/login" class="sm_btn_text">
           <div class="border_bt2">賣家登入</div>
@@ -34,8 +39,8 @@
       <!-- 登入後的nav -->
       <div v-if="registerBool" class="col d-flex flex-column justify-content-end">
         <router-link to="/" class="sm_btn_text">首頁</router-link>
-        <router-link to="/*" class="sm_btn_text">菜單編輯</router-link>
-        <router-link to="/ordermanager" class="sm_btn_text">訂單編輯</router-link>
+        <router-link to="/menumanager" class="sm_btn_text">菜單管理</router-link>
+        <router-link to="/ordermanager" class="sm_btn_text">訂單管理</router-link>
       </div>
     </div>
   </div>
@@ -63,14 +68,16 @@
 .logo img {
   height: 58px;
 }
-.logo img:hover{
+.logo img:hover {
   cursor: pointer;
 }
 .nav_btn {
+  padding:0;
   height: 50px;
   color: #fff;
 }
 .nav_btn_style {
+  background-color:rgba(0,0,0,0);
   color: #fff;
   font-size: 15px;
   font-weight: 300;
@@ -78,8 +85,7 @@
   border-radius: 30px;
   padding: 5px 15px;
   margin-right: 3%;
-  margin-top:-15px;
-
+  margin-top: -15px;
 }
 .nav_btn_style:hover {
   cursor: pointer;
@@ -87,7 +93,7 @@
   color: #262626;
 }
 .nav_btn_style:active {
- text-decoration:none;
+  text-decoration: none;
 }
 .humberger {
   display: none;
@@ -128,24 +134,23 @@
 }
 a :active {
   color: #fff;
-
 }
 @media screen and (max-width: 2000px) {
   .humberger {
     display: none;
     margin-right: 0px;
   }
-    .sm_btn{
+  .sm_btn {
     display: none;
     opacity: 0;
   }
 }
 @media screen and (max-width: 768px) {
-   .humberger {
+  .humberger {
     display: none;
     margin-right: 0px;
   }
-  .sm_btn{
+  .sm_btn {
     display: none;
     opacity: 0;
   }
@@ -157,11 +162,11 @@ a :active {
     border-radius: 30px;
     padding: 3px 13px;
     margin-left: 2px;
-     margin-top:0px;
+    margin-top: 0px;
   }
   .nav_name {
     font-size: 2.5vw;
-    margin-top:15px;
+    margin-top: 15px;
   }
   .logo img {
     height: 50px;
@@ -173,15 +178,13 @@ a :active {
     top: -10px;
     right: -2.5vw;
   }
-  
-
 }
 
 @media screen and (max-width: 480px) {
   .nav_name {
     position: absolute;
     left: -20%;
-    margin-top:3px;
+    margin-top: 3px;
     font-size: 20px;
   }
   .nav_btn_style {
@@ -191,7 +194,6 @@ a :active {
     background-color: #232323;
     height: 60px;
     padding: 14px 10px;
-    
   }
   .logo img {
     position: relative;
@@ -204,8 +206,8 @@ a :active {
     height: 30px;
     width: 28px;
     transition: all 0.5s;
-    margin-right:10px;
-    margin-top:8px;
+    margin-right: 10px;
+    margin-top: 8px;
   }
   .line {
     display: block;
@@ -218,9 +220,8 @@ a :active {
     font-size: 15px;
     width: 40px;
   }
-  
+
   .border_bt2 {
-   
     font-size: 15px;
     width: 60px;
   }
@@ -228,15 +229,12 @@ a :active {
     font-size: 15px;
     width: 60px;
   }
-
-
-
-
 }
 </style>
 <script>
 import $ from "jquery";
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { mapState } from "vuex";
 export default {
   name: "Nav",
@@ -246,6 +244,26 @@ export default {
     registerBool: function(newValue, oldValue) {
       console.log(newValue, oldValue);
     }
+  },
+  methods:{
+    //...mapActions(["signout"]),
+    toHome(){
+      this.$router.push("/");
+    },
+    signout() { //登出函式
+      console.log("signout");
+      firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+      
+      }, function(error) {
+        console.error('Sign Out Error', error);
+      });
+       this.$router.push("/");
+       location.reload();
+      //location.assign('https://test-firestore-847fa.firebaseapp.com/');
+      console.log("after="+this.state.user.userid);
+    },
+  
   },
   mounted() {
     var clickCount = 0;
@@ -258,7 +276,7 @@ export default {
         $(".humberger").css("height", "20px");
         $(".humberger").css("margin-top", "12px");
         $(".sm_btn").css("display", "block");
-         $(".sm_btn").css("opacity", "1");
+        $(".sm_btn").css("opacity", "1");
         $(".main ").css("height", "190px");
       } else {
         $(".line1").css("transform", "rotate(0deg)");
@@ -270,11 +288,10 @@ export default {
         $(".main ").css("height", "60px");
       }
     });
- $('.logo').click(function () { 
-       
-        window.location.assign("/"); //按圖片跳轉頁面
-      });
-    
+    //$('.logo').click(function () {
+    //
+    //       window.location.assign("/"); //按圖片跳轉頁面
+    //     });
   }
 };
 </script>

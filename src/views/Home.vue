@@ -71,7 +71,7 @@
         <option>豚太郎</option>
       </select>
     </div>
-    <div class="  card_section  d-flex flex-wrap">
+    <div class="  card_section  d-flex flex-wrap justify-content-start">
       <!-- 印出所有店家的資訊 -->
       <StoreCard
         v-for="(ele, id) in store"
@@ -210,6 +210,7 @@ span {
   margin-top: 40px;
 }
 .card_section {
+  padding-bottom: 10vw;
   margin: 0 auto;
   margin-top: 2%;
   margin-left: 14vw;
@@ -284,8 +285,9 @@ span {
     margin-left: 0px
   }
   .card_section {
+    
     margin-top: 15vw;
-    margin-left: auto;
+    margin-left: 12vw;
   }
   .carousel-indicators li {
     margin-top: -6px;
@@ -374,7 +376,7 @@ export default {
   async created() {
     this.store = await this.doStoreDataRead();
     this.store.forEach((ele, id) => {
-      console.log(id);
+      //console.log(id);
       console.log("id= " + this.$store.state.user.userid);
     });
   },

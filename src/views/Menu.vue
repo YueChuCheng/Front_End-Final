@@ -136,31 +136,31 @@ export default {
   firestore() {
     return {
       // Collection
-      docRestaurantRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info"),
-      colTypeRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Menu"),
-      colOrderRef: firebase
-        .firestore()
-        .collection("Restaurant")
-        .doc("Info")
-        .collection("Order")
-      // docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      // docRestaurantRef: firebase
+      //   .firestore()
+      //   .collection("Restaurant")
+      //   .doc("Info"),
       // colTypeRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Menu"),
       // colOrderRef: firebase
       //   .firestore()
-      //   .collection("test")
-      //   .doc(this.$store.state.clickID)
+      //   .collection("Restaurant")
+      //   .doc("Info")
       //   .collection("Order")
+      docRestaurantRef: firebase.firestore().collection("test").doc(this.$store.state.clickID),
+      colTypeRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Menu"),
+      colOrderRef: firebase
+        .firestore()
+        .collection("test")
+        .doc(this.$store.state.clickID)
+        .collection("Order")
     };
   },
   mounted: async function() {
@@ -182,7 +182,8 @@ export default {
       typearray.push({
         name: docSnapshot.data().Name,
         food: [],
-        isShow: false
+        isShow: false,
+        typeindex:docSnapshot.data().TypeIndex
       });
     });
     this.type = typearray;
@@ -190,7 +191,7 @@ export default {
     const colTypeRef = this.$firestore.colTypeRef;
     this.type.forEach(async function(item, index, array) {
       querySnapshot = await colTypeRef
-        .doc("Type" + (index + 1))
+        .doc("Type" + item.typeindex)
         .collection("Food")
         .get();
       let foodarray = [];
@@ -253,6 +254,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+/* nav */
 .main {
   padding: 14px 10px;
   background-color: #262626;
@@ -463,7 +465,7 @@ article {
 }
 
 /* 768px */
-@media screen and (max-width: 768px) and (min-width: 481px) {
+@media screen and (max-width: 768px){
   header {
     padding-top: 60px;
   }
@@ -493,7 +495,7 @@ article {
     width: 45%;
     padding: 2.5vw 4vw;
     top: 17%;
-    margin-top: 17.5vw;
+    margin-top: 0vw;
   }
   /* article */
   .menuheader_container {
@@ -647,7 +649,8 @@ article {
   .img_food {
     /* border:1px solid #000000;  */
     height: 20vw;
-    margin-left: 10%;
+    width:auto;
+    margin-left: 30%;
   }
   .foodinfo_container {
     grid-template-columns: 25vw auto;

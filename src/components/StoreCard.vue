@@ -82,7 +82,7 @@ img {
 }
 .storeName {
   margin: 0px;
-  margin-top: 2%;
+  margin-top: 5%;
   text-align: center;
   font-size: 2vw;
   font-weight: 400;
@@ -99,8 +99,9 @@ img {
 }
 .info_span {
   margin-left: 10%;
-  margin-top: -13%;
+  margin-top: -7.5%;
   font-size: 1.4vw;
+  font-weight: 300;
 }
 .submit {
   display: flex;
@@ -126,8 +127,8 @@ img {
   .card_style {
     width: 30%;
     height: 20%;
-    margin-right: auto;
-    margin-left: 3%;
+    /* margin-right: auto;
+    margin-left: 3%; */
   }
   .submit_btn {
     height: 30px;
@@ -142,7 +143,7 @@ img {
   }
   .info_span {
     font-size: 1.5vw;
-    
+    margin-top: -10%;
   }
   .card_style {
     padding: 2.5% 3%;
@@ -153,7 +154,7 @@ img {
   .card_style {
     width: 46.5%;
     height: 22%;
-    margin-left: auto;
+  
   }
   .submit_btn {
     height: 6vw;
