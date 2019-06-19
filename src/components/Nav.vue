@@ -72,6 +72,7 @@
   cursor: pointer;
 }
 .nav_btn {
+  padding:0;
   height: 50px;
   color: #fff;
 }
