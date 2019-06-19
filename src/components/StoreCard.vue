@@ -82,7 +82,7 @@ img {
 }
 .storeName {
   margin: 0px;
-  margin-top: 2%;
+  margin-top: 5%;
   text-align: center;
   font-size: 2vw;
   font-weight: 400;
@@ -99,8 +99,9 @@ img {
 }
 .info_span {
   margin-left: 10%;
-  margin-top: -13%;
+  margin-top: -7.5%;
   font-size: 1.4vw;
+  font-weight: 300;
 }
 .submit {
   display: flex;
@@ -142,7 +143,7 @@ img {
   }
   .info_span {
     font-size: 1.5vw;
-    
+    margin-top: -10%;
   }
   .card_style {
     padding: 2.5% 3%;
