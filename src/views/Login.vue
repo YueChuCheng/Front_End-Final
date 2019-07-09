@@ -370,7 +370,7 @@ a {
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  border: solid #262626 1px;
+  border: solid #262626 0.5px;
   border-radius: 8px;
 }
 
@@ -380,7 +380,6 @@ a {
   justify-content: center;
   align-items: center;
   background-color: #3b5998;
-  border: solid #262626 1px;
   border-radius: 8px;
 }
 .google_btn img {
@@ -517,6 +516,9 @@ export default {
         this.$router.push({ path: "/register2" });
       } //if not register ever change to register page
     }
+  },
+  mounted(){
+    alert("目前僅開放使用google帳號登入");
   }
 };
 </script>

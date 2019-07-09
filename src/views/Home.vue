@@ -385,7 +385,7 @@ export default {
     new ScrollMagic.Scene({
       triggerElement: ".menuheader_container"
     })
-      .setClassToggle(".main", "bgc-black")
+      .setClassToggle(".nav_main", "bgc-black")
       .addTo(controller);
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="main_section">
+  <!-- <div class="main_section">
     <LogoTag/>
     <div class="card_deco">
       <h5 class="font_bg">註冊</h5>
@@ -44,6 +44,39 @@
         <img src="../assets/picture (2).png" alt class="deco_img">
       </div>
     </div>
+  </div>-->
+  <div class="register2">
+    <LogoTag />
+    <div class="register2_main">
+      <div class="login_title">
+        <div class="title">註冊</div>
+        <div class="title_style"></div>
+      </div>
+      <div class="register2_deco">
+        <div class="l"></div>
+        <div class="subtitle">輸入店家基本資訊</div>
+        <div class="l"></div>
+      </div>
+
+      <div class="store_name">
+        <div class="name">店名</div>
+        <input name="name" type="text " class="input" placeholder="填寫餐廳名稱" />
+      </div>
+      <div class="store_name">
+        <div class="name">地址</div>
+        <input name="address" type="text " class="input" placeholder="填寫餐廳地址" />
+      </div>
+      <div class="store_name">
+        <div class="name">TEL</div>
+        <input name="tel" type="text " class="input" placeholder="填寫餐廳電話" />
+      </div>
+      <div class="store_name">
+        <div class="name">外送時間</div>
+        <input name="time" type="text " class="input" placeholder="填寫外送時間" />
+      </div>
+      <div class="choose_pic">選擇照片 <button>上傳照片</button></div>
+      <div  @click="set" class="register2_submit ">成為賣家吧！</div>
+    </div>
   </div>
 </template>
 
@@ -51,238 +84,108 @@
 @import "../css/base.css";
 * {
   font-family: "Noto Sans TC", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 .outline {
   outline: solid 2px red;
 }
-.main_section {
-  overflow: hidden;
-  padding-top: 6%;
-  height: 100vh;
+
+.register2 {
   background-color: #f8f8f8;
- 
-}
-.or_style {
-  font-size: 21px;
-}
-.rest_line {
-  border-bottom: #262626 solid 1px;
-  height: 0;
-  width: 50px;
-}
-.input {
-  margin: 0 auto;
-  position: relative;
-  height: 35px;
-  width: 250px;
-  margin-left: 20px;
-  border-radius: 10px;
-  border: #262626 0.5px solid;
+  height: 100vh;
+  padding-top: 25px;
+  display: grid;
+  justify-content: center;
 }
 
-.text {
-  text-align: center;
-  width: 500px;
-  font-size: 15px;
+.register2_main {
+  margin-top: 80px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(8, 40px);
+  grid-gap: 10px;
 }
-.input_style {
-  text-align: right;
-  padding-right: 4vw;
-  margin-top: -50px;
+.login_title {
+  display: grid;
+  height: 50px;
+  width: 100px;
 }
-.input_w {
-  font-size: 25px;
-}
-.input_w span {
-  font-size: 20px;
+.title {
+  z-index: 10;
+  font-size: 30px;
   font-weight: 300;
 }
-.submit {
-  cursor: pointer;
-  color: #fff;
-  height: 40px;
-  width: 125px;
-  text-align: center;
-  background: #ff794a;
-  border-radius: 40px;
-  font-size: 15px;
-  font-weight: 200;
-  line-height: 40px;
-
-  margin: 0 auto;
-  margin-top: 40px;
+.title_style {
+  position: relative;
+  background-color: #219e91;
+  height: 24px;
+  width: 75px;
+  border-radius: 50vw;
+  top: -20px;
+  left: 10px;
+}
+.subtitle {
+  font-size: 16px;
+  justify-self: center;
+}
+.register2_deco {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 180px 150px 180px;
+}
+.l {
+  border: solid 0.5px #000;
+  width: 100%;
+  height: 1px;
+  align-self: center;
+}
+.store_name {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 70px 220px;
+  grid-column-gap: 10px;
+}
+.name {
+  justify-self: end;
+  align-self: center;
+}
+.input {
+  border: #262626 1px solid;
+  border-radius: 10px;
+  height: 35px;
 }
 
 .input::-webkit-input-placeholder {
   font-size: 15px;
   padding-left: 15px;
 }
-.btn_img {
-  height: 30px;
-  width: 100px;
+.choose_pic{
+  display: grid;
+  width: 300px;
+  grid-template-rows: 100%;
+  grid-template-columns: 70px 80px;
+  grid-column-gap: 10px;
+}
+.choose_pic button{
   background-color: #fff;
-  border-radius: 1vw;
-  border: #262626 solid 1px;
-  margin-left: 20px;
-  font-size: 15px;
+  border-radius: 10px;
+  border:solid 1px #000;
+  font-size: 13px;
 }
-.pic {
-  float: left;
-}
-.deco_img {
-  text-align: center;
-  width: 17vw;
-  margin-left: 74vw;
-  margin-top: -100px;
-}
-h5 {
-  /* writing-mode:vertical-lr; */
-  color: #262626;
-  /* border:1px solid #000000; */
-  font-size: 3vw;
-  font-weight: 300;
-  line-height: 4.25vw;
-  position: absolute;
-  width: 3vw;
-}
-h5 {
-  width: 20vw;
-}
-.font_bg {
-  width: 3vw;
-  border-radius: 50px;
-  background-color: #219e91;
-  margin-top: 2%;
-  margin-left: 1.25%;
-  color: rgba(0, 0, 0, 0);
-}
-.font_bg {
-  width: 7.5vw;
-  height: 2.5vw;
-  margin-top: 2.4%;
-  margin-left: 1.4%;
-}
-.card_deco {
-  margin-top: 8vh;
-  margin-left: 45%;
-}
-.rest_text {
-  position: relative;
-  top: 30px;
-  width: 480px;
-  margin: 100px auto;
-}
-.input_w {
-  margin-top: 7px;
-}
-.rest_text {
-  width: 100%;
-}
-.rest_line {
-  width: 180px;
-}
-.text {
-  width: 150px;
-}
-@media screen and (max-width: 768px) {
-  .input_style {
-    margin-top: -28px;
-  }
-  .rest_text {
-    top:55px;
-    width: 100%;
-  }
-  .rest_line {
-    width: 150px;
-  }
-  .text {
-    width: 150px;
-  }
-  .submit {
-    margin: 0 auto;
-    height: 38px;
-    width: 125px;
-    font-size: 15px;
-    line-height: 38px;
-    margin-top: 2%;
-  }
-  .input_style {
-    margin-top: -25px;
-  }
-  .input_w {
-    margin-top: 5px;
-  }
-  .deco_img {
-    width: 20vw;
-    margin-left: 75vw;
-    margin-top: 20px;
-  }
-  h5 {
-    font-size: 30px;
-  }
-  .font_bg {
-    width: 9.5vw;
-    height: 2.5vw;
-    margin-top: 2.4%;
-    margin-left: 1.4%;
-  }
-  .rest_text {
-    margin-top: 10px;
-  }
-  .submit {
-    margin-top: 20px;
-  }
-}
-@media screen and (max-width: 480px) {
-  h5 {
-    /* writing-mode:vertical-lr; */
-    color: #262626;
-    /* border:1px solid #000000; */
-    font-size: 7vw;
-    font-weight: 300;
-    line-height: 4.25vw;
-    position: absolute;
-    width: 30vw;
-  }
-  .font_bg {
-    width: 14vw;
-    height: 4.2vw;
-    border-radius: 50px;
-    background-color: #219e91;
-    margin-top: 2.5%;
-    margin-left: 3%;
-    color: rgba(0, 0, 0, 0);
-  }
-  .deco_img {
-    display: none;
-  }
-  .rest_text {
-    width: 100%;
-    margin: 80px auto;
-  }
-  .rest_line {
-    width: 100px;
-  }
-  .text {
-    width: 150px;
-  }
-  .card_deco {
-    margin-top: 110px;
-    margin-left: 40%;
-  }
-  .input_style {
-    margin-top: -5px;
-  }
-  .btn_img {
-    border-radius: 10px;
-  }
-  .input_w span {
-    font-size: 18px;
-  }
-
-  .input {
-    width: 220px;
-  }
+.register2_submit{
+  cursor: pointer;
+  background-color: #ff794a;
+  color:#fff;
+  border-radius: 50vw;
+  width: 120px;
+  height: 40px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  font-weight: 200;
 }
 </style>
 
@@ -311,7 +214,7 @@ export default {
           OrderCount: 0,
           OrderNumber: [],
           RegisterBool: "true",
-          MenuTypeCount:"0"
+          MenuTypeCount: "0"
         });
       alert("註冊成功請再次登入");
       this.$router.push("/");
